@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package dao;
-//import java.sql.*;
+
 import java.sql.Driver;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -11,12 +11,11 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
 /**
  *
- * @author king
+ * @author admin
  */
-public class DBconnect {
+public class DBcontext {
     public static Connection connectDB() throws SQLException{
         
         try {
@@ -28,13 +27,12 @@ public class DBconnect {
             System.out.println("succcessful");
             // ket noi thanh cong tra ve conn
            return conn;
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        } catch (ClassNotFoundException | SQLException ex) {
         }
  
         return null;
     }
     public static void main(String[] args) throws SQLException {
-        DBconnect.connectDB();
+        DBcontext.connectDB();
     }
 }

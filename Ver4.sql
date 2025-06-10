@@ -20,8 +20,7 @@ CREATE TABLE UserAccount (
 CREATE TABLE Student (
     ID INT IDENTITY PRIMARY KEY,
     UserID NVARCHAR(20) UNIQUE,
-    StudentCode VARCHAR(20) UNIQUE,
-    Class VARCHAR(50),
+    Major VARCHAR(50),
     FOREIGN KEY (UserID) REFERENCES UserAccount(UserID)
 );
 

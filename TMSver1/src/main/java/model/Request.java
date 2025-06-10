@@ -11,14 +11,24 @@ package model;
 public class Request {
     
     private int id;
-    private String student_id;
+    private int studentID;
     private String title;
-    private String desceprion;
+    private String description;
     private String status;
-    private String creat_at;
-    private String teacher_id;
+    private int teacherID;
+    private String createAt;
 
     public Request() {
+    }
+
+    public Request(int id, int studentID, String title, String description, String status, int teacherID, String createAt) {
+        this.id = id;
+        this.studentID = studentID;
+        this.title = title;
+        this.description = description;
+        this.status = status;
+        this.teacherID = teacherID;
+        this.createAt = createAt;
     }
 
     public int getId() {
@@ -29,12 +39,12 @@ public class Request {
         this.id = id;
     }
 
-    public String getStudent_id() {
-        return student_id;
+    public int getStudentID() {
+        return studentID;
     }
 
-    public void setStudent_id(String student_id) {
-        this.student_id = student_id;
+    public void setStudentID(int studentID) {
+        this.studentID = studentID;
     }
 
     public String getTitle() {
@@ -45,12 +55,12 @@ public class Request {
         this.title = title;
     }
 
-    public String getDesceprion() {
-        return desceprion;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDesceprion(String desceprion) {
-        this.desceprion = desceprion;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getStatus() {
@@ -61,20 +71,20 @@ public class Request {
         this.status = status;
     }
 
-    public String getCreat_at() {
-        return creat_at;
+    public int getTeacherID() {
+        return teacherID;
     }
 
-    public void setCreat_at(String creat_at) {
-        this.creat_at = creat_at;
+    public void setTeacherID(int teacherID) {
+        this.teacherID = teacherID;
     }
 
-    public String getTeacher_id() {
-        return teacher_id;
+    public String getCreateAt() {
+        return createAt;
     }
 
-    public void setTeacher_id(String teacher_id) {
-        this.teacher_id = teacher_id;
+    public void setCreateAt(String createAt) {
+        this.createAt = createAt;
     }
     
     
