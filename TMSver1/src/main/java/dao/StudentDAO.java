@@ -8,7 +8,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Student;
@@ -16,21 +17,20 @@ import model.Student;
 /**
  *
  * @author admin
+ * @param <Student>
  */
-public class StudentDAO extends DAO {
-
+public class StudentDAO extends DAO<Student>{
+    
+    @Override
     public int create(Student t) {
         try {
             int rows;
             PreparedStatement ps;
-            try (Connection conn = DBconnect.connectDB()) {
-                String sql = "Insert Into Student(id, name, email, major)"
-                        +"Value(?,?,?,?)";
+            try (Connection conn = DBcontext.connectDB()) {
+                String sql = "INSERT INTO Student(UserID, Major) VALUES(?,?)";
                 ps = conn.prepareStatement(sql);
-                ps.setString(1, t.getId());
-                ps.setString(2, t.getName());
-                ps.setString(3, t.getEmail());
-                ps.setString(4, t.getMajor());
+                ps.setString(1, t.getStudentID());
+                ps.setString(2, t.getMajor());
                 rows = ps.executeUpdate();
             }
             ps.close();
@@ -41,19 +41,17 @@ public class StudentDAO extends DAO {
         }
     }
 
+    @Override
     public int update(Student t) {
         try {
             int rows;
             PreparedStatement ps;
-            try (Connection conn = DBconnect.connectDB()) {
-                String sql = "Update student"
-                        +"Set name=?, email=?, major=?"
-                        +"Where id = ?";
+            try (Connection conn = DBcontext.connectDB()) {
+                String sql = "UPDATE Student SET UserID=?, Major=? WHERE ID=?";
                 ps = conn.prepareStatement(sql);
-                ps.setString(4, t.getId());
-                ps.setString(1, t.getName());
-                ps.setString(2, t.getEmail());
-                ps.setString(3, t.getMajor());
+                ps.setString(1, t.getStudentID());
+                ps.setString(2, t.getMajor());
+                ps.setInt(3, t.getId());
                 rows = ps.executeUpdate();
             }
             ps.close();
@@ -64,14 +62,15 @@ public class StudentDAO extends DAO {
         }
     }
 
+    @Override
     public int delete(Student t) {
         try {
             int rows;
             PreparedStatement ps;
-            try (Connection conn = DBconnect.connectDB()) {
-                String sql = "Delete student Where id=?";
+            try (Connection conn = DBcontext.connectDB()) {
+                String sql = "DELETE FROM Student WHERE ID=?";
                 ps = conn.prepareStatement(sql);
-                ps.setString(1, t.getId());
+                ps.setInt(1, t.getId());
                 rows = ps.executeUpdate();
             }
             ps.close();
@@ -82,24 +81,21 @@ public class StudentDAO extends DAO {
         }
     }
 
-    
     @Override
     public List<Student> readAll() {
         try {
             List<Student> newList;
             PreparedStatement ps;
-            try (Connection conn = DBconnect.connectDB()) {
+            try (Connection conn = DBcontext.connectDB()) {
                 newList = new ArrayList<>();
-                String sql = "Select * From student s";
+                String sql = "SELECT * FROM Student";
                 ps = conn.prepareStatement(sql);
                 ResultSet rs = ps.executeQuery();
                 while (rs.next()) {
-                    // Giả sử bảng Region có 2 cột: RegionID (int), RegionName (String)
-                    String id = rs.getString("id");
-                    String name = rs.getString("name");
-                    String email = rs.getString("email");
-                    String major = rs.getString("major");
-                    newList.add(new Student(id,name,email,major));
+                    int id = rs.getInt("ID");
+                    String userID = rs.getString("UserID");
+                    String major = rs.getString("Major");
+                    newList.add(new Student(id, userID, major));
                 }
             }
             ps.close();
@@ -113,21 +109,19 @@ public class StudentDAO extends DAO {
     @Override
     public Student readOnly(String str) {
         try {
-            Student student;
+            Student student = null;
             PreparedStatement ps;
-            try (Connection conn = DBconnect.connectDB()) {
-                student = null;
-                String sql = "Select * From student s where id=?";
+            try (Connection conn = DBcontext.connectDB()) {
+                String sql = "SELECT * FROM Student WHERE ID=? OR UserID=?";
                 ps = conn.prepareStatement(sql);
                 ps.setString(1, str);
+                ps.setString(2, str);
                 ResultSet rs = ps.executeQuery();
-                while (rs.next()) {
-                    // Giả sử bảng Region có 2 cột: RegionID (int), RegionName (String)
+                if (rs.next()) {
                     student = new Student();
-                    student.setId(rs.getString("id"));
-                    student.setName(rs.getString("name"));
-                    student.setEmail(rs.getString("email"));
-                    student.setMajor(rs.getString("major"));
+                    student.setId(rs.getInt("ID"));
+                    student.setStudentID(rs.getString("UserID"));
+                    student.setMajor(rs.getString("Major"));
                 }
             }
             ps.close();
@@ -137,8 +131,5 @@ public class StudentDAO extends DAO {
             return null;
         }
     }
-
-    
-    
     
 }

@@ -10,33 +10,31 @@ package model;
  */
 public class Project {
     
-    private int id;
+    private String projectCode;
     private String title;
-    private String descreption;
-    private String teacher_id;
-    private String comment;
-    private double score;
+    private String description;
+    private String teacherID;
+    private String semesterID;
+    private String judgingID;
 
     public Project() {
     }
 
-    public Project(int id, String title, String descreption, String teacher_id, String comment, double score) {
-        this.id = id;
+    public Project(String projectCode, String title, String description, String teacherID, String semesterID, String judgingID) {
+        this.projectCode = projectCode;
         this.title = title;
-        this.descreption = descreption;
-        this.teacher_id = teacher_id;
-        this.comment = comment;
-        this.score = score;
-    }
-    
-    
-
-    public int getId() {
-        return id;
+        this.description = description;
+        this.teacherID = teacherID;
+        this.semesterID = semesterID;
+        this.judgingID = judgingID;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public String getProjectCode() {
+        return projectCode;
+    }
+
+    public void setProjectCode(String projectCode) {
+        this.projectCode = projectCode;
     }
 
     public String getTitle() {
@@ -47,36 +45,36 @@ public class Project {
         this.title = title;
     }
 
-    public String getDescreption() {
-        return descreption;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDescreption(String descreption) {
-        this.descreption = descreption;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public String getTeacher_id() {
-        return teacher_id;
+    public String getTeacherID() {
+        return teacherID;
     }
 
-    public void setTeacher_id(String teacher_id) {
-        this.teacher_id = teacher_id;
-    }        
-
-    public String getComment() {
-        return comment;
+    public void setTeacherID(String teacherID) {
+        this.teacherID = teacherID;
     }
 
-    public void setComment(String comment) {
-        this.comment = comment;
+    public String getSemesterID() {
+        return semesterID;
     }
 
-    public double getScore() {
-        return score;
+    public void setSemesterID(String semesterID) {
+        this.semesterID = semesterID;
     }
 
-    public void setScore(double score) {
-        this.score = score;
+    public String getJudgingID() {
+        return judgingID;
+    }
+
+    public void setJudgingID(String judgingID) {
+        this.judgingID = judgingID;
     }
     
     

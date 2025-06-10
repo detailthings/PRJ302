@@ -32,5 +32,5 @@ public abstract class DAO<T> {
     public T readOnly(String str) {
         return null;
     }
-    
+
 }

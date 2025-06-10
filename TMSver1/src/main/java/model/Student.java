@@ -10,45 +10,33 @@ package model;
  */
 public class Student {
     
-    private String id;
-    private String name;
-    private String email;
+    private int id;
+    private String studentID;
     private String major;
 
     public Student() {
     }
 
-    public Student(String id, String name, String email, String major) {
+    public Student(int id, String studentID, String major) {
         this.id = id;
-        this.name = name;
-        this.email = email;
+        this.studentID = studentID;
         this.major = major;
     }
-    
-    
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getStudentID() {
+        return studentID;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
+    public void setStudentID(String studentID) {
+        this.studentID = studentID;
     }
 
     public String getMajor() {
@@ -58,5 +46,6 @@ public class Student {
     public void setMajor(String major) {
         this.major = major;
     }
-        
+    
+    
 }
