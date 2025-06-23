@@ -4,12 +4,19 @@
  */
 package model;
 
+import jakarta.persistence.*;
+
+
 /**
  *
  * @author admin
- */
+ */ 
+
+@Entity
 public class UserAccount {
     
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String userID;
     private String passWord;
     private String fullName;

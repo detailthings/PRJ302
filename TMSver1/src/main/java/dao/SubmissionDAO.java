@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -56,7 +57,7 @@ public class SubmissionDAO extends DAO<Submission> {
                 ps.setTimestamp(3, t.getSubmissionDate());
                 ps.setTimestamp(4, t.getLastModified());
                 ps.setString(5, t.getStatus());
-                ps.setInt(6, t.getSubmissionID());
+                ps.setInt(6, t.getId());
                 rows = ps.executeUpdate();
             }
             ps.close();
@@ -75,7 +76,7 @@ public class SubmissionDAO extends DAO<Submission> {
             try (Connection conn = DBcontext.connectDB()) {
                 String sql = "DELETE FROM Submission WHERE SubmissionID=?";
                 ps = conn.prepareStatement(sql);
-                ps.setInt(1, t.getSubmissionID());
+                ps.setInt(1, t.getId());
                 rows = ps.executeUpdate();
             }
             ps.close();
@@ -126,7 +127,7 @@ public class SubmissionDAO extends DAO<Submission> {
                 ResultSet rs = ps.executeQuery();
                 if (rs.next()) {
                     submission = new Submission();
-                    submission.setSubmissionID(rs.getInt("SubmissionID"));
+                    submission.setId(rs.getInt("SubmissionID"));
                     submission.setProjectID(rs.getString("ProjectID"));
                     submission.setDeliverableID(rs.getInt("DeliverableID"));
                     submission.setSubmissionDate(rs.getTimestamp("SubmissionDate"));

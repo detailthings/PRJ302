@@ -4,6 +4,8 @@
  */
 package model;
 
+import java.sql.Timestamp;
+
 /**
  *
  * @author admin
@@ -13,14 +15,14 @@ public class Submission {
     private int id;
     private String projectID;
     private int deliverableID;
-    private String submissionDate;
-    private String lastModified;
+    private Timestamp submissionDate;
+    private Timestamp lastModified;
     private String status;
 
     public Submission() {
     }
 
-    public Submission(int id, String projectID, int deliverableID, String submissionDate, String lastModified, String status) {
+    public Submission(int id, String projectID, int deliverableID, Timestamp submissionDate, Timestamp lastModified, String status) {
         this.id = id;
         this.projectID = projectID;
         this.deliverableID = deliverableID;
@@ -53,22 +55,22 @@ public class Submission {
         this.deliverableID = deliverableID;
     }
 
-    public String getSubmissionDate() {
+    public Timestamp getSubmissionDate() {
         return submissionDate;
     }
 
-    public void setSubmissionDate(String submissionDate) {
+    public void setSubmissionDate(Timestamp submissionDate) {
         this.submissionDate = submissionDate;
     }
 
-    public String getLastModified() {
+    public Timestamp getLastModified() {
         return lastModified;
     }
 
-    public void setLastModified(String lastModified) {
+    public void setLastModified(Timestamp lastModified) {
         this.lastModified = lastModified;
     }
-
+    
     public String getStatus() {
         return status;
     }
