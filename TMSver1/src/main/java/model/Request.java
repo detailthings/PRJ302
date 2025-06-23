@@ -4,6 +4,8 @@
  */
 package model;
 
+import java.sql.Timestamp;
+
 /**
  *
  * @author admin
@@ -16,12 +18,12 @@ public class Request {
     private String description;
     private String status;
     private int teacherID;
-    private String createAt;
+    private Timestamp createAt;
 
     public Request() {
     }
 
-    public Request(int id, int studentID, String title, String description, String status, int teacherID, String createAt) {
+    public Request(int id, int studentID, String title, String description, String status, int teacherID, Timestamp createAt) {
         this.id = id;
         this.studentID = studentID;
         this.title = title;
@@ -79,14 +81,14 @@ public class Request {
         this.teacherID = teacherID;
     }
 
-    public String getCreateAt() {
+    public Timestamp getCreateAt() {
         return createAt;
     }
 
-    public void setCreateAt(String createAt) {
+    public void setCreateAt(Timestamp createAt) {
         this.createAt = createAt;
     }
-    
+
     
     
 }

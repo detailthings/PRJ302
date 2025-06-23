@@ -4,24 +4,33 @@
  */
 package model;
 
+import jakarta.persistence.*;
+
+
 /**
  *
  * @author admin
  */
+
+@Entity
 public class Project {
     
-    private String projectCode;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    
+    private String projectID;
     private String title;
     private String description;
     private String teacherID;
     private String semesterID;
     private String judgingID;
+    private String studentID;
 
     public Project() {
     }
 
-    public Project(String projectCode, String title, String description, String teacherID, String semesterID, String judgingID) {
-        this.projectCode = projectCode;
+    public Project(String projectID, String title, String description, String teacherID, String semesterID, String judgingID, String studentID) {
+        this.projectID = projectID;
         this.title = title;
         this.description = description;
         this.teacherID = teacherID;
@@ -30,11 +39,11 @@ public class Project {
     }
 
     public String getProjectCode() {
-        return projectCode;
+        return projectID;
     }
 
-    public void setProjectCode(String projectCode) {
-        this.projectCode = projectCode;
+    public void setProjectCode(String projectID) {
+        this.projectID = projectID;
     }
 
     public String getTitle() {
@@ -76,7 +85,15 @@ public class Project {
     public void setJudgingID(String judgingID) {
         this.judgingID = judgingID;
     }
+
+    public String getStudentID() {
+        return studentID;
+    }
+
+    public void setStudentID(String studentID) {
+        this.studentID = studentID;
+    }
     
-    
+        
     
 }

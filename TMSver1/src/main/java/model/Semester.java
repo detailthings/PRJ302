@@ -4,6 +4,9 @@
  */
 package model;
 
+import java.sql.Date;
+import java.sql.Timestamp;
+
 /**
  *
  * @author admin
@@ -13,13 +16,13 @@ public class Semester {
     private String id;
     private String semester;
     private int year;
-    private String startDate;
-    private String endDate;
+    private Date startDate;
+    private Date endDate;
 
     public Semester() {
     }
 
-    public Semester(String id, String semester, int year, String startDate, String endDate) {
+    public Semester(String id, String semester, int year, Date startDate, Date endDate) {
         this.id = id;
         this.semester = semester;
         this.year = year;
@@ -51,19 +54,19 @@ public class Semester {
         this.year = year;
     }
 
-    public String getStartDate() {
+    public Date getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(String startDate) {
+    public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
 
-    public String getEndDate() {
+    public Date getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(String endDate) {
+    public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
     

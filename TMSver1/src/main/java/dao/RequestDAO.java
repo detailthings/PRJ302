@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -33,7 +34,7 @@ public class RequestDAO extends DAO<Request> {
                 ps.setString(3, t.getDescription());
                 ps.setString(4, t.getStatus());
                 ps.setInt(5, t.getTeacherID());
-                ps.setTimestamp(6, t.getCreatedAt());
+                ps.setTimestamp(6, t.getCreateAt());
                 rows = ps.executeUpdate();
             }
             ps.close();
@@ -57,7 +58,7 @@ public class RequestDAO extends DAO<Request> {
                 ps.setString(3, t.getDescription());
                 ps.setString(4, t.getStatus());
                 ps.setInt(5, t.getTeacherID());
-                ps.setTimestamp(6, t.getCreatedAt());
+                ps.setTimestamp(6, t.getCreateAt());
                 ps.setInt(7, t.getId());
                 rows = ps.executeUpdate();
             }
@@ -135,7 +136,7 @@ public class RequestDAO extends DAO<Request> {
                     request.setDescription(rs.getString("Description"));
                     request.setStatus(rs.getString("Status"));
                     request.setTeacherID(rs.getInt("TeacherID"));
-                    request.setCreatedAt(rs.getTimestamp("Created_At"));
+                    request.setCreateAt(rs.getTimestamp("Created_At"));
                 }
             }
             ps.close();
