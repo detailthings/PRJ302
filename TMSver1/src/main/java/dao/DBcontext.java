@@ -22,7 +22,7 @@ public class DBcontext {
             // dang ky drive cho project
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             // tao ket noi
-            Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=JavaJDBC;trustServerCertificate=true", "sa", "khanh");
+            Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=PRJ302;trustServerCertificate=true", "sa", "sa");
             
             System.out.println("succcessful");
             // ket noi thanh cong tra ve conn

@@ -170,13 +170,20 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <%for (Reviewer r : rev) {%>
+                                
+                                <% if (rev != null) //for null sẽ lỗi đã sửa { %>
+                                <% for (Reviewer r : rev) { %>
                                 <tr>
-                                    <td><%= r.getId()%></td>
-                                    <td><%= r.getReviewerID()%></td>
-                                    <td><%= r.getDepartment()%></td>
-
+                                    <td><%= r.getId() %></td>
+                                    <td><%= r.getReviewerID() %></td>
                                 </tr>
+                                <% } %>
+                                <% } else { %>
+                                <tr>
+                                    <td colspan="2">No reviewer data found.</td>
+                                </tr>
+
+
                                 <%
                                     }
                                 %>
