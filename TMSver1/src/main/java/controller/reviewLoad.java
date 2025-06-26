@@ -61,10 +61,10 @@ public class reviewLoad extends HttpServlet {
         List<Reviewer> reviewer = new ArrayList<>();
         ReviewerDAO da;
         da = new ReviewerDAO();
-        
+
         reviewer = da.readAll();
         request.setAttribute("reviewer", reviewer);
-        request.getRequestDispatcher("/Webkit/Webkit/html/backend/table-reviewer.jsp").forward(request, response);
+        request.getRequestDispatcher("table-reviewer.jsp").forward(request, response);
     }
 
     /**

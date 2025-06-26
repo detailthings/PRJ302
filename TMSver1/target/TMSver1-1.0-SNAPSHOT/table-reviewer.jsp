@@ -170,23 +170,23 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                
-                                <% if (rev != null) //for null sẽ lỗi đã sửa { %>
+
+                                <%-- sửa để kiểm tra for null và empty --%>
+                                <% if (rev != null&& rev.isEmpty()) { %>
                                 <% for (Reviewer r : rev) { %>
                                 <tr>
-                                    <td><%= r.getId() %></td>
-                                    <td><%= r.getReviewerID() %></td>
+                                    <td><%= r.getId()%></td>
+                                    <td><%= r.getReviewerID()%></td>
+                                    <td><%= e.getDepartment() %></td>
                                 </tr>
                                 <% } %>
                                 <% } else { %>
                                 <tr>
                                     <td colspan="2">No reviewer data found.</td>
                                 </tr>
+                                <% } %>
 
 
-                                <%
-                                    }
-                                %>
 
 
                             </tbody>

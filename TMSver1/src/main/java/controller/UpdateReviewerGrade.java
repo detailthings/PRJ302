@@ -5,25 +5,18 @@
 
 package controller;
 
-import dao.ReviewerDAO;
-import dao.StudentDAO;
-import dao.TeacherDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import static java.util.Collections.list;
-import java.util.List;
-import model.UserAccount;
 
 /**
  *
- * @author admin
+ * @author Acer
  */
-public class Login extends HttpServlet {
+public class UpdateReviewerGrade extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -40,10 +33,10 @@ public class Login extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Login</title>");  
+            out.println("<title>Servlet UpdateReviewerGrade</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Login at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet UpdateReviewerGrade at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -60,14 +53,7 @@ public class Login extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-//        processRequest(request, response);
-          List<UserAccount> user = new ArrayList<>();
-          StudentDAO student = new StudentDAO();
-          TeacherDAO teacher = new TeacherDAO();
-          ReviewerDAO reviewer = new ReviewerDAO();
-          if (user.) {
-            
-        }
+        processRequest(request, response);
     } 
 
     /** 
@@ -81,7 +67,6 @@ public class Login extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         processRequest(request, response);
-
     }
 
     /** 

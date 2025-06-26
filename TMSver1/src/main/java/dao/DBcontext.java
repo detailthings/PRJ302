@@ -24,7 +24,7 @@ public class DBcontext {
             // tao ket noi
             Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=PRJ302;trustServerCertificate=true", "sa", "sa");
             
-            System.out.println("succcessful");
+            System.out.println("succcessful database PRJ302");
             // ket noi thanh cong tra ve conn
            return conn;
         } catch (ClassNotFoundException | SQLException ex) {

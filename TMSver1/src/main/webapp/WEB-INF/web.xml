@@ -72,6 +72,10 @@
         <servlet-name>TeacherViewRequest</servlet-name>
         <servlet-class>controller.TeacherViewRequest</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UpdateReviewerGrade</servlet-name>
+        <servlet-class>controller.UpdateReviewerGrade</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>stureadstu</servlet-name>
         <url-pattern>/stureadstu</url-pattern>
@@ -143,6 +147,10 @@
     <servlet-mapping>
         <servlet-name>TeacherViewRequest</servlet-name>
         <url-pattern>/TeacherViewRequest</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateReviewerGrade</servlet-name>
+        <url-pattern>/UpdateReviewerGrade</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
