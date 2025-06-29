@@ -4,139 +4,75 @@
  */
 package dao;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import model.Semester;
 
 /**
  *
  * @author admin
  */
-public class SemesterDAO extends DAO<Semester> {
+public class SemesterDAO extends DAO1<Semester> {
 
+    
+    private EntityManagerFactory emf = 
+            Persistence.createEntityManagerFactory("Semester");
+        
     @Override
-    public int create(Semester t) {
-        try {
-            int rows;
-            PreparedStatement ps;
-            try (Connection conn = DBcontext.connectDB()) {
-                String sql = "INSERT INTO Semester(SemesterID, Semester, Year, StartDate, EndDate) VALUES(?,?,?,?,?)";
-                ps = conn.prepareStatement(sql);
-                ps.setString(1, t.getId());
-                ps.setString(2, t.getSemester());
-                ps.setInt(3, t.getYear());
-                ps.setDate(4, t.getStartDate());
-                ps.setDate(5, t.getEndDate());
-                rows = ps.executeUpdate();
-            }
-            ps.close();
-            return rows;
-        } catch (SQLException ex) {
-            Logger.getLogger(SemesterDAO.class.getName()).log(Level.SEVERE, null, ex);
-            return 0;
-        }
+    public void create(Semester t) {
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        em.persist(t);
+        em.getTransaction().commit();
+        em.close();
     }
 
     @Override
-    public int update(Semester t) {
-        try {
-            int rows;
-            PreparedStatement ps;
-            try (Connection conn = DBcontext.connectDB()) {
-                String sql = "UPDATE Semester SET Semester=?, Year=?, StartDate=?, EndDate=? WHERE SemesterID=?";
-                ps = conn.prepareStatement(sql);
-                ps.setString(1, t.getSemester());
-                ps.setInt(2, t.getYear());
-                ps.setDate(3, t.getStartDate());
-                ps.setDate(4, t.getEndDate());
-                ps.setString(5, t.getId());
-                rows = ps.executeUpdate();
-            }
-            ps.close();
-            return rows;
-        } catch (SQLException ex) {
-            Logger.getLogger(SemesterDAO.class.getName()).log(Level.SEVERE, null, ex);
-            return 0;
-        }
+    public boolean update(Semester t) {
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        em.merge(t);
+        em.getTransaction().commit();
+        em.close();
+        return true;
     }
 
     @Override
-    public int delete(Semester t) {
-        try {
-            int rows;
-            PreparedStatement ps;
-            try (Connection conn = DBcontext.connectDB()) {
-                String sql = "DELETE FROM Semester WHERE SemesterID=?";
-                ps = conn.prepareStatement(sql);
-                ps.setString(1, t.getId());
-                rows = ps.executeUpdate();
-            }
-            ps.close();
-            return rows;
-        } catch (SQLException ex) {
-            Logger.getLogger(SemesterDAO.class.getName()).log(Level.SEVERE, null, ex);
-            return 0;
-        }
+    public boolean delete(Semester t) {
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        em.remove(t);
+        em.getTransaction().commit();
+        em.close();
+        return true;
     }
 
     @Override
     public List<Semester> readAll() {
+        EntityManager em = emf.createEntityManager();
+        List<Semester> list = new ArrayList<>();
         try {
-            List<Semester> newList;
-            PreparedStatement ps;
-            try (Connection conn = DBcontext.connectDB()) {
-                newList = new ArrayList<>();
-                String sql = "SELECT * FROM Semester";
-                ps = conn.prepareStatement(sql);
-                ResultSet rs = ps.executeQuery();
-                while (rs.next()) {
-                    String semesterID = rs.getString("SemesterID");
-                    String semester = rs.getString("Semester");
-                    int year = rs.getInt("Year");
-                    Date startDate = rs.getDate("StartDate");
-                    Date endDate = rs.getDate("EndDate");
-                    newList.add(new Semester(semesterID, semester, year, startDate, endDate));
-                }
-            }
-            ps.close();
-            return newList;
-        } catch (SQLException ex) {
-            Logger.getLogger(SemesterDAO.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
+            em.getTransaction().begin();
+            list = em.createQuery("Select u From Semester u", Semester.class)
+                    .getResultList();
+            em.getTransaction().commit();
+        }  catch (NoResultException e) {
+            list = null;
+        } finally {
+            em.close();
         }
+        return list;
     }
 
     @Override
-    public Semester readOnly(String semesterID) {
-        try {
-            Semester semester = null;
-            PreparedStatement ps;
-            try (Connection conn = DBcontext.connectDB()) {
-                String sql = "SELECT * FROM Semester WHERE SemesterID=?";
-                ps = conn.prepareStatement(sql);
-                ps.setString(1, semesterID);
-                ResultSet rs = ps.executeQuery();
-                if (rs.next()) {
-                    semester = new Semester();
-                    semester.setId(rs.getString("SemesterID"));
-                    semester.setSemester(rs.getString("Semester"));
-                    semester.setYear(rs.getInt("Year"));
-                    semester.setStartDate(rs.getDate("StartDate"));
-                    semester.setEndDate(rs.getDate("EndDate"));
-                }
-            }
-            ps.close();
-            return semester;
-        } catch (SQLException ex) {
-            Logger.getLogger(SemesterDAO.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
-        }
+    public Semester readOnly(String str) {
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        Semester u = em.find(Semester.class, str);
+        em.getTransaction().commit();
+        em.close();
+        return u;
     }
+
 }

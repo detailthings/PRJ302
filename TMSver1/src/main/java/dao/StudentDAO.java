@@ -4,6 +4,7 @@
  */
 package dao;
 
+import jakarta.persistence.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,117 +20,66 @@ import model.Student;
  * @author admin
  * @param <Student>
  */
-public class StudentDAO extends DAO<Student>{
+public class StudentDAO extends DAO1<Student>{
+
+        private EntityManagerFactory emf = 
+            Persistence.createEntityManagerFactory("Student");
     
     @Override
-    public int create(Student t) {
-        try {
-            int rows;
-            PreparedStatement ps;
-            try (Connection conn = DBcontext.connectDB()) {
-                String sql = "INSERT INTO Student(UserID, Major) VALUES(?,?)";
-                ps = conn.prepareStatement(sql);
-                ps.setString(1, t.getStudentID());
-                ps.setString(2, t.getMajor());
-                rows = ps.executeUpdate();
-            }
-            ps.close();
-            return rows;
-        } catch (SQLException ex) {
-            Logger.getLogger(StudentDAO.class.getName()).log(Level.SEVERE, null, ex);
-            return 0;
-        }
+    public void create(Student t) {
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        em.persist(t);
+        em.getTransaction().commit();
+        em.close();
     }
 
     @Override
-    public int update(Student t) {
-        try {
-            int rows;
-            PreparedStatement ps;
-            try (Connection conn = DBcontext.connectDB()) {
-                String sql = "UPDATE Student SET UserID=?, Major=? WHERE ID=?";
-                ps = conn.prepareStatement(sql);
-                ps.setString(1, t.getStudentID());
-                ps.setString(2, t.getMajor());
-                ps.setInt(3, t.getId());
-                rows = ps.executeUpdate();
-            }
-            ps.close();
-            return rows;
-        } catch (SQLException ex) {
-            Logger.getLogger(StudentDAO.class.getName()).log(Level.SEVERE, null, ex);
-            return 0;
-        }
+    public boolean update(Student t) {
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        em.merge(t);
+        em.getTransaction().commit();
+        em.close();
+        return true;
     }
 
     @Override
-    public int delete(Student t) {
-        try {
-            int rows;
-            PreparedStatement ps;
-            try (Connection conn = DBcontext.connectDB()) {
-                String sql = "DELETE FROM Student WHERE ID=?";
-                ps = conn.prepareStatement(sql);
-                ps.setInt(1, t.getId());
-                rows = ps.executeUpdate();
-            }
-            ps.close();
-            return rows;
-        } catch (SQLException ex) {
-            Logger.getLogger(StudentDAO.class.getName()).log(Level.SEVERE, null, ex);
-            return 0;
-        }
+    public boolean delete(Student t) {
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        em.remove(t);
+        em.getTransaction().commit();
+        em.close();
+        return true;
     }
 
     @Override
     public List<Student> readAll() {
-        try {
-            List<Student> newList;
-            PreparedStatement ps;
-            try (Connection conn = DBcontext.connectDB()) {
-                newList = new ArrayList<>();
-                String sql = "SELECT * FROM Student";
-                ps = conn.prepareStatement(sql);
-                ResultSet rs = ps.executeQuery();
-                while (rs.next()) {
-                    int id = rs.getInt("ID");
-                    String userID = rs.getString("UserID");
-                    String major = rs.getString("Major");
-                    newList.add(new Student(id, userID, major));
-                }
-            }
-            ps.close();
-            return newList;
-        } catch (SQLException ex) {
-            Logger.getLogger(StudentDAO.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
-        }
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        List<Student> list = em.createQuery("Select u From Project u", Student.class)
+                .getResultList();
+        em.getTransaction().commit();
+        em.close();
+        return list;
     }
 
     @Override
     public Student readOnly(String str) {
+        EntityManager em = emf.createEntityManager();
+        Student u = null;
         try {
-            Student student = null;
-            PreparedStatement ps;
-            try (Connection conn = DBcontext.connectDB()) {
-                String sql = "SELECT * FROM Student WHERE ID=? OR UserID=?";
-                ps = conn.prepareStatement(sql);
-                ps.setString(1, str);
-                ps.setString(2, str);
-                ResultSet rs = ps.executeQuery();
-                if (rs.next()) {
-                    student = new Student();
-                    student.setId(rs.getInt("ID"));
-                    student.setStudentID(rs.getString("UserID"));
-                    student.setMajor(rs.getString("Major"));
-                }
-            }
-            ps.close();
-            return student;
-        } catch (SQLException ex) {
-            Logger.getLogger(StudentDAO.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
+            em.getTransaction().begin();
+            u = em.createQuery("Select u From Student u Where u.userID = :userID", Student.class)
+                    .setParameter("userID", str)
+                    .getSingleResult();
+            em.getTransaction().commit();
+        }  catch (NoResultException e) {
+            u = null;
+        } finally {
+            em.close();
         }
+        return u;
     }
-    
 }

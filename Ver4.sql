@@ -1,4 +1,4 @@
--- TERM
+﻿-- TERM
 CREATE TABLE Semester (
     SemesterID VARCHAR(4) PRIMARY KEY,
     Semester VARCHAR(10) CHECK (Semester IN ('Fall', 'Spring', 'Summer')) NOT NULL,
@@ -13,7 +13,7 @@ CREATE TABLE UserAccount (
     Password VARCHAR(255) NOT NULL,
     FullName NVARCHAR(100) NOT NULL,
     Email VARCHAR(100) NOT NULL,
-    Role VARCHAR(20) CHECK (Role IN ('student', 'teacher', 'reviewer')) NOT NULL
+    Role VARCHAR(20) CHECK (Role IN ('student', 'teacher', 'reviewer', 'admin')) NOT NULL
 );
 
 -- STUDENT
@@ -89,12 +89,66 @@ CREATE TABLE Submission (
 -- REQUEST
 CREATE TABLE Request (
     ID INT PRIMARY KEY IDENTITY(1,1),
-    StudentID INT,
+    StudentID NVARCHAR(20),
     Title NVARCHAR(255),
     Description NVARCHAR(MAX),
-    Status NVARCHAR(50) CHECK(Status IN ('Processing','Accept','Reject')),
+    Status NVARCHAR(50) DEFAULT 'None' CHECK(Status IN ('Processing','Accept','Reject','None')),
     TeacherID INT,
-    Created_At DATETIME DEFAULT GETDATE(),
-    FOREIGN KEY (StudentID) REFERENCES Student(ID),
+    CreatedAt DATETIME DEFAULT GETDATE(),
     FOREIGN KEY (TeacherID) REFERENCES Teacher(ID)
 );
+
+
+-- SEMESTER
+INSERT INTO Semester (SemesterID, Semester, Year, StartDate, EndDate) VALUES
+('SP24', 'Spring', 2024, '2024-01-01', '2024-04-30'),
+('SU24', 'Summer', 2024, '2024-05-01', '2024-08-31'),
+('FA24', 'Fall', 2024, '2024-09-01', '2024-12-31'),
+('SP25', 'Spring', 2025, '2024-01-01', '2024-04-30'),
+('SU25', 'Summer', 2025, '2025-05-01', '2025-08-31');
+
+-- USERACCOUNT
+INSERT INTO UserAccount (UserID, Password, FullName, Email, Role) VALUES
+('sv001', '12345678', N'Nguyễn Văn A', 'a@student.fpt.edu.vn', 'student'),
+('sv002', '12345678', N'Lê Thị B', 'b@student.fpt.edu.vn', 'student'),
+('gv001', '12345678', N'Trần Văn C', 'c@fpt.edu.vn', 'teacher'),
+('rv001', '12345678', N'Phạm Văn D', 'd@fpt.edu.vn', 'reviewer'),
+('rv002', '12345678', N'Hoàng Thị E', 'e@fpt.edu.vn', 'reviewer'),
+('admin01', 'admin123', N'Admin Hệ thống', 'admin@fpt.edu.vn', 'admin');
+
+-- STUDENT
+INSERT INTO Student (UserID, Major, studentCode) VALUES
+('sv001', 'Information System', 'he000001' ),
+('sv002', 'Software Engineering', 'he000002');
+
+-- TEACHER
+INSERT INTO Teacher (UserID, Department) VALUES
+('gv001', N'Computer Science');
+
+-- REVIEWER
+INSERT INTO Reviewer (UserID, Department) VALUES
+('rv001', N'Computer Science'),
+('rv002', N'Information System');
+
+-- PROJECT
+INSERT INTO Project (ProjectID, Title, Description, TeacherID, SemesterID, JudgingID) VALUES
+('PRJ001', N'Hệ thống quản lý khóa luận', N'Một hệ thống giúp quản lý sinh viên và tiến độ khóa luận', 'gv001', 'FA24', 'JUDG001');
+
+-- JUDGING
+INSERT INTO Judging (JudgingID, ProjectCode, TeacherID, Reviewer1ID, Reviewer2ID) VALUES
+('JUDG001', 'PRJ001', 'gv001', 'rv001', 'rv002');
+
+-- DELIVERABLE
+INSERT INTO Deliverable (Title, Description, Weighting, SubmissionOpenDate, DueDate) VALUES
+(N'Proposal', N'Nộp đề cương khóa luận', 20, '2024-08-15', '2024-09-01'),
+(N'Final Report', N'Nộp báo cáo cuối kỳ', 80, '2024-11-15', '2024-12-01');
+
+-- SUBMISSION
+INSERT INTO Submission (ProjectID, DeliverableID, Status) VALUES
+('PRJ001', 1, 'Submitted'),
+('PRJ001', 2, 'Pending');
+
+-- REQUEST
+INSERT INTO Request (Title, Description, Status, TeacherID) VALUES
+(N'Xin đổi đề tài', N'Em muốn đổi đề tài sang hướng AI', 'Processing', 1),
+(N'Gia hạn nộp báo cáo', N'Em xin thêm 1 tuần để hoàn thành báo cáo cuối kỳ', 'Accept', 1);

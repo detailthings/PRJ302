@@ -4,33 +4,39 @@
  */
 package model;
 
-import java.sql.Timestamp;
+import jakarta.persistence.*;
+import java.time.LocalDateTime;
 
 /**
  *
  * @author admin
  */
+
+@Entity
 public class Request {
     
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    
     private int id;
-    private int studentID;
+    private String studentID;
     private String title;
     private String description;
     private String status;
     private int teacherID;
-    private Timestamp createAt;
+    private LocalDateTime createdAt;
 
     public Request() {
     }
 
-    public Request(int id, int studentID, String title, String description, String status, int teacherID, Timestamp createAt) {
+    public Request(int id, String studentID, String title, String description, String status, int teacherID, LocalDateTime createdAt) {
         this.id = id;
         this.studentID = studentID;
         this.title = title;
         this.description = description;
         this.status = status;
         this.teacherID = teacherID;
-        this.createAt = createAt;
+        this.createdAt = createdAt;
     }
 
     public int getId() {
@@ -41,11 +47,11 @@ public class Request {
         this.id = id;
     }
 
-    public int getStudentID() {
+    public String getStudentID() {
         return studentID;
     }
 
-    public void setStudentID(int studentID) {
+    public void setStudentID(String studentID) {
         this.studentID = studentID;
     }
 
@@ -81,12 +87,12 @@ public class Request {
         this.teacherID = teacherID;
     }
 
-    public Timestamp getCreateAt() {
-        return createAt;
+    public LocalDateTime getCreateAt() {
+        return createdAt;
     }
 
-    public void setCreateAt(Timestamp createAt) {
-        this.createAt = createAt;
+    public void setCreateAt(LocalDateTime createAt) {
+        this.createdAt = createAt;
     }
 
     

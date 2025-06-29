@@ -5,7 +5,7 @@
 package dao;
 
 import jakarta.persistence.*;
-import java.util.List;
+import java.util.*;
 import model.UserAccount;
 
 /**
@@ -49,21 +49,35 @@ public class UserAccDAO extends DAO1<UserAccount> {
     @Override
     public List<UserAccount> readAll() {
         EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
-        List<UserAccount> list = em.createQuery("Select u From UserAccount u", UserAccount.class)
-                .getResultList();
-        em.getTransaction().commit();
-        em.close();
+        List<UserAccount> list = new ArrayList<>();
+        try {
+            em.getTransaction().begin();
+            list = em.createQuery("Select u From UserAccount u", UserAccount.class)
+                    .getResultList();
+            em.getTransaction().commit();
+        }  catch (NoResultException e) {
+            list = null;
+        } finally {
+            em.close();
+        }
         return list;
     }
 
     @Override
     public UserAccount readOnly(String str) {
         EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
-        UserAccount u = em.find(UserAccount.class, str);
-        em.getTransaction().commit();
-        em.close();
+        UserAccount u = null;
+        try {
+            em.getTransaction().begin();
+            u = em.createQuery("Select u From UserAccount u Where u.userID = :userID", UserAccount.class)
+                    .setParameter("userID", str)
+                    .getSingleResult();
+            em.getTransaction().commit();
+        }  catch (NoResultException e) {
+            u = null;
+        } finally {
+            em.close();
+        }
         return u;
     }
     

@@ -1,0 +1,40 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
+ */
+
+package controller.admin;
+
+import dao.*;
+import model.*;
+import java.io.IOException;
+import java.io.PrintWriter;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import java.util.*;
+
+/**
+ *
+ * @author admin
+ */
+public class ReadAllProject extends HttpServlet {
+   
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    throws ServletException, IOException {
+        HttpSession session = request.getSession(false);
+        if (session == null || session.getAttribute("user") == null) {
+            response.sendRedirect("/TMSver1/jsp/common/layout/login.jsp");
+            return;
+        }
+        
+        ProjectDAO p = new ProjectDAO();
+        List<Project> listAllProject = p.readAll();
+        
+        request.setAttribute("listAllProject", listAllProject);
+        request.getRequestDispatcher("/jsp/admin/allproject.jsp").forward(request, response);
+    } 
+}

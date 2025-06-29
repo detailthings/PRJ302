@@ -5,6 +5,9 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import="dao.*" %>
+<%@ page import="model.*" %>
+<%@ page import="java.util.*" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 
@@ -289,89 +292,33 @@
                           </div>
                       </div>
                       <div class=" row align-items-center">
+                          <% Student s = (Student) request.getAttribute("studentprofile"); %>
+                          <% UserAccount u = (UserAccount) ss.getAttribute("useraccount"); %>
                           <div class="form-group col-sm-6">
-                              <label for="fname">First Name:</label>
-                              <input type="text" class="form-control" id="fname" value="Barry">
+                              <label for="fname">User ID:</label>
+                              <%=u.getUserID() %>
                           </div>
                           <div class="form-group col-sm-6">
-                              <label for="lname">Last Name:</label>
-                              <input type="text" class="form-control" id="lname" value="Tech">
+                              <label for="lname">Full Name:</label>
+                              <%=u.getFullName() %>
                           </div>
                           <div class="form-group col-sm-6">
-                              <label for="uname">User Name:</label>
-                              <input type="text" class="form-control" id="uname" value="Barry@01">
+                              <label for="uname">Email:</label>
+                              <%=u.getEmail() %>
                           </div>
                           <div class="form-group col-sm-6">
-                              <label for="cname">City:</label>
-                              <input type="text" class="form-control" id="cname" value="Atlanta">
+                              <label for="cname">Role:</label>
+                              <%=u.getRole() %>
                           </div>
                           <div class="form-group col-sm-6">
-                              <label class="d-block">Gender:</label>
-                              <div class="custom-control custom-radio custom-control-inline">
-                                  <input type="radio" id="customRadio6" name="customRadio1" class="custom-control-input" checked="">
-                                  <label class="custom-control-label" for="customRadio6"> Male </label>
-                              </div>
-                              <div class="custom-control custom-radio custom-control-inline">
-                                  <input type="radio" id="customRadio7" name="customRadio1" class="custom-control-input">
-                                  <label class="custom-control-label" for="customRadio7"> Female </label>
-                              </div>
+                              <label for="dob">Student Code:</label>
+                              <%=s.getStudentCode() %>
                           </div>
                           <div class="form-group col-sm-6">
-                              <label for="dob">Date Of Birth:</label>
-                              <input  class="form-control" id="dob" value="1984-01-24">
-                          </div>
-                          <div class="form-group col-sm-6">
-                              <label>Marital Status:</label>
-                              <select class="form-control" id="exampleFormControlSelect1">
-                                  <option selected="">Single</option>
-                                  <option>Married</option>
-                                  <option>Widowed</option>
-                                  <option>Divorced</option>
-                                  <option>Separated </option>
-                              </select>
-                          </div>
-                          <div class="form-group col-sm-6">
-                              <label>Age:</label>
-                              <select class="form-control" id="exampleFormControlSelect2">
-                                  <option>12-18</option>
-                                  <option>19-32</option>
-                                  <option selected="">33-45</option>
-                                  <option>46-62</option>
-                                  <option>63 > </option>
-                              </select>
-                          </div>
-                          <div class="form-group col-sm-6">
-                              <label>Country:</label>
-                              <select class="form-control" id="exampleFormControlSelect3">
-                                  <option>Caneda</option>
-                                  <option>Noida</option>
-                                  <option selected="">USA</option>
-                                  <option>India</option>
-                                  <option>Africa</option>
-                              </select>
-                          </div>
-                          <div class="form-group col-sm-6">
-                              <label>State:</label>
-                              <select class="form-control" id="exampleFormControlSelect4">
-                                  <option>California</option>
-                                  <option>Florida</option>
-                                  <option selected="">Georgia</option>
-                                  <option>Connecticut</option>
-                                  <option>Louisiana</option>
-                              </select>
-                          </div>
-                          <div class="form-group col-sm-12">
-                              <label>Address:</label>
-                              <textarea class="form-control" name="address" rows="5" style="line-height: 22px;">
-                                       37 Cardinal Lane
-                                       Petersburg, VA 23803
-                                       United States of America
-                                       Zip Code: 85001
-                              </textarea>
+                              <label for="dob">Major:</label>
+                              <%=s.getMajor() %>
                           </div>
                       </div>
-                      <button type="submit" class="btn btn-primary mr-2">Submit</button>
-                      <button type="reset" class="btn iq-bg-danger">Cancel</button>
                   </form>
               </div>
           </div>

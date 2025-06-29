@@ -4,13 +4,19 @@
  */
 package model;
 
+import jakarta.persistence.*;
+import jakarta.persistence.Id;
 import java.sql.Timestamp;
 
 /**
  *
  * @author admin
  */
+@Entity
 public class Submission {
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     
     private int id;
     private String projectID;
