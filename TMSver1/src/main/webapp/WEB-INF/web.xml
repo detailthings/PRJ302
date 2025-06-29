@@ -144,6 +144,18 @@
         <servlet-name>CreateRequestController</servlet-name>
         <servlet-class>controller.teacher.CreateRequestController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>TeacherRequestController</servlet-name>
+        <servlet-class>controller.teacher.TeacherRequestController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteApplyController</servlet-name>
+        <servlet-class>controller.teacher.DeleteApplyController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditApplyController</servlet-name>
+        <servlet-class>controller.teacher.EditApplyController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SubmissionController</servlet-name>
         <url-pattern>/submissioncontroller</url-pattern>
@@ -287,6 +299,18 @@
     <servlet-mapping>
         <servlet-name>CreateRequestController</servlet-name>
         <url-pattern>/createrequestcontroller</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TeacherRequestController</servlet-name>
+        <url-pattern>/teacherrequestcontroller</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteApplyController</servlet-name>
+        <url-pattern>/deleteapplycontroller</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditApplyController</servlet-name>
+        <url-pattern>/editapplycontroller</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

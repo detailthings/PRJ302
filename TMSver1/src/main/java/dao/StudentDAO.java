@@ -5,14 +5,7 @@
 package dao;
 
 import jakarta.persistence.*;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import model.Student;
 
 /**
@@ -22,8 +15,8 @@ import model.Student;
  */
 public class StudentDAO extends DAO1<Student>{
 
-        private EntityManagerFactory emf = 
-            Persistence.createEntityManagerFactory("Student");
+    private EntityManagerFactory emf = 
+        Persistence.createEntityManagerFactory("Student");
     
     @Override
     public void create(Student t) {
