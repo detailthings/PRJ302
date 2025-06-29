@@ -25,6 +25,7 @@ public class Project {
     private String semesterID;
     private String judgingID;
     private String studentID;
+    private Float scorce;
 
     public Project() {
     }
@@ -38,6 +39,17 @@ public class Project {
         this.judgingID = judgingID;
     }
 
+    public Project(String projectID, String title, String description, String teacherID, String semesterID, String judgingID, String studentID, Float scorce) {
+        this.projectID = projectID;
+        this.title = title;
+        this.description = description;
+        this.teacherID = teacherID;
+        this.semesterID = semesterID;
+        this.judgingID = judgingID;
+        this.studentID = studentID;
+        this.scorce = scorce;
+    }
+    
     public String getProjectCode() {
         return projectID;
     }
@@ -93,7 +105,21 @@ public class Project {
     public void setStudentID(String studentID) {
         this.studentID = studentID;
     }
-    
-        
-    
+
+    public String getProjectID() {
+        return projectID;
+    }
+
+    public void setProjectID(String projectID) {
+        this.projectID = projectID;
+    }
+
+    public Float getScorce() {
+        return scorce;
+    }
+
+    public void setScorce(Float scorce) {
+        this.scorce = scorce;
+    }
+
 }

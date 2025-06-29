@@ -4,15 +4,21 @@
  */
 package model;
 
+import jakarta.persistence.*;
 import java.sql.Date;
 
 /**
  *
  * @author admin
  */
+
+@Entity
 public class Deliverable {
     
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    
+    private int deliverableID;
     private String title;
     private String description;
     private float weighting;
@@ -22,8 +28,8 @@ public class Deliverable {
     public Deliverable() {
     }
 
-    public Deliverable(int id, String title, String description, float weighting, Date submissionOpenDate, Date dueDate) {
-        this.id = id;
+    public Deliverable(int deliverableID, String title, String description, float weighting, Date submissionOpenDate, Date dueDate) {
+        this.deliverableID = deliverableID;
         this.title = title;
         this.description = description;
         this.weighting = weighting;
@@ -31,12 +37,12 @@ public class Deliverable {
         this.dueDate = dueDate;
     }
 
-    public int getId() {
-        return id;
+    public int getDeliverableID() {
+        return deliverableID;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setDeliverableID(int deliverableID) {
+        this.deliverableID = deliverableID;
     }
 
     public String getTitle() {

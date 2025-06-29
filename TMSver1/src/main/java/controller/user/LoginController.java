@@ -5,6 +5,9 @@
 
 package controller.user;
 
+import dao.ReviewerDAO;
+import dao.StudentDAO;
+import dao.TeacherDAO;
 import dao.UserAccDAO;
 import dao.UserAccountDAO;
 import java.io.IOException;
@@ -14,7 +17,11 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import model.Reviewer;
+import model.Student;
+import model.Teacher;
 import model.UserAccount;
+import util.Validation;
 
 /**
  *
@@ -77,6 +84,19 @@ public class LoginController extends HttpServlet {
             HttpSession session = request.getSession();
             String user = request.getParameter("username");
             String pass = request.getParameter("password");
+            boolean hasError = false;
+            if (!Validation.checkUsername(user)) {
+                request.setAttribute("uerror", "Username chỉ chứa a-z, A-Z, 0-9, dấu gạch dưới.");
+                hasError = true;
+            }
+            if (!Validation.checkPassword(pass)) {
+                request.setAttribute("perror", "Password phải có ít nhất 8 ký tự.");
+                hasError = true;
+            }
+            if (hasError) {
+                request.getRequestDispatcher("/jsp/common/layout/login.jsp").forward(request, response);
+                return;
+            }
 //            UserAccountDAO uad = new UserAccountDAO();
 //            UserAccount a = uad.getUserAccount(user, pass);
 
@@ -88,38 +108,38 @@ public class LoginController extends HttpServlet {
                 session.setAttribute("user", user);
                 session.setAttribute("pass", pass);
                 session.setAttribute("name", a.getFullName());
+                session.setAttribute("useraccount", a);
                 String role = a.getRole();
                 switch (role) {
                     case "admin":
-                        response.sendRedirect("jsp/admin/home.jsp");
+                        response.sendRedirect("dashboardcontroller");
                         break;
                     case "teacher":
-                        response.sendRedirect("jsp/teacher/home.jsp");
+                        Teacher profileT = new TeacherDAO().readOnly(user);
+                        session.setAttribute("teacherprofile", profileT);
+                        response.sendRedirect("hometeachercontroller");
                         break;
                     case "reviewer":
-                        response.sendRedirect("jsp/reviewer/home.jsp");
+                        Reviewer profileR = new ReviewerDAO().readOnly(user);
+                        session.setAttribute("reviewerprofile", profileR);
+                        response.sendRedirect("homereviewercontroller");
                         break;
                     case "student":
-                        response.sendRedirect("jsp/student/index.jsp");
+                        Student profileS = new StudentDAO().readOnly(user);
+                        session.setAttribute("studentprofile", profileS);
+                        response.sendRedirect("homestudentcontroller");
                         break;
                     default:
-                        response.sendRedirect("jsp/common/layout/login.jsp");
+                        response.sendRedirect("/TMSver1/jsp/common/layout/login.jsp");
                 }
             } else {
-                response.sendRedirect("jsp/common/layout/login.jsp");
+                request.setAttribute("err", "Sai tên tài khoản hoặc mật khẩu.");
+                request.getRequestDispatcher("/jsp/common/layout/login.jsp").forward(request, response);
             }
         } catch(Exception e) {
             
         }
     }
 
-    /** 
-     * Returns a short description of the servlet.
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
 
 }

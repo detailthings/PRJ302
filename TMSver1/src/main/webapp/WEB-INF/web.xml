@@ -1,70 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="6.0" xmlns="https://jakarta.ee/xml/ns/jakartaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd">
     <servlet>
-        <servlet-name>stureadstu</servlet-name>
-        <servlet-class>controller.StudentReadStudent</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>stuupstu</servlet-name>
-        <servlet-class>controller.StudentUpdateStudent</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>stucrerequest</servlet-name>
-        <servlet-class>controller.StudentCreateRequest</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>sturereadrequest</servlet-name>
-        <servlet-class>controller.StudentReadRequest</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>stuuprequest</servlet-name>
-        <servlet-class>controller.StudentUpdateRequest</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>studerequets</servlet-name>
-        <servlet-class>controller.StudentDeleteRequest</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>stureadproass</servlet-name>
-        <servlet-class>controller.StudentReadProjectAssignment</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>stureadpro</servlet-name>
-        <servlet-class>controller.StudentReadProject</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>stureadgrade</servlet-name>
-        <servlet-class>controller.StudentReadGrade</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>Login</servlet-name>
-        <servlet-class>controller.Login</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>Logout</servlet-name>
-        <servlet-class>controller.Logout</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>UserController</servlet-name>
-        <servlet-class>controller.user.UserController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>TeacherController</servlet-name>
-        <servlet-class>controller.user.TeacherController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ReviewerController</servlet-name>
-        <servlet-class>controller.user.ReviewerController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>StudentController</servlet-name>
-        <servlet-class>controller.user.StudentController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ProjectController</servlet-name>
-        <servlet-class>controller.user.ProjectController</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>SubmissionController</servlet-name>
         <servlet-class>controller.student.SubmissionController</servlet-class>
     </servlet>
@@ -73,24 +9,8 @@
         <servlet-class>controller.student.DeliverableController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>SemesterController</servlet-name>
-        <servlet-class>controller.user.SemesterController</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>ApplicationController</servlet-name>
         <servlet-class>controller.student.ApplicationController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ResponseController</servlet-name>
-        <servlet-class>controller.user.ResponseController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>RequestController</servlet-name>
-        <servlet-class>controller.user.RequestController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>JudgingController</servlet-name>
-        <servlet-class>controller.user.JudgingController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>LoginController</servlet-name>
@@ -116,99 +36,125 @@
         <servlet-name>UserProfileController</servlet-name>
         <servlet-class>controller.user.UserProfileController</servlet-class>
     </servlet>
-    <servlet-mapping>
-        <servlet-name>stureadstu</servlet-name>
-        <url-pattern>/stureadstu</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>stuupstu</servlet-name>
-        <url-pattern>/stuupstu</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>stucrerequest</servlet-name>
-        <url-pattern>/stucrerequest</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>sturereadrequest</servlet-name>
-        <url-pattern>/sturereadrequest</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>stuuprequest</servlet-name>
-        <url-pattern>/stuuprequest</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>studerequets</servlet-name>
-        <url-pattern>/studerequets</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>stureadproass</servlet-name>
-        <url-pattern>/stureadproass</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>stureadpro</servlet-name>
-        <url-pattern>/stureadpro</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>stureadgrade</servlet-name>
-        <url-pattern>/stureadgrade</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>Login</servlet-name>
-        <url-pattern>/login</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>Logout</servlet-name>
-        <url-pattern>/logout</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>UserController</servlet-name>
-        <url-pattern>/usercontroller</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>TeacherController</servlet-name>
-        <url-pattern>/teachercontroller</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ReviewerController</servlet-name>
-        <url-pattern>/reviewercontroller</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>StudentController</servlet-name>
-        <url-pattern>/studentcontroller</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ProjectController</servlet-name>
-        <url-pattern>/projectcontroller</url-pattern>
-    </servlet-mapping>
+    <servlet>
+        <servlet-name>DashBoardController</servlet-name>
+        <servlet-class>controller.admin.DashBoardController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ReadAllRequest</servlet-name>
+        <servlet-class>controller.admin.ReadAllRequest</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ReadAllProject</servlet-name>
+        <servlet-class>controller.admin.ReadAllProject</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ReadAllDeliverable</servlet-name>
+        <servlet-class>controller.admin.ReadAllDeliverable</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ReadAllSemester</servlet-name>
+        <servlet-class>controller.admin.ReadAllSemester</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ReadAllUseraccount</servlet-name>
+        <servlet-class>controller.admin.ReadAllUseraccount</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CreateDeliverable</servlet-name>
+        <servlet-class>controller.admin.CreateDeliverable</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CreateProject</servlet-name>
+        <servlet-class>controller.admin.CreateProject</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CreateRequest</servlet-name>
+        <servlet-class>controller.admin.CreateRequest</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CreateSemester</servlet-name>
+        <servlet-class>controller.admin.CreateSemester</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CreateUseraccount</servlet-name>
+        <servlet-class>controller.admin.CreateUseraccount</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateDeliverable</servlet-name>
+        <servlet-class>controller.admin.UpdateDeliverable</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateProject</servlet-name>
+        <servlet-class>controller.admin.UpdateProject</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateRequest</servlet-name>
+        <servlet-class>controller.admin.UpdateRequest</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateSemester</servlet-name>
+        <servlet-class>controller.admin.UpdateSemester</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateUseraccount</servlet-name>
+        <servlet-class>controller.admin.UpdateUseraccount</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteDeliverable</servlet-name>
+        <servlet-class>controller.admin.DeleteDeliverable</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteProject</servlet-name>
+        <servlet-class>controller.admin.DeleteProject</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteRequest</servlet-name>
+        <servlet-class>controller.admin.DeleteRequest</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteSemester</servlet-name>
+        <servlet-class>controller.admin.DeleteSemester</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AppliedController</servlet-name>
+        <servlet-class>controller.student.AppliedController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditProfileController</servlet-name>
+        <servlet-class>controller.user.EditProfileController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditController</servlet-name>
+        <servlet-class>controller.user.EditController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>TeacherProjectController</servlet-name>
+        <servlet-class>controller.teacher.TeacherProjectController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>HomeTeacherController</servlet-name>
+        <servlet-class>controller.teacher.HomeTeacherController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>TeacherApplyController</servlet-name>
+        <servlet-class>controller.teacher.TeacherApplyController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CreateRequestController</servlet-name>
+        <servlet-class>controller.teacher.CreateRequestController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SubmissionController</servlet-name>
         <url-pattern>/submissioncontroller</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>DeliverableController</servlet-name>
-        <url-pattern>/jsp/student/deliverablecontroller</url-pattern>
-        <url-pattern>/jsp/app/deliverablecontroller</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>SemesterController</servlet-name>
-        <url-pattern>/semestercontroller</url-pattern>
+        <url-pattern>/deliverablecontroller</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ApplicationController</servlet-name>
-        <url-pattern>/jsp/student/applicationcontroller</url-pattern>
-        <url-pattern>/jsp/app/applicationcontroller</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ResponseController</servlet-name>
-        <url-pattern>/responsecontroller</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>RequestController</servlet-name>
-        <url-pattern>/requestcontroller</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>JudgingController</servlet-name>
-        <url-pattern>/judgingcontroller</url-pattern>
+        <url-pattern>/applicationcontroller</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
@@ -220,27 +166,134 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>MyProjectStudentController</servlet-name>
-        <url-pattern>/jsp/student/myprojectstudent</url-pattern>
-        <url-pattern>/jsp/app/myprojectstudent</url-pattern>
+        <url-pattern>/myprojectstudent</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>FeedBackController</servlet-name>
-        <url-pattern>/jsp/student/feedbackcontroller</url-pattern>
-        <url-pattern>/jsp/app/feedbackcontroller</url-pattern>
+        <url-pattern>/feedbackcontroller</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>HomeStudentController</servlet-name>
-        <url-pattern>/jsp/student/homestudentcontroller</url-pattern>
-        <url-pattern>/jsp/app/homestudentcontroller</url-pattern>
+        <url-pattern>/homestudentcontroller</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>UserProfileController</servlet-name>
-        <url-pattern>/jsp/student/userprofilecontroller</url-pattern>
-        <url-pattern>/jsp/app/userprofilecontroller</url-pattern>
+        <url-pattern>/userprofilecontroller</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DashBoardController</servlet-name>
+        <url-pattern>/dashboardcontroller</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ReadAllRequest</servlet-name>
+        <url-pattern>/readallrequest</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ReadAllProject</servlet-name>
+        <url-pattern>/readallproject</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ReadAllDeliverable</servlet-name>
+        <url-pattern>/readalldeliverable</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ReadAllSemester</servlet-name>
+        <url-pattern>/readallsemester</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ReadAllUseraccount</servlet-name>
+        <url-pattern>/readalluseraccount</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateDeliverable</servlet-name>
+        <url-pattern>/createdeliverable</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateProject</servlet-name>
+        <url-pattern>/createproject</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateRequest</servlet-name>
+        <url-pattern>/createrequest</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateSemester</servlet-name>
+        <url-pattern>/createsemester</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateUseraccount</servlet-name>
+        <url-pattern>/createuseraccount</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateDeliverable</servlet-name>
+        <url-pattern>/updatedeliverable</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateProject</servlet-name>
+        <url-pattern>/updateproject</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateRequest</servlet-name>
+        <url-pattern>/updaterequest</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateSemester</servlet-name>
+        <url-pattern>/updatesemester</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateUseraccount</servlet-name>
+        <url-pattern>/updateuseraccount</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteDeliverable</servlet-name>
+        <url-pattern>/deletedeliverable</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteProject</servlet-name>
+        <url-pattern>/deleteproject</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteRequest</servlet-name>
+        <url-pattern>/deleterequest</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteSemester</servlet-name>
+        <url-pattern>/deletesemester</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AppliedController</servlet-name>
+        <url-pattern>/appliedcontroller</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditProfileController</servlet-name>
+        <url-pattern>/editprofilecontroller</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditController</servlet-name>
+        <url-pattern>/editcontroller</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TeacherProjectController</servlet-name>
+        <url-pattern>/teacherprojectcontroller</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HomeTeacherController</servlet-name>
+        <url-pattern>/hometeachercontroller</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TeacherApplyController</servlet-name>
+        <url-pattern>/teacherapplycontroller</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateRequestController</servlet-name>
+        <url-pattern>/createrequestcontroller</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
+    <welcome-file-list>
+        <welcome-file>jsp/common/layout/login.jsp</welcome-file>
+    </welcome-file-list>
 </web-app>

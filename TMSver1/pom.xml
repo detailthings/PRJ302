@@ -39,7 +39,7 @@
         <dependency>
             <groupId>com.microsoft.sqlserver</groupId>
             <artifactId>mssql-jdbc</artifactId>
-            <version>12.6.1.jre11</version> <!-- t??ng thích v?i JDK 17 tr? lên -->
+            <version>12.6.1.jre11</version> <!-- t??ng th?ch v?i JDK 17 tr? l?n -->
         </dependency>
         
         <!-- JSTL API -->
@@ -54,7 +54,9 @@
             <groupId>org.glassfish.web</groupId>
             <artifactId>jakarta.servlet.jsp.jstl</artifactId>
             <version>3.0.1</version>
-        </dependency>    
+        </dependency> 
+        
+        
     </dependencies>
 
     

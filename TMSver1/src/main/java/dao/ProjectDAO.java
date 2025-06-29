@@ -58,11 +58,17 @@ public class ProjectDAO extends DAO1<Project> {
     @Override
     public List<Project> readAll() {
         EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
-        List<Project> list = em.createQuery("Select u From Project u", Project.class)
-                .getResultList();
-        em.getTransaction().commit();
-        em.close();
+        List<Project> list = new ArrayList<>();
+        try {
+            em.getTransaction().begin();
+            list = em.createQuery("Select u From Project u", Project.class)
+                    .getResultList();
+            em.getTransaction().commit();
+        }  catch (NoResultException e) {
+            list = null;
+        } finally {
+            em.close();
+        }
         return list;
     }
 
@@ -88,14 +94,33 @@ public class ProjectDAO extends DAO1<Project> {
         return list;
     }
     
-    public static void main(String[] args) {
-        ProjectDAO p = new ProjectDAO();
-        List<Project> l =  p.readAllByStuID("he190177");
-        if(l.isEmpty()) {
-            System.out.println("Em");
-        } else {
-            System.out.println(l.get(0));
+    public List<Project> readAllByTeaID(String teacherID) {
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        List<Project> list = em
+                .createQuery("Select u From Project u Where u.teacherID = :teacherID", Project.class)
+                .setParameter("teacherID", teacherID)
+                .getResultList();
+        em.getTransaction().commit();
+        em.close();
+        return list;
+    }
+    
+    public int countAllProject() {
+        EntityManager em = emf.createEntityManager();
+        int count = 0;
+        try {
+            em.getTransaction().begin();
+            count = em.createQuery("Select Count(u) From Project u", Long.class)
+                    .getSingleResult()
+                    .intValue();
+            em.getTransaction().commit();
+        }  catch (NoResultException e) {
+            count = 0;
+        } finally {
+            em.close();
         }
+        return count;
     }
     
 }

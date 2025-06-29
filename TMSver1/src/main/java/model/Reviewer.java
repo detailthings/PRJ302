@@ -4,11 +4,19 @@
  */
 package model;
 
+import jakarta.persistence.*;
+import jakarta.persistence.Id;
+
 /**
  *
  * @author admin
  */
+
+@Entity
 public class Reviewer {
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     
     private int id;
     private String reviewerID;

@@ -4,146 +4,102 @@
  */
 package dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Timestamp;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.NoResultException;
+import jakarta.persistence.Persistence;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import model.Request;
 
 /**
  *
  * @author admin
  */
-public class RequestDAO extends DAO<Request> {
+public class RequestDAO extends DAO1<Request> {
 
+    private EntityManagerFactory emf = 
+            Persistence.createEntityManagerFactory("Request");
+        
     @Override
-    public int create(Request t) {
-        try {
-            int rows;
-            PreparedStatement ps;
-            try (Connection conn = DBcontext.connectDB()) {
-                String sql = "INSERT INTO Request(StudentID, Title, Description, Status, TeacherID, Created_At) VALUES(?,?,?,?,?,?)";
-                ps = conn.prepareStatement(sql);
-                ps.setInt(1, t.getStudentID());
-                ps.setString(2, t.getTitle());
-                ps.setString(3, t.getDescription());
-                ps.setString(4, t.getStatus());
-                ps.setInt(5, t.getTeacherID());
-                ps.setTimestamp(6, t.getCreateAt());
-                rows = ps.executeUpdate();
-            }
-            ps.close();
-            return rows;
-        } catch (SQLException ex) {
-            Logger.getLogger(RequestDAO.class.getName()).log(Level.SEVERE, null, ex);
-            return 0;
-        }
+    public void create(Request t) {
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        em.persist(t);
+        em.getTransaction().commit();
+        em.close();
     }
 
     @Override
-    public int update(Request t) {
-        try {
-            int rows;
-            PreparedStatement ps;
-            try (Connection conn = DBcontext.connectDB()) {
-                String sql = "UPDATE Request SET StudentID=?, Title=?, Description=?, Status=?, TeacherID=?, Created_At=? WHERE ID=?";
-                ps = conn.prepareStatement(sql);
-                ps.setInt(1, t.getStudentID());
-                ps.setString(2, t.getTitle());
-                ps.setString(3, t.getDescription());
-                ps.setString(4, t.getStatus());
-                ps.setInt(5, t.getTeacherID());
-                ps.setTimestamp(6, t.getCreateAt());
-                ps.setInt(7, t.getId());
-                rows = ps.executeUpdate();
-            }
-            ps.close();
-            return rows;
-        } catch (SQLException ex) {
-            Logger.getLogger(RequestDAO.class.getName()).log(Level.SEVERE, null, ex);
-            return 0;
-        }
+    public boolean update(Request t) {
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        em.merge(t);
+        em.getTransaction().commit();
+        em.close();
+        return true;
     }
 
     @Override
-    public int delete(Request t) {
-        try {
-            int rows;
-            PreparedStatement ps;
-            try (Connection conn = DBcontext.connectDB()) {
-                String sql = "DELETE FROM Request WHERE ID=?";
-                ps = conn.prepareStatement(sql);
-                ps.setInt(1, t.getId());
-                rows = ps.executeUpdate();
-            }
-            ps.close();
-            return rows;
-        } catch (SQLException ex) {
-            Logger.getLogger(RequestDAO.class.getName()).log(Level.SEVERE, null, ex);
-            return 0;
-        }
+    public boolean delete(Request t) {
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        em.remove(t);
+        em.getTransaction().commit();
+        em.close();
+        return true;
     }
 
     @Override
     public List<Request> readAll() {
+        EntityManager em = emf.createEntityManager();
+        List<Request> list = new ArrayList<>();
         try {
-            List<Request> newList;
-            PreparedStatement ps;
-            try (Connection conn = DBcontext.connectDB()) {
-                newList = new ArrayList<>();
-                String sql = "SELECT * FROM Request";
-                ps = conn.prepareStatement(sql);
-                ResultSet rs = ps.executeQuery();
-                while (rs.next()) {
-                    int id = rs.getInt("ID");
-                    int studentID = rs.getInt("StudentID");
-                    String title = rs.getString("Title");
-                    String description = rs.getString("Description");
-                    String status = rs.getString("Status");
-                    int teacherID = rs.getInt("TeacherID");
-                    Timestamp createdAt = rs.getTimestamp("Created_At");
-                    newList.add(new Request(id, studentID, title, description, status, teacherID, createdAt));
-                }
-            }
-            ps.close();
-            return newList;
-        } catch (SQLException ex) {
-            Logger.getLogger(RequestDAO.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
+            em.getTransaction().begin();
+            list = em.createQuery("Select u From Request u", Request.class)
+                    .getResultList();
+            em.getTransaction().commit();
+        }  catch (NoResultException e) {
+            list = null;
+        } finally {
+            em.close();
         }
+        return list;
     }
 
     @Override
     public Request readOnly(String str) {
+        EntityManager em = emf.createEntityManager();
+        Request r = new Request();
         try {
-            Request request = null;
-            PreparedStatement ps;
-            try (Connection conn = DBcontext.connectDB()) {
-                String sql = "SELECT * FROM Request WHERE ID=?";
-                ps = conn.prepareStatement(sql);
-                ps.setString(1, str);
-                ResultSet rs = ps.executeQuery();
-                if (rs.next()) {
-                    request = new Request();
-                    request.setId(rs.getInt("ID"));
-                    request.setStudentID(rs.getInt("StudentID"));
-                    request.setTitle(rs.getString("Title"));
-                    request.setDescription(rs.getString("Description"));
-                    request.setStatus(rs.getString("Status"));
-                    request.setTeacherID(rs.getInt("TeacherID"));
-                    request.setCreateAt(rs.getTimestamp("Created_At"));
-                }
-            }
-            ps.close();
-            return request;
-        } catch (SQLException ex) {
-            Logger.getLogger(RequestDAO.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
+            em.getTransaction().begin();
+            r = em.createQuery("Select u From Request u Where u.studentID = :studentID", Request.class)
+                    .setParameter("studentID", str)
+                    .getSingleResult();
+            em.getTransaction().commit();
+        }catch (NoResultException e) {
+            r = null;
+        } finally {
+            em.close();
         }
+        return r;
     }
+    public Request readOnly(int id) {
+        EntityManager em = emf.createEntityManager();
+        Request r = new Request();
+        try {
+            em.getTransaction().begin();
+            r = em.createQuery("Select u From Request u Where u.Id = :Id", Request.class)
+                    .setParameter("Id", id)
+                    .getSingleResult();
+            em.getTransaction().commit();
+        }catch (NoResultException e) {
+            r = null;
+        } finally {
+            em.close();
+        }
+        return r;
+    }
+    
+
 }
