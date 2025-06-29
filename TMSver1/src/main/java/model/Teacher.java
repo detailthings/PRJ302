@@ -19,14 +19,16 @@ public class Teacher {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     
     private int id;
+    private String userID;
     private String teacherID;
     private String department;
 
     public Teacher() {
     }
 
-    public Teacher(int id, String teacherID, String department) {
+    public Teacher(int id, String userID, String teacherID, String department) {
         this.id = id;
+        this.userID = userID;
         this.teacherID = teacherID;
         this.department = department;
     }
@@ -53,6 +55,14 @@ public class Teacher {
 
     public void setDepartment(String department) {
         this.department = department;
+    }
+
+    public String getUserID() {
+        return userID;
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
     }
     
     

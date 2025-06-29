@@ -4,131 +4,77 @@
  */
 package dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import model.Teacher;
+import jakarta.persistence.*;
+import java.util.*;
+import model.*;
 
 
 /**
  *
  * @author admin
+ * @param <Teacher>
  */
-public class TeacherDAO extends DAO<Teacher> {
+public class TeacherDAO extends DAO1<Teacher> {
 
+    private EntityManagerFactory emf = 
+        Persistence.createEntityManagerFactory("Teacher");
+    
     @Override
-    public int create(Teacher t) {
-        try {
-            int rows;
-            PreparedStatement ps;
-            try (Connection conn = DBcontext.connectDB()) {
-                String sql = "INSERT INTO Teacher(UserID, Department) VALUES(?,?)";
-                ps = conn.prepareStatement(sql);
-                ps.setString(1, t.getTeacherID());
-                ps.setString(2, t.getDepartment());
-                rows = ps.executeUpdate();
-            }
-            ps.close();
-            return rows;
-        } catch (SQLException ex) {
-            Logger.getLogger(TeacherDAO.class.getName()).log(Level.SEVERE, null, ex);
-            return 0;
-        }
+    public void create(Teacher t) {
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        em.persist(t);
+        em.getTransaction().commit();
+        em.close();
     }
 
     @Override
-    public int update(Teacher t) {
-        try {
-            int rows;
-            PreparedStatement ps;
-            try (Connection conn = DBcontext.connectDB()) {
-                String sql = "UPDATE Teacher SET UserID=?, Department=? WHERE ID=?";
-                ps = conn.prepareStatement(sql);
-                ps.setString(1, t.getTeacherID());
-                ps.setString(2, t.getDepartment());
-                ps.setInt(3, t.getId());
-                rows = ps.executeUpdate();
-            }
-            ps.close();
-            return rows;
-        } catch (SQLException ex) {
-            Logger.getLogger(TeacherDAO.class.getName()).log(Level.SEVERE, null, ex);
-            return 0;
-        }
+    public boolean update(Teacher t) {
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        em.merge(t);
+        em.getTransaction().commit();
+        em.close();
+        return true;
     }
 
     @Override
-    public int delete(Teacher t) {
-        try {
-            int rows;
-            PreparedStatement ps;
-            try (Connection conn = DBcontext.connectDB()) {
-                String sql = "DELETE FROM Teacher WHERE ID=?";
-                ps = conn.prepareStatement(sql);
-                ps.setInt(1, t.getId());
-                rows = ps.executeUpdate();
-            }
-            ps.close();
-            return rows;
-        } catch (SQLException ex) {
-            Logger.getLogger(TeacherDAO.class.getName()).log(Level.SEVERE, null, ex);
-            return 0;
-        }
+    public boolean delete(Teacher t) {
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        em.remove(t);
+        em.getTransaction().commit();
+        em.close();
+        return true;
     }
 
     @Override
     public List<Teacher> readAll() {
-        try {
-            List<Teacher> newList;
-            PreparedStatement ps;
-            try (Connection conn = DBcontext.connectDB()) {
-                newList = new ArrayList<>();
-                String sql = "SELECT * FROM Teacher";
-                ps = conn.prepareStatement(sql);
-                ResultSet rs = ps.executeQuery();
-                while (rs.next()) {
-                    int id = rs.getInt("ID");
-                    String userID = rs.getString("UserID");
-                    String department = rs.getString("Department");
-                    newList.add(new Teacher(id, userID, department));
-                }
-            }
-            ps.close();
-            return newList;
-        } catch (SQLException ex) {
-            Logger.getLogger(TeacherDAO.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
-        }
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        List<Teacher> list = em.createQuery("Select u From Project u", Teacher.class)
+                .getResultList();
+        em.getTransaction().commit();
+        em.close();
+        return list;
     }
 
     @Override
     public Teacher readOnly(String str) {
+        EntityManager em = emf.createEntityManager();
+        Teacher u = null;
         try {
-            Teacher teacher = null;
-            PreparedStatement ps;
-            try (Connection conn = DBcontext.connectDB()) {
-                String sql = "SELECT * FROM Teacher WHERE ID=? OR UserID=?";
-                ps = conn.prepareStatement(sql);
-                ps.setString(1, str);
-                ps.setString(2, str);
-                ResultSet rs = ps.executeQuery();
-                if (rs.next()) {
-                    teacher = new Teacher();
-                    teacher.setId(rs.getInt("ID"));
-                    teacher.setTeacherID(rs.getString("UserID"));
-                    teacher.setDepartment(rs.getString("Department"));
-                }
-            }
-            ps.close();
-            return teacher;
-        } catch (SQLException ex) {
-            Logger.getLogger(TeacherDAO.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
+            em.getTransaction().begin();
+            u = em.createQuery("Select u From Teacher u Where u.userID = :userID", Teacher.class)
+                    .setParameter("userID", str)
+                    .getSingleResult();
+            em.getTransaction().commit();
+        }  catch (NoResultException e) {
+            u = null;
+        } finally {
+            em.close();
         }
+        return u;
     }
+    
 }

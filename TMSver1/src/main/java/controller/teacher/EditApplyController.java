@@ -6,6 +6,7 @@
 package controller.teacher;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -16,11 +17,11 @@ import jakarta.servlet.http.HttpSession;
  *
  * @author admin
  */
-public class HomeTeacherController extends HttpServlet {
+public class EditApplyController extends HttpServlet {
    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    throws ServletException, IOException {
 //        processRequest(request, response);
         HttpSession session = request.getSession(false);
         if (session == null || session.getAttribute("user") == null) {
@@ -28,13 +29,12 @@ public class HomeTeacherController extends HttpServlet {
             return;
         }
         // Lấy studentID từ session
-        String teacherID = (String) session.getAttribute("user");
+        String studentID = (String) session.getAttribute("user");
         // Đặt dữ liệu lên request
-        request.setAttribute("teacherID", teacherID);
+        request.setAttribute("studentID", studentID);
 
         // Chuyển tiếp sang JSP hiển thị
-        request.getRequestDispatcher("/jsp/teacher/index.jsp").forward(request, response);
-
-    }
+        request.getRequestDispatcher("/jsp/teacher/createrequeset.jsp").forward(request, response);
+    } 
 
 }

@@ -42,12 +42,25 @@ public class RequestDAO extends DAO1<Request> {
 
     @Override
     public boolean delete(Request t) {
-        EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
-        em.remove(t);
-        em.getTransaction().commit();
-        em.close();
-        return true;
+            EntityManager em = emf.createEntityManager();
+        try {
+            em.getTransaction().begin();
+
+            // Gắn lại entity bị detached
+            Request attached = em.merge(t);
+
+            // Xóa entity đã gắn
+            em.remove(attached);
+
+            em.getTransaction().commit();
+            return true;
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+            e.printStackTrace();
+            return false;
+        } finally {
+            em.close();
+        }
     }
 
     @Override
@@ -57,6 +70,40 @@ public class RequestDAO extends DAO1<Request> {
         try {
             em.getTransaction().begin();
             list = em.createQuery("Select u From Request u", Request.class)
+                    .getResultList();
+            em.getTransaction().commit();
+        }  catch (NoResultException e) {
+            list = null;
+        } finally {
+            em.close();
+        }
+        return list;
+    }
+    
+    public List<Request> readAllTeacher(String str) {
+        EntityManager em = emf.createEntityManager();
+        List<Request> list = new ArrayList<>();
+        try {
+            em.getTransaction().begin();
+            list = em.createQuery("Select u From Request u Where u.teacherID = :teacherID", Request.class)
+                    .setParameter("teacherID", str)
+                    .getResultList();
+            em.getTransaction().commit();
+        }  catch (NoResultException e) {
+            list = null;
+        } finally {
+            em.close();
+        }
+        return list;
+    }
+    
+    public List<Request> readAllStudentApply(String str) {
+        EntityManager em = emf.createEntityManager();
+        List<Request> list = new ArrayList<>();
+        try {
+            em.getTransaction().begin();
+            list = em.createQuery("Select u From Request u Where u.studentID IS NOT NULL And u.teacherID = :teacherID And u.status, Request.class)
+                    .setParameter("teacherID", str)
                     .getResultList();
             em.getTransaction().commit();
         }  catch (NoResultException e) {
@@ -84,6 +131,24 @@ public class RequestDAO extends DAO1<Request> {
         }
         return r;
     }
+    
+    public Request readOnlyTeacher(String str) {
+        EntityManager em = emf.createEntityManager();
+        Request r = new Request();
+        try {
+            em.getTransaction().begin();
+            r = em.createQuery("Select u From Request u Where u.teacherID = :teacherID", Request.class)
+                    .setParameter("teacherID", str)
+                    .getSingleResult();
+            em.getTransaction().commit();
+        }catch (NoResultException e) {
+            r = null;
+        } finally {
+            em.close();
+        }
+        return r;
+    }
+    
     public Request readOnly(int id) {
         EntityManager em = emf.createEntityManager();
         Request r = new Request();

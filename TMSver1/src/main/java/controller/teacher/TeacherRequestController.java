@@ -5,36 +5,40 @@
 
 package controller.teacher;
 
+import dao.*;
 import java.io.IOException;
+import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.*;
+import model.*;
 
 /**
  *
  * @author admin
  */
-public class HomeTeacherController extends HttpServlet {
+public class TeacherRequestController extends HttpServlet {
    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    throws ServletException, IOException {
 //        processRequest(request, response);
         HttpSession session = request.getSession(false);
         if (session == null || session.getAttribute("user") == null) {
             response.sendRedirect("/jsp/common/layout/login.jsp");
             return;
         }
-        // Lấy studentID từ session
-        String teacherID = (String) session.getAttribute("user");
-        // Đặt dữ liệu lên request
-        request.setAttribute("teacherID", teacherID);
+        
+        Teacher t = (Teacher) session.getAttribute("teacherprofile");
+        RequestDAO r = new RequestDAO();
+        List<Request> listAllRequest = r.readAllStudentApply(t.getTeacherID());
+        request.setAttribute("listAllRequest", listAllRequest);
+        request.getRequestDispatcher("/jsp/teacher/teacherrequest.jsp").forward(request, response);
+    } 
 
-        // Chuyển tiếp sang JSP hiển thị
-        request.getRequestDispatcher("/jsp/teacher/index.jsp").forward(request, response);
-
-    }
 
 }
