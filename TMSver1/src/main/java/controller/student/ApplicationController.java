@@ -40,7 +40,7 @@ public class ApplicationController extends HttpServlet {
         if(newRequest!=null) {
             listAllRequest.add(newRequest);
         } else {
-            listAllRequest = r.readAll();
+            listAllRequest = r.readAllNone();
         }
         request.setAttribute("listAllRequest", listAllRequest);
         request.getRequestDispatcher("/jsp/student/applyproject.jsp").forward(request, response);

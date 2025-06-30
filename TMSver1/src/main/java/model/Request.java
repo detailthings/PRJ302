@@ -16,8 +16,6 @@ import java.time.LocalDateTime;
 public class Request {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    
     private String id; //
     private String studentID;
     private String title; //

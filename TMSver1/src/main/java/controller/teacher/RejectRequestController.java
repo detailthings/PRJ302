@@ -5,13 +5,14 @@
 
 package controller.teacher;
 
+import dao.*;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import model.*;
 
 /**
  *
@@ -25,16 +26,22 @@ public class RejectRequestController extends HttpServlet {
 //        processRequest(request, response);
         HttpSession session = request.getSession(false);
         if (session == null || session.getAttribute("user") == null) {
-            response.sendRedirect("/jsp/common/layout/login.jsp");
+            response.sendRedirect("TMSver1/jsp/common/layout/login.jsp");
             return;
         }
         // Lấy studentID từ session
-        String studentID = (String) session.getAttribute("user");
-        // Đặt dữ liệu lên request
-        request.setAttribute("studentID", studentID);
+        String teacherID = (String) session.getAttribute("user");
+        String requestID = (String) request.getParameter("requestID");
+        
+        RequestDAO r = new RequestDAO();
+        Request rejectRequest = r.readOnly(requestID);
+        rejectRequest.setStatus("None");
+        rejectRequest.setStudentID(null);
+        r.update(rejectRequest);
+        
 
         // Chuyển tiếp sang JSP hiển thị
-        request.getRequestDispatcher("/jsp/teacher/teacherapply.jsp").forward(request, response);
+        request.getRequestDispatcher("teacherapplycontroller").forward(request, response);
     } 
 
 }

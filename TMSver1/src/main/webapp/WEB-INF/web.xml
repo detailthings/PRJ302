@@ -164,6 +164,10 @@
         <servlet-name>RejectRequestController</servlet-name>
         <servlet-class>controller.teacher.RejectRequestController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EditRequestController</servlet-name>
+        <servlet-class>controller.teacher.EditRequestController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SubmissionController</servlet-name>
         <url-pattern>/submissioncontroller</url-pattern>
@@ -327,6 +331,10 @@
     <servlet-mapping>
         <servlet-name>RejectRequestController</servlet-name>
         <url-pattern>/rejectrequestcontroller</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditRequestController</servlet-name>
+        <url-pattern>/editrequestcontroller</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

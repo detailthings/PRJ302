@@ -47,7 +47,7 @@
                                     <div class="col-md-12">
                                         <div class="profile-img-edit">
                                             <div class="crm-profile-img-edit">
-                                                <img class="crm-profile-pic rounded-circle avatar-100" src="../assets/images/user/11.png" alt="profile-pic">
+                                                <img class="crm-profile-pic rounded-circle avatar-100" src="${path}/jsp/assets/images/user/11.png" alt="profile-pic">
                                                 <div class="crm-p-image bg-primary">
                                                     <i class="las la-pen upload-button"></i>
                                                     <input class="file-upload" type="file" accept="image/*">
@@ -57,7 +57,7 @@
                                     </div>
                                 </div>
                                 <div class=" row align-items-center">
-                                    <% Student s = (Student) request.getAttribute("studentprofile"); %>
+                                    <% Teacher s = (Teacher) request.getAttribute("teacherprofile"); %>
                                     <% UserAccount u = (UserAccount) ss.getAttribute("useraccount"); %>
                                     <div class="form-group col-sm-6">
                                         <label for="fname">User ID:</label>
@@ -76,13 +76,9 @@
                                         <%=u.getRole() %>
                                     </div>
                                     <div class="form-group col-sm-6">
-                                        <label for="dob">Student Code:</label>
-                                        <%=s.getStudentCode() %>
-                                    </div>
-                                    <div class="form-group col-sm-6">
-                                        <label for="dob">Major:</label>
-                                        <%=s.getMajor() %>
-                                    </div>
+                                        <label for="dob">Department:</label>
+                                        <%=s.getDepartment() %>
+                                    </div>                                    
                                 </div>
                             </form>
                         </div>

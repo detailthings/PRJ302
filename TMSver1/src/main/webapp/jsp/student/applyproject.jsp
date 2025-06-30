@@ -55,7 +55,8 @@
                                         </div>
                                         <div class="d-flex align-items-center justify-content-between">
                                             <div>
-                                                <a href="<%=request.getContextPath()%>/appliedcontroller?requestID=<%=p.getId()%>" class="btn bg-success-light">Apply</a>
+                                                <a href="<%=request.getContextPath()%>/appliedcontroller?requestID=<%=p.getId()%>" class="btn bg-success-light"
+                                                   onclick="return confirm('Are you sure you want to apply?');">Apply</a>
                                             </div>
                                         </div>
                                     </div>
