@@ -47,6 +47,7 @@
                                 <div class="card">
                                     <div class="card-body"> 
                                         <h5 class="mb-3"><%=p.getTitle()%></h5>
+                                        <p class="mb-3"><i class="las la-calendar-check mr-2"></i><%=p.getId()%></p>
                                         <p class="mb-3"><i class="las la-calendar-check mr-2"></i><%=p.getTeacherID()%></p>
                                         <p class="mb-3"><i class="las la-calendar-check mr-2"></i><%=p.getCreateAt()%></p>
                                         <p class="mb-3"><i class="las la-calendar-check mr-2"></i><%=p.getStatus()%></p>
@@ -55,8 +56,8 @@
                                         </div>
                                         <div class="d-flex align-items-center justify-content-between">
                                             <div>
-                                                <a href="<%=request.getContextPath()%>/appliedcontroller?requestID=<%=p.getId()%>" class="btn bg-success-light">Accept</a>
-                                                <a href="<%=request.getContextPath()%>/appliedcontroller?requestID=<%=p.getId()%>" class="btn bg-success-light">Reject</a>
+                                                <a href="<%=request.getContextPath()%>/acceptrequestcontroller?requestID=<%=p.getId()%>" class="btn bg-success-light">Accept</a>
+                                                <a href="<%=request.getContextPath()%>/rejectrequestcontroller?requestID=<%=p.getId()%>" class="btn bg-success-light">Reject</a>
                                             </div>
                                         </div>
                                     </div>

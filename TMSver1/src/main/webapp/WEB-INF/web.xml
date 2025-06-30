@@ -156,6 +156,14 @@
         <servlet-name>EditApplyController</servlet-name>
         <servlet-class>controller.teacher.EditApplyController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AcceptRequestController</servlet-name>
+        <servlet-class>controller.teacher.AcceptRequestController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RejectRequestController</servlet-name>
+        <servlet-class>controller.teacher.RejectRequestController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SubmissionController</servlet-name>
         <url-pattern>/submissioncontroller</url-pattern>
@@ -311,6 +319,14 @@
     <servlet-mapping>
         <servlet-name>EditApplyController</servlet-name>
         <url-pattern>/editapplycontroller</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AcceptRequestController</servlet-name>
+        <url-pattern>/acceptrequestcontroller</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RejectRequestController</servlet-name>
+        <url-pattern>/rejectrequestcontroller</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

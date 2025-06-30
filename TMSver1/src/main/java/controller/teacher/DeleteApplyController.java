@@ -31,7 +31,7 @@ public class DeleteApplyController extends HttpServlet {
         }
         // Lấy  từ session
         String teacherID = (String) session.getAttribute("user");
-        int requestID = Integer.parseInt(request.getParameter("requestID")); 
+        String requestID = (String) request.getParameter("requestID");
         
         RequestDAO r = new RequestDAO();
         Request deleteRequest = r.readOnly(requestID);

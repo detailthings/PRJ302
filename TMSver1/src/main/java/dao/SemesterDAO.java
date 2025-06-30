@@ -5,9 +5,9 @@
 package dao;
 
 import jakarta.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
-import model.Semester;
+import java.time.LocalDateTime;
+import java.util.*;
+import model.*;
 
 /**
  *
@@ -68,11 +68,50 @@ public class SemesterDAO extends DAO1<Semester> {
     @Override
     public Semester readOnly(String str) {
         EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
-        Semester u = em.find(Semester.class, str);
-        em.getTransaction().commit();
-        em.close();
+        Semester u = null;
+        try {
+            em.getTransaction().begin();
+            u = em.createQuery("Select u From Semester u Where u.semesterID = :semesterID", Semester.class)
+                    .setParameter("semesterID", str)
+                    .getSingleResult();
+            em.getTransaction().commit();
+        } catch (NoResultException e) {
+            u = null;
+        } finally {
+            em.close();
+        }
         return u;
+    }
+    
+   public String getSemester(LocalDateTime createAt) {
+    EntityManager em = emf.createEntityManager();
+    String semesterID = null;
+    try {
+        em.getTransaction().begin();
+
+        TypedQuery<String> query = em.createQuery(
+            "SELECT u.semesterID FROM Semester u WHERE :date BETWEEN u.startDate AND u.endDate",
+            String.class
+        );
+        query.setParameter("date", createAt.toLocalDate());
+
+        semesterID = query.getSingleResult();  // sẽ trả về chuỗi "Fall", "Spring",...
+
+        em.getTransaction().commit();
+    } catch (NoResultException e) {
+        semesterID = null;
+    } finally {
+        em.close();
+    }
+    return semesterID;
+}
+   
+    public static void main(String[] args) {
+        SemesterDAO s = new SemesterDAO();
+        RequestDAO r = new RequestDAO();
+        Request newRequest = r.readOnly("CSS111");
+        String Se = s.getSemester(newRequest.getCreateAt());
+        System.out.println(Se);
     }
 
 }

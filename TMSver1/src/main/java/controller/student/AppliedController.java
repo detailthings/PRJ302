@@ -32,7 +32,8 @@ public class AppliedController extends HttpServlet {
             return;
         }
         
-        int requestID = Integer.parseInt(request.getParameter("requestID")); 
+//        int requestID = Integer.parseInt(request.getParameter("requestID")); 
+        String requestID = (String) request.getParameter("requestID");
         Student s = (Student) session.getAttribute("studentprofile");
         
         List<Request> listAllRequest = new ArrayList<>();

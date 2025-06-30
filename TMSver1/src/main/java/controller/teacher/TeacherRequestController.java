@@ -35,7 +35,7 @@ public class TeacherRequestController extends HttpServlet {
         
         Teacher t = (Teacher) session.getAttribute("teacherprofile");
         RequestDAO r = new RequestDAO();
-        List<Request> listAllRequest = r.readAllStudentApply(t.getTeacherID());
+        List<Request> listAllRequest = r.readAllStudentApply(t.getId());
         request.setAttribute("listAllRequest", listAllRequest);
         request.getRequestDispatcher("/jsp/teacher/teacherrequest.jsp").forward(request, response);
     } 
