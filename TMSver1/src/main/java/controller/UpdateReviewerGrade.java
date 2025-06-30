@@ -4,6 +4,7 @@
  */
 package controller;
 
+import dao.DeliverableDAO;
 import dao.ReviewerDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,6 +14,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
+import model.Deliverable;
 import model.Reviewer;
 
 /**
@@ -60,12 +62,12 @@ public class UpdateReviewerGrade extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 //        processRequest(request, response);
-        List<Reviewer> reviewer = new ArrayList<>();
-        ReviewerDAO tda;
-        tda = new ReviewerDAO();
+        List<Deliverable> deli = new ArrayList<>();
+        DeliverableDAO tda;
+        tda = new DeliverableDAO();
 
-        reviewer = tda.readAll();
-        request.setAttribute("reviewer", reviewer);
+        deli = tda.readAll();
+        request.setAttribute("deliverable", deli);
         request.getRequestDispatcher("reviewerUpdateScoreProject.jsp").forward(request, response);
     }
 
