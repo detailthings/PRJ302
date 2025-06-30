@@ -39,5 +39,24 @@ public class TeacherApplyController extends HttpServlet {
         request.setAttribute("listAllRequest", listAllRequest);
         request.getRequestDispatcher("/jsp/teacher/teacherapply.jsp").forward(request, response);
     } 
+    
+    
+    // cái này dùng để tiếp nối doPost ở trang servlet khác
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    throws ServletException, IOException {
+//        processRequest(request, response);
+        HttpSession session = request.getSession(false);
+        if (session == null || session.getAttribute("user") == null) {
+            response.sendRedirect("/jsp/common/layout/login.jsp");
+            return;
+        }
+        
+        Teacher t = (Teacher) session.getAttribute("teacherprofile");
+        RequestDAO r = new RequestDAO();
+        List<Request> listAllRequest = r.readAllTeacher(t.getId());
+        request.setAttribute("listAllRequest", listAllRequest);
+        request.getRequestDispatcher("/jsp/teacher/teacherapply.jsp").forward(request, response);
+    } 
 
 }

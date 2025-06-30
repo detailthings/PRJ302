@@ -47,6 +47,7 @@
                                                         <div class="col-sm-3">
                                                             <p class="mb-0">Number of project</p>
                                                         </div>
+                                                        <% int t1 = (int) request.getAttribute("t1"); %>
                                                         <div class="col-sm-6">
                                                             <div class="d-flex align-items-center justify-content-between">
                                                                 <div class="iq-progress-bar bg-primary-light">
@@ -62,12 +63,16 @@
                                                         <div class="col-sm-3">
                                                             <p class="mb-0">Number of project in this semester</p>
                                                         </div>
+                                                        <% 
+                                                            int t2 = (int) request.getAttribute("t2"); 
+                                                            float percent21 = t1 == 0 ? 0 : ((float)t2 / t1) * 100;
+                                                        %>
                                                         <div class="col-sm-6">
                                                             <div class="d-flex align-items-center justify-content-between">
                                                                 <div class="iq-progress-bar bg-primary-light">
-                                                                    <span class="bg-primary iq-progress progress-1" data-percent="15" style="width: 15%;"></span>
+                                                                    <span class="bg-primary iq-progress progress-1" data-percent="<%=percent21%>" style="width: <%=percent21%>%;"></span>
                                                                 </div>
-                                                                <span class="ml-3">15%</span>
+                                                                <span class="ml-3"><%=percent21%>%</span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -75,14 +80,18 @@
                                                 <li class="mb-1">
                                                     <div class="row align-items-center">
                                                         <div class="col-sm-3">
-                                                            <p class="mb-0">Scorce >= 8.0</p>
+                                                            <p class="mb-0">Good project (8-9) - (percent per semester)</p>
                                                         </div>
+                                                        <% 
+                                                            int t3 = (int) request.getAttribute("t3"); 
+                                                            float percent32 = t2 == 0 ? 0 : ((float)t3 / t2) * 100;
+                                                        %>
                                                         <div class="col-sm-6">
                                                             <div class="d-flex align-items-center justify-content-between">
                                                                 <div class="iq-progress-bar bg-primary-light">
-                                                                    <span class="bg-primary iq-progress progress-1" data-percent="60" style="width: 60%;"></span>
+                                                                    <span class="bg-primary iq-progress progress-1" data-percent="<%=percent21%>" style="width: <%=percent21%>%;"></span>
                                                                 </div>
-                                                                <span class="ml-3">60%</span>
+                                                                <span class="ml-3"><%=percent21%>%</span>
                                                             </div>
                                                         </div>
                                                     </div>

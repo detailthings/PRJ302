@@ -59,6 +59,17 @@ public class EditProfileController extends HttpServlet {
                 break;
             case "teacher":
                 Teacher profileT = new TeacherDAO().readOnly(user);
+                TeacherDAO tDAO = new TeacherDAO();
+                String fullnameT = (String) request.getParameter("fullname");
+                String emailT = (String) request.getParameter("email");
+                
+                u.setFullName(fullnameT);
+                u.setEmail(emailT);
+                
+                uDAO.update(u);
+                session.setAttribute("name", u.getFullName());
+                session.setAttribute("useraccount", u);
+                
                 request.setAttribute("teacherprofile", profileT);
                 request.getRequestDispatcher("/jsp/teacher/userprofile.jsp").forward(request, response);
                 break;

@@ -25,7 +25,7 @@ public class RequestDAO extends DAO1<Request> {
     public void create(Request t) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
-        em.persist(t);
+        em.persist(t);  
         em.getTransaction().commit();
         em.close();
     }
@@ -80,12 +80,28 @@ public class RequestDAO extends DAO1<Request> {
         return list;
     }
     
+    public List<Request> readAllNone() {
+        EntityManager em = emf.createEntityManager();
+        List<Request> list = new ArrayList<>();
+        try {
+            em.getTransaction().begin();
+            list = em.createQuery("Select u From Request u Where u.status = 'None'", Request.class)
+                    .getResultList();
+            em.getTransaction().commit();
+        }  catch (NoResultException e) {
+            list = null;
+        } finally {
+            em.close();
+        }
+        return list;
+    }
+    
     public List<Request> readAllTeacher(String str) {
         EntityManager em = emf.createEntityManager();
         List<Request> list = new ArrayList<>();
         try {
             em.getTransaction().begin();
-            list = em.createQuery("Select u From Request u Where u.teacherID = :teacherID And u.status != 'Reject' And u.status != 'Accept'", Request.class)
+            list = em.createQuery("Select u From Request u Where u.teacherID = :teacherID And u.status = 'Reject' And u.status != 'Accept'", Request.class)
                     .setParameter("teacherID", str)
                     .getResultList();
             em.getTransaction().commit();
@@ -101,7 +117,7 @@ public class RequestDAO extends DAO1<Request> {
         EntityManager em = emf.createEntityManager();
         List<Request> list = new ArrayList<>();
         try {
-            em.getTransaction().begin();
+            em.getTransaction().begin(); // cũng có thể truy vấn với status = processing
             list = em.createQuery("Select u From Request u Where u.studentID IS NOT NULL And u.teacherID = :teacherID And u.status != 'Reject' And u.status != 'Accept'", Request.class)
                     .setParameter("teacherID", str)
                     .getResultList();

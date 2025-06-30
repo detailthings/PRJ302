@@ -47,7 +47,7 @@
                                     <div class="col-md-12">
                                         <div class="profile-img-edit">
                                             <div class="crm-profile-img-edit">
-                                                <img class="crm-profile-pic rounded-circle avatar-100" src="../assets/images/user/11.png" alt="profile-pic">
+                                                <img class="crm-profile-pic rounded-circle avatar-100" src="${path}/jsp/assets/images/user/11.png" alt="profile-pic">
                                                 <div class="crm-p-image bg-primary">
                                                     <i class="las la-pen upload-button"></i>
                                                     <input class="file-upload" type="file" accept="image/*">

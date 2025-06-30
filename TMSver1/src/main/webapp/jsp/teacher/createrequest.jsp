@@ -41,11 +41,7 @@
                             <form action="${path}/createrequestcontroller" method="post">
                                 <div class="form-group">
                                     <label for="ID">Project ID:</label>
-                                    <input type="text" class="form-control" id="studentId" name="studentId" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="teacherId">Teacher ID:</label>
-                                    <input type="text" class="form-control" id="teacherId" name="teacherId" required>
+                                    <input type="text" class="form-control" id="id" name="id" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="title">Title:</label>
@@ -53,7 +49,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="description">Description:</label>
-                                    <textarea class="form-control" id="description" name="description" rows="4" cols="40"></textarea>
+                                    <input type="text" class="form-control" id="description" name="description" maxlength="255" required>
                                 </div>
                                 <button type="submit" class="btn btn-primary mr-2">Submit</button>
                                 <button type="reset" class="btn iq-bg-danger">Cancel</button>

@@ -120,10 +120,55 @@ INSERT INTO UserAccount (UserID, Password, FullName, Email, Role) VALUES
 ('rv002', '12345678', N'Hoàng Thị E', 'e@fpt.edu.vn', 'reviewer'),
 ('admin01', 'admin123', N'Admin Hệ thống', 'admin@fpt.edu.vn', 'admin');
 
+INSERT INTO UserAccount (UserID, Password, FullName, Email, Role) VALUES
+('sv003', '12345678', N'Đỗ Minh F', 'sv003@student.fpt.edu.vn', 'student'),
+('sv004', '12345678', N'Nguyễn Thị G', 'sv004@student.fpt.edu.vn', 'student'),
+('sv005', '12345678', N'Trịnh Văn H', 'sv005@student.fpt.edu.vn', 'student'),
+('sv006', '12345678', N'Lê Văn I', 'sv006@student.fpt.edu.vn', 'student'),
+('sv007', '12345678', N'Phạm Thị K', 'sv007@student.fpt.edu.vn', 'student'),
+('sv008', '12345678', N'Võ Minh L', 'sv008@student.fpt.edu.vn', 'student'),
+('sv009', '12345678', N'Nguyễn Văn M', 'sv009@student.fpt.edu.vn', 'student'),
+('sv010', '12345678', N'Phan Thị N', 'sv010@student.fpt.edu.vn', 'student'),
+('sv011', '12345678', N'Hồ Quốc O', 'sv011@student.fpt.edu.vn', 'student'),
+('sv012', '12345678', N'Trương Văn P', 'sv012@student.fpt.edu.vn', 'student'),
+('sv013', '12345678', N'Lý Thị Q', 'sv013@student.fpt.edu.vn', 'student'),
+('sv014', '12345678', N'Huỳnh Văn R', 'sv014@student.fpt.edu.vn', 'student'),
+('sv015', '12345678', N'Ngô Thị S', 'sv015@student.fpt.edu.vn', 'student'),
+('sv016', '12345678', N'Mai Văn T', 'sv016@student.fpt.edu.vn', 'student'),
+('sv017', '12345678', N'Tạ Thị U', 'sv017@student.fpt.edu.vn', 'student'),
+('sv018', '12345678', N'Bùi Văn V', 'sv018@student.fpt.edu.vn', 'student'),
+('sv019', '12345678', N'Đặng Thị X', 'sv019@student.fpt.edu.vn', 'student'),
+('sv020', '12345678', N'Đỗ Văn Y', 'sv020@student.fpt.edu.vn', 'student'),
+('sv021', '12345678', N'Nguyễn Thị Z', 'sv021@student.fpt.edu.vn', 'student'),
+('sv022', '12345678', N'Trần Văn AA', 'sv022@student.fpt.edu.vn', 'student');
+
+
+
+
 -- STUDENT
 INSERT INTO Student (UserID, Major, studentCode) VALUES
 ('sv001', 'Information System', 'he000001' ),
 ('sv002', 'Software Engineering', 'he000002');
+INSERT INTO Student (UserID, Major, studentCode) VALUES
+('sv003', 'Information System', 'he000003'),
+('sv004', 'Information System', 'he000004'),
+('sv005', 'Information System', 'he000005'),
+('sv006', 'Software Engineering', 'he000006'),
+('sv007', 'Software Engineering', 'he000007'),
+('sv008', 'Software Engineering', 'he000008'),
+('sv009', 'Software Engineering', 'he000009'),
+('sv010', 'Software Engineering', 'he000010'),
+('sv011', 'Computer Science', 'he000011'),
+('sv012', 'Computer Science', 'he000012'),
+('sv013', 'Computer Science', 'he000013'),
+('sv014', 'Computer Science', 'he000014'),
+('sv015', 'Computer Science', 'he000015'),
+('sv016', 'AI', 'he000016'),
+('sv017', 'AI', 'he000017'),
+('sv018', 'AI', 'he000018'),
+('sv019', 'AI', 'he000019'),
+('sv020', 'AI', 'he000020');
+
 
 -- TEACHER
 INSERT INTO Teacher (ID, UserID, Department) VALUES

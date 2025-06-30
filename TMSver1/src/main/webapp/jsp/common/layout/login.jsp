@@ -21,6 +21,13 @@
         <link rel="stylesheet" href="${path}/jsp/assets/vendor/tui-calendar/tui-time-picker/dist/tui-time-picker.css">  
     </head>
     <body class=" ">
+        <%
+            HttpSession ss = request.getSession(false);
+            if (ss != null && ss.getAttribute("user") != null) {
+                response.sendRedirect(request.getContextPath() + "/logincontroller");
+                return;
+            }
+        %>
         <!-- loader Start -->
         <div id="loading">
             <div id="loading-center">
