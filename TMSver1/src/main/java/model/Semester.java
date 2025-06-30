@@ -4,35 +4,44 @@
  */
 package model;
 
+import jakarta.persistence.*;
+import jakarta.persistence.Id;
+import java.sql.Date;
+import java.sql.Timestamp;
+
 /**
  *
  * @author admin
  */
+@Entity
 public class Semester {
     
-    private String id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    
+    private String semesterID;
     private String semester;
     private int year;
-    private String startDate;
-    private String endDate;
+    private Date startDate;
+    private Date endDate;
 
     public Semester() {
     }
 
-    public Semester(String id, String semester, int year, String startDate, String endDate) {
-        this.id = id;
+    public Semester(String semesterID, String semester, int year, Date startDate, Date endDate) {
+        this.semesterID = semesterID;
         this.semester = semester;
         this.year = year;
         this.startDate = startDate;
         this.endDate = endDate;
     }
 
-    public String getId() {
-        return id;
+    public String getSemesterID() {
+        return semesterID;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setSemesterID(String semesterID) {
+        this.semesterID = semesterID;
     }
 
     public String getSemester() {
@@ -51,19 +60,19 @@ public class Semester {
         this.year = year;
     }
 
-    public String getStartDate() {
+    public Date getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(String startDate) {
+    public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
 
-    public String getEndDate() {
+    public Date getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(String endDate) {
+    public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
     

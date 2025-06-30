@@ -4,52 +4,54 @@
  */
 package model;
 
-import java.sql.Timestamp;
+import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 /**
  *
  * @author admin
  */
+
+@Entity
 public class Request {
     
-    private int id;
-    private int studentID;
-    private String title;
-    private String description;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    
+    private String id; //
+    private String studentID;
+    private String title; //
+    private String description; //
     private String status;
-    private int teacherID;
-    private Timestamp createAt;
-
+    private String teacherID; //
+    private LocalDateTime createdAt;
 
     public Request() {
     }
 
-    public Request(int id, int studentID, String title, String description, String status, int teacherID, Timestamp createAt) {
+    public Request(String id, String studentID, String title, String description, String status, String teacherID, LocalDateTime createdAt) {
         this.id = id;
         this.studentID = studentID;
         this.title = title;
         this.description = description;
         this.status = status;
         this.teacherID = teacherID;
-        this.createAt = createAt;
+        this.createdAt = createdAt;
     }
 
-    
-
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public int getStudentID() {
+    public String getStudentID() {
         return studentID;
     }
 
-    public void setStudentID(int studentID) {
+    public void setStudentID(String studentID) {
         this.studentID = studentID;
     }
 
@@ -77,20 +79,22 @@ public class Request {
         this.status = status;
     }
 
-    public int getTeacherID() {
+    public String getTeacherID() {
         return teacherID;
     }
 
-    public void setTeacherID(int teacherID) {
+    public void setTeacherID(String teacherID) {
         this.teacherID = teacherID;
     }
 
-    public Timestamp getCreateAt() {
-        return createAt;
+    public LocalDateTime getCreateAt() {
+        return createdAt;
     }
 
-    public void setCreateAt(Timestamp createAt) {
-        this.createAt = createAt;
+    public void setCreateAt(LocalDateTime createAt) {
+        this.createdAt = createAt;
     }
 
+    
+    
 }

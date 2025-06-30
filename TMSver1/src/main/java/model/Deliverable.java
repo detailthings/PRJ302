@@ -4,24 +4,32 @@
  */
 package model;
 
+import jakarta.persistence.*;
+import java.sql.Date;
+
 /**
  *
  * @author admin
  */
+
+@Entity
 public class Deliverable {
     
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    
+    private int deliverableID;
     private String title;
     private String description;
     private float weighting;
-    private String submissionOpenDate;
-    private String dueDate;
+    private Date submissionOpenDate;
+    private Date dueDate;
 
     public Deliverable() {
     }
 
-    public Deliverable(int id, String title, String description, float weighting, String submissionOpenDate, String dueDate) {
-        this.id = id;
+    public Deliverable(int deliverableID, String title, String description, float weighting, Date submissionOpenDate, Date dueDate) {
+        this.deliverableID = deliverableID;
         this.title = title;
         this.description = description;
         this.weighting = weighting;
@@ -29,12 +37,12 @@ public class Deliverable {
         this.dueDate = dueDate;
     }
 
-    public int getId() {
-        return id;
+    public int getDeliverableID() {
+        return deliverableID;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setDeliverableID(int deliverableID) {
+        this.deliverableID = deliverableID;
     }
 
     public String getTitle() {
@@ -61,21 +69,22 @@ public class Deliverable {
         this.weighting = weighting;
     }
 
-    public String getSubmissionOpenDate() {
+    public Date getSubmissionOpenDate() {
         return submissionOpenDate;
     }
 
-    public void setSubmissionOpenDate(String submissionOpenDate) {
+    public void setSubmissionOpenDate(Date submissionOpenDate) {
         this.submissionOpenDate = submissionOpenDate;
     }
 
-    public String getDueDate() {
+    public Date getDueDate() {
         return dueDate;
     }
 
-    public void setDueDate(String dueDate) {
+    public void setDueDate(Date dueDate) {
         this.dueDate = dueDate;
     }
+
     
     
     

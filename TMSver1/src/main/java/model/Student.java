@@ -4,36 +4,34 @@
  */
 package model;
 
+import jakarta.persistence.*;
+
+
 /**
  *
  * @author admin
  */
+
+@Entity
 public class Student {
     
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    
     private int id;
-    private String studentID;
+    private String userID;
+    private String studentCode;
     private String major;
-    private String group;
 
     public Student() {
     }
 
-    public Student(int id, String studentID, String major, String group) {
+    public Student(int id, String userID, String studentCode, String major) {
         this.id = id;
-        this.studentID = studentID;
+        this.userID = userID;
+        this.studentCode = studentCode;
         this.major = major;
-        this.group = group;
     }
-
-    public String getGroup() {
-        return group;
-    }
-
-    public void setGroup(String group) {
-        this.group = group;
-    }
-
-
 
     public int getId() {
         return id;
@@ -43,12 +41,12 @@ public class Student {
         this.id = id;
     }
 
-    public String getStudentID() {
-        return studentID;
+    public String getStudentCode() {
+        return studentCode;
     }
 
-    public void setStudentID(String studentID) {
-        this.studentID = studentID;
+    public void setStudentCode(String studentCode) {
+        this.studentCode = studentCode;
     }
 
     public String getMajor() {
@@ -58,6 +56,16 @@ public class Student {
     public void setMajor(String major) {
         this.major = major;
     }
+
+    public String getUserID() {
+        return userID;
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
+    }
+    
+    
     
     
 }

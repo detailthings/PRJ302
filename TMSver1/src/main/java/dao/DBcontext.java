@@ -22,8 +22,8 @@ public class DBcontext {
             // dang ky drive cho project
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             // tao ket noi
-            Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=JavaJDBC;trustServerCertificate=true", "sa", "khanh");
-            
+            Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=30062025;trustServerCertificate=true", "sa", "khanh");
+            System.out.println(conn);
             System.out.println("succcessful");
             // ket noi thanh cong tra ve conn
            return conn;
@@ -33,6 +33,7 @@ public class DBcontext {
         return null;
     }
     public static void main(String[] args) throws SQLException {
-        DBcontext.connectDB();
+        System.out.println(DBcontext.connectDB());
+        
     }
 }

@@ -13,24 +13,14 @@ import java.util.List;
  */
 public abstract class DAO<T> {
     
-    public int create(T t) {
-        return 0;
-    }
+    public abstract int create(T t);
     
-    public int update(T t) {
-        return 0;
-    }
+    public abstract int update(T t);
     
-    public int delete(T t) {
-        return 0;
-    }
+    public abstract int delete(T t);
     
-    public List<T> readAll() {
-        return null;
-    }
+    public abstract List<T> readAll();
     
-    public T readOnly(String str) {
-        return null;
-    }
+    public abstract T readOnly(String str);
 
 }

@@ -4,6 +4,7 @@
  */
 package dao;
 
+import jakarta.persistence.*;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -14,133 +15,112 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Project;
+import model.UserAccount;
 
 /**
  *
  * @author admin
  */
-public class ProjectDAO extends DAO<Project> {
+public class ProjectDAO extends DAO1<Project> {
 
+    private EntityManagerFactory emf = 
+            Persistence.createEntityManagerFactory("Project");
+        
     @Override
-    public int create(Project t) {
-        try {
-            int rows;
-            PreparedStatement ps;
-            try (Connection conn = DBcontext.connectDB()) {
-                String sql = "INSERT INTO Project(ProjectID, Title, Description, TeacherID, SemesterID, JudgingID) VALUES(?,?,?,?,?,?)";
-                ps = conn.prepareStatement(sql);
-                ps.setString(1, t.getProjectCode());
-                ps.setString(2, t.getTitle());
-                ps.setString(3, t.getDescription());
-                ps.setString(4, t.getTeacherID());
-                ps.setString(5, t.getSemesterID());
-                ps.setString(6, t.getJudgingID());
-                rows = ps.executeUpdate();
-            }
-            ps.close();
-            return rows;
-        } catch (SQLException ex) {
-            Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, null, ex);
-            return 0;
-        }
+    public void create(Project t) {
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        em.persist(t);
+        em.getTransaction().commit();
+        em.close();
     }
 
     @Override
-    public int update(Project t) {
-        try {
-            int rows;
-            PreparedStatement ps;
-            try (Connection conn = DBcontext.connectDB()) {
-                String sql = "UPDATE Project SET Title=?, Description=?, TeacherID=?, SemesterID=?, JudgingID=? WHERE ProjectID=?";
-                ps = conn.prepareStatement(sql);
-                ps.setString(1, t.getTitle());
-                ps.setString(2, t.getDescription());
-                ps.setString(3, t.getTeacherID());
-                ps.setString(4, t.getSemesterID());
-                ps.setString(5, t.getJudgingID());
-                ps.setString(6, t.getProjectCode());
-                rows = ps.executeUpdate();
-            }
-            ps.close();
-            return rows;
-        } catch (SQLException ex) {
-            Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, null, ex);
-            return 0;
-        }
+    public boolean update(Project t) {
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        em.merge(t);
+        em.getTransaction().commit();
+        em.close();
+        return true;
     }
 
     @Override
-    public int delete(Project t) {
-        try {
-            int rows;
-            PreparedStatement ps;
-            try (Connection conn = DBcontext.connectDB()) {
-                String sql = "DELETE FROM Project WHERE ProjectID=?";
-                ps = conn.prepareStatement(sql);
-                ps.setString(1, t.getProjectCode());
-                rows = ps.executeUpdate();
-            }
-            ps.close();
-            return rows;
-        } catch (SQLException ex) {
-            Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, null, ex);
-            return 0;
-        }
+    public boolean delete(Project t) {
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        em.remove(t);
+        em.getTransaction().commit();
+        em.close();
+        return true;
     }
 
     @Override
     public List<Project> readAll() {
+        EntityManager em = emf.createEntityManager();
+        List<Project> list = new ArrayList<>();
         try {
-            List<Project> newList;
-            PreparedStatement ps;
-            try (Connection conn = DBcontext.connectDB()) {
-                newList = new ArrayList<>();
-                String sql = "SELECT * FROM Project";
-                ps = conn.prepareStatement(sql);
-                ResultSet rs = ps.executeQuery();
-                while (rs.next()) {
-                    String projectID = rs.getString("ProjectID");
-                    String title = rs.getString("Title");
-                    String description = rs.getString("Description");
-                    String teacherID = rs.getString("TeacherID");
-                    String semesterID = rs.getString("SemesterID");
-                    String judgingID = rs.getString("JudgingID");
-                    newList.add(new Project(projectID, title, description, teacherID, semesterID, judgingID));
-                }
-            }
-            ps.close();
-            return newList;
-        } catch (SQLException ex) {
-            Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
+            em.getTransaction().begin();
+            list = em.createQuery("Select u From Project u", Project.class)
+                    .getResultList();
+            em.getTransaction().commit();
+        }  catch (NoResultException e) {
+            list = null;
+        } finally {
+            em.close();
         }
+        return list;
     }
 
     @Override
-    public Project readOnly(String projectID) {
-        try {
-            Project project = null;
-            PreparedStatement ps;
-            try (Connection conn = DBcontext.connectDB()) {
-                String sql = "SELECT * FROM Project WHERE ProjectID=?";
-                ps = conn.prepareStatement(sql);
-                ps.setString(1, projectID);
-                ResultSet rs = ps.executeQuery();
-                if (rs.next()) {
-                    project = new Project();
-                    project.setProjectCode(rs.getString("ProjectID"));
-                    project.setTitle(rs.getString("Title"));
-                    project.setDescription(rs.getString("Description"));
-                    project.setTeacherID(rs.getString("TeacherID"));
-                    project.setSemesterID(rs.getString("SemesterID"));
-                    project.setJudgingID(rs.getString("JudgingID"));
-                }
-            }
-            ps.close();
-            return project;
-        } catch (SQLException ex) {
-            Logger.getLogger(ProjectDAO.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
-        }
+    public Project readOnly(String str) {
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        Project u = em.find(Project.class, str);
+        em.getTransaction().commit();
+        em.close();
+        return u;
     }
+    
+    public List<Project> readAllByStuID(String studentID) {
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        List<Project> list = em
+                .createQuery("Select u From Project u Where u.studentID = :studentID", Project.class)
+                .setParameter("studentID", studentID)
+                .getResultList();
+        em.getTransaction().commit();
+        em.close();
+        return list;
+    }
+    
+    public List<Project> readAllByTeaID(String teacherID) {
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        List<Project> list = em
+                .createQuery("Select u From Project u Where u.teacherID = :teacherID", Project.class)
+                .setParameter("teacherID", teacherID)
+                .getResultList();
+        em.getTransaction().commit();
+        em.close();
+        return list;
+    }
+    
+    public int countAllProject() {
+        EntityManager em = emf.createEntityManager();
+        int count = 0;
+        try {
+            em.getTransaction().begin();
+            count = em.createQuery("Select Count(u) From Project u", Long.class)
+                    .getSingleResult()
+                    .intValue();
+            em.getTransaction().commit();
+        }  catch (NoResultException e) {
+            count = 0;
+        } finally {
+            em.close();
+        }
+        return count;
+    }
+    
 }

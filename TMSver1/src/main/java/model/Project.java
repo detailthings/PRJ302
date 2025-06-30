@@ -4,24 +4,33 @@
  */
 package model;
 
+import jakarta.persistence.*;
+
+
 /**
  *
  * @author admin
  */
+
+@Entity
 public class Project {
     
-    private String projectCode;
+    @Id
+    
+    private String projectID;
     private String title;
     private String description;
     private String teacherID;
     private String semesterID;
     private String judgingID;
+    private String studentID;
+    private Float scorce;
 
     public Project() {
     }
 
-    public Project(String projectCode, String title, String description, String teacherID, String semesterID, String judgingID) {
-        this.projectCode = projectCode;
+    public Project(String projectID, String title, String description, String teacherID, String semesterID, String judgingID, String studentID) {
+        this.projectID = projectID;
         this.title = title;
         this.description = description;
         this.teacherID = teacherID;
@@ -29,12 +38,34 @@ public class Project {
         this.judgingID = judgingID;
     }
 
-    public String getProjectCode() {
-        return projectCode;
+    public Project(String projectID, String title, String description, String teacherID, String semesterID, String judgingID, String studentID, Float scorce) {
+        this.projectID = projectID;
+        this.title = title;
+        this.description = description;
+        this.teacherID = teacherID;
+        this.semesterID = semesterID;
+        this.judgingID = judgingID;
+        this.studentID = studentID;
+        this.scorce = scorce;
     }
 
-    public void setProjectCode(String projectCode) {
-        this.projectCode = projectCode;
+    public Project(String projectID, String title, String description, String teacherID, String semesterID, String studentID) {
+        this.projectID = projectID;
+        this.title = title;
+        this.description = description;
+        this.teacherID = teacherID;
+        this.semesterID = semesterID;
+        this.studentID = studentID;
+    }
+    
+    
+    
+    public String getProjectCode() {
+        return projectID;
+    }
+
+    public void setProjectCode(String projectID) {
+        this.projectID = projectID;
     }
 
     public String getTitle() {
@@ -76,7 +107,29 @@ public class Project {
     public void setJudgingID(String judgingID) {
         this.judgingID = judgingID;
     }
-    
-    
-    
+
+    public String getStudentID() {
+        return studentID;
+    }
+
+    public void setStudentID(String studentID) {
+        this.studentID = studentID;
+    }
+
+    public String getProjectID() {
+        return projectID;
+    }
+
+    public void setProjectID(String projectID) {
+        this.projectID = projectID;
+    }
+
+    public Float getScorce() {
+        return scorce;
+    }
+
+    public void setScorce(Float scorce) {
+        this.scorce = scorce;
+    }
+
 }

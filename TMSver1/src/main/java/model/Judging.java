@@ -4,11 +4,18 @@
  */
 package model;
 
+import jakarta.persistence.*;
+
 /**
  *
  * @author admin
  */
+
+@Entity
 public class Judging {
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     
     private String id;
     private String projectCode;
