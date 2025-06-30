@@ -18,18 +18,18 @@ public class Request {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     
-    private int id;
+    private String id; //
     private String studentID;
-    private String title;
-    private String description;
+    private String title; //
+    private String description; //
     private String status;
-    private int teacherID;
+    private String teacherID; //
     private LocalDateTime createdAt;
 
     public Request() {
     }
 
-    public Request(int id, String studentID, String title, String description, String status, int teacherID, LocalDateTime createdAt) {
+    public Request(String id, String studentID, String title, String description, String status, String teacherID, LocalDateTime createdAt) {
         this.id = id;
         this.studentID = studentID;
         this.title = title;
@@ -39,11 +39,11 @@ public class Request {
         this.createdAt = createdAt;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -79,11 +79,11 @@ public class Request {
         this.status = status;
     }
 
-    public int getTeacherID() {
+    public String getTeacherID() {
         return teacherID;
     }
 
-    public void setTeacherID(int teacherID) {
+    public void setTeacherID(String teacherID) {
         this.teacherID = teacherID;
     }
 

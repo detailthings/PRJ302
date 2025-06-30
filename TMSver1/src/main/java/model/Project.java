@@ -16,7 +16,6 @@ import jakarta.persistence.*;
 public class Project {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     
     private String projectID;
     private String title;
@@ -49,6 +48,17 @@ public class Project {
         this.studentID = studentID;
         this.scorce = scorce;
     }
+
+    public Project(String projectID, String title, String description, String teacherID, String semesterID, String studentID) {
+        this.projectID = projectID;
+        this.title = title;
+        this.description = description;
+        this.teacherID = teacherID;
+        this.semesterID = semesterID;
+        this.studentID = studentID;
+    }
+    
+    
     
     public String getProjectCode() {
         return projectID;

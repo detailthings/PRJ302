@@ -1,4 +1,7 @@
-﻿-- TERM
+﻿CREATE DATABASE QLDAver3
+
+
+-- TERM
 CREATE TABLE Semester (
     SemesterID VARCHAR(4) PRIMARY KEY,
     Semester VARCHAR(10) CHECK (Semester IN ('Fall', 'Spring', 'Summer')) NOT NULL,
@@ -20,13 +23,14 @@ CREATE TABLE UserAccount (
 CREATE TABLE Student (
     ID INT IDENTITY PRIMARY KEY,
     UserID NVARCHAR(20) UNIQUE,
+	StudentCode NVARCHAR(20) UNIQUE,
     Major VARCHAR(50),
     FOREIGN KEY (UserID) REFERENCES UserAccount(UserID)
 );
 
 -- TEACHER
 CREATE TABLE Teacher (
-    ID INT IDENTITY PRIMARY KEY,
+    ID NVARCHAR(20) PRIMARY KEY,
     UserID NVARCHAR(20) UNIQUE,
     Department NVARCHAR(100),
     FOREIGN KEY (UserID) REFERENCES UserAccount(UserID)
@@ -34,7 +38,7 @@ CREATE TABLE Teacher (
 
 -- REVIEWER
 CREATE TABLE Reviewer (
-    ID INT IDENTITY PRIMARY KEY,
+    ID NVARCHAR(20) PRIMARY KEY,
     UserID NVARCHAR(20) UNIQUE,
     Department NVARCHAR(100),
     FOREIGN KEY (UserID) REFERENCES UserAccount(UserID)
@@ -88,12 +92,12 @@ CREATE TABLE Submission (
 
 -- REQUEST
 CREATE TABLE Request (
-    ID INT PRIMARY KEY IDENTITY(1,1),
+    ID Nvarchar(20) PRIMARY KEY,
     StudentID NVARCHAR(20),
     Title NVARCHAR(255),
     Description NVARCHAR(MAX),
     Status NVARCHAR(50) DEFAULT 'None' CHECK(Status IN ('Processing','Accept','Reject','None')),
-    TeacherID INT,
+    TeacherID NVARCHAR(20),
     CreatedAt DATETIME DEFAULT GETDATE(),
     FOREIGN KEY (TeacherID) REFERENCES Teacher(ID)
 );
@@ -122,13 +126,13 @@ INSERT INTO Student (UserID, Major, studentCode) VALUES
 ('sv002', 'Software Engineering', 'he000002');
 
 -- TEACHER
-INSERT INTO Teacher (UserID, Department) VALUES
-('gv001', N'Computer Science');
+INSERT INTO Teacher (ID, UserID, Department) VALUES
+('gv001','gv001', N'Computer Science');
 
 -- REVIEWER
-INSERT INTO Reviewer (UserID, Department) VALUES
-('rv001', N'Computer Science'),
-('rv002', N'Information System');
+INSERT INTO Reviewer (ID, UserID, Department) VALUES
+('rv001','rv001', N'Computer Science'),
+('rv002','rv002', N'Information System');
 
 -- PROJECT
 INSERT INTO Project (ProjectID, Title, Description, TeacherID, SemesterID, JudgingID) VALUES
@@ -149,6 +153,10 @@ INSERT INTO Submission (ProjectID, DeliverableID, Status) VALUES
 ('PRJ001', 2, 'Pending');
 
 -- REQUEST
-INSERT INTO Request (Title, Description, Status, TeacherID) VALUES
-(N'Xin đổi đề tài', N'Em muốn đổi đề tài sang hướng AI', 'Processing', 1),
-(N'Gia hạn nộp báo cáo', N'Em xin thêm 1 tuần để hoàn thành báo cáo cuối kỳ', 'Accept', 1);
+INSERT INTO Request (ID, Title, Description, Status, TeacherID) VALUES
+('CSS111', N'Gia hạn nộp báo cáo', N'Em xin thêm 1 tuần để hoàn thành báo cáo cuối kỳ', 'None', 'gv001'),
+('WEB201', N'Xin đổi nhóm', N'Em muốn chuyển sang nhóm làm việc khác phù hợp hơn', 'None', 'gv001'),
+('DBS301', N'Yêu cầu hỗ trợ', N'Em cần thêm tài liệu để hoàn thành đồ án', 'None', 'gv001'),
+('PRJ310', N'Xin bảo lưu', N'Em gặp vấn đề cá nhân, xin bảo lưu đồ án sang kỳ sau', 'None', 'gv001'),
+('PRJ300', N'Xin đổi đề tài', N'Em muốn đổi đề tài sang hướng AI', 'None', 'gv001');
+

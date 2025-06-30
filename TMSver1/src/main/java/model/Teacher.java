@@ -18,35 +18,25 @@ public class Teacher {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     
-    private int id;
+    private String id;
     private String userID;
-    private String teacherID;
     private String department;
 
     public Teacher() {
     }
 
-    public Teacher(int id, String userID, String teacherID, String department) {
+    public Teacher(String id, String userID, String department) {
         this.id = id;
         this.userID = userID;
-        this.teacherID = teacherID;
         this.department = department;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
-    }
-
-    public String getTeacherID() {
-        return teacherID;
-    }
-
-    public void setTeacherID(String teacherID) {
-        this.teacherID = teacherID;
     }
 
     public String getDepartment() {

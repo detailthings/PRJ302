@@ -85,7 +85,7 @@ public class RequestDAO extends DAO1<Request> {
         List<Request> list = new ArrayList<>();
         try {
             em.getTransaction().begin();
-            list = em.createQuery("Select u From Request u Where u.teacherID = :teacherID", Request.class)
+            list = em.createQuery("Select u From Request u Where u.teacherID = :teacherID And u.status != 'Reject' And u.status != 'Accept'", Request.class)
                     .setParameter("teacherID", str)
                     .getResultList();
             em.getTransaction().commit();
@@ -102,7 +102,7 @@ public class RequestDAO extends DAO1<Request> {
         List<Request> list = new ArrayList<>();
         try {
             em.getTransaction().begin();
-            list = em.createQuery("Select u From Request u Where u.studentID IS NOT NULL And u.teacherID = :teacherID And u.status, Request.class)
+            list = em.createQuery("Select u From Request u Where u.studentID IS NOT NULL And u.teacherID = :teacherID And u.status != 'Reject' And u.status != 'Accept'", Request.class)
                     .setParameter("teacherID", str)
                     .getResultList();
             em.getTransaction().commit();
@@ -120,8 +120,9 @@ public class RequestDAO extends DAO1<Request> {
         Request r = new Request();
         try {
             em.getTransaction().begin();
-            r = em.createQuery("Select u From Request u Where u.studentID = :studentID", Request.class)
+            r = em.createQuery("Select u From Request u Where u.studentID = :studentID Or u.Id = :Id", Request.class)
                     .setParameter("studentID", str)
+                    .setParameter("Id", str)
                     .getSingleResult();
             em.getTransaction().commit();
         }catch (NoResultException e) {
@@ -148,23 +149,12 @@ public class RequestDAO extends DAO1<Request> {
         }
         return r;
     }
+   
     
-    public Request readOnly(int id) {
-        EntityManager em = emf.createEntityManager();
-        Request r = new Request();
-        try {
-            em.getTransaction().begin();
-            r = em.createQuery("Select u From Request u Where u.Id = :Id", Request.class)
-                    .setParameter("Id", id)
-                    .getSingleResult();
-            em.getTransaction().commit();
-        }catch (NoResultException e) {
-            r = null;
-        } finally {
-            em.close();
-        }
-        return r;
+    public static void main(String[] args) {
+        RequestDAO r = new RequestDAO();
+        List<Request> list = r.readAllTeacher("gv001");
+        System.out.println(list.get(0));
     }
-    
 
 }
