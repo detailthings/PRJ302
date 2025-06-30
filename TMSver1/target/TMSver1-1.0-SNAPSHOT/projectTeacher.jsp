@@ -182,7 +182,7 @@
                                     <td><%= r.getTitle()%></td>
                                     <td><%= r.getDescription()%></td>
                                     <td><%= r.getSemesterID()%></td>
-                                    <td><a href="#">Juding</a></td>
+                                    <td><a href="ReviewerUpdateGrade">Juding</a></td>
                                     <td><a href="TeacherReadMemberProject?ProjectCode=<%= r.getProjectCode()%>">show</a></td>
                                 </tr>
                                 <%

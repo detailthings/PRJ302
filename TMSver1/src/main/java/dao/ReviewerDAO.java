@@ -1,18 +1,22 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+     * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+     * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package dao;
 
+import static java.nio.file.Files.list;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import static java.util.Collections.list;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Reviewer;
+import model.UserAccount;
+import java.util.List;
 
 /**
  *
@@ -87,14 +91,16 @@ public class ReviewerDAO extends DAO<Reviewer> {
             PreparedStatement ps;
             try (Connection conn = DBcontext.connectDB()) {
                 newList = new ArrayList<>();
-                String sql = "SELECT * FROM Reviewer";
+                String sql = "SELECT Reviewer.ID, Reviewer.UserID, UserAccount.FullName, Reviewer.Department "
+                        + "FROM Reviewer JOIN UserAccount ON Reviewer.UserID = UserAccount.UserID";
                 ps = conn.prepareStatement(sql);
                 ResultSet rs = ps.executeQuery();
                 while (rs.next()) {
                     int id = rs.getInt("ID");
                     String userID = rs.getString("UserID");
                     String department = rs.getString("Department");
-                    newList.add(new Reviewer(id, userID, department));
+                    String fullname = rs.getString("Fullname");
+                    newList.add(new Reviewer(id, userID, department, fullname));
                 }
             }
             ps.close();
@@ -130,5 +136,21 @@ public class ReviewerDAO extends DAO<Reviewer> {
             return null;
         }
     }
-    
+
+    public static void main(String[] args) {
+        ReviewerDAO dao = new ReviewerDAO();
+        List<Reviewer> reviewers = dao.readAll();
+
+        if (reviewers != null && !reviewers.isEmpty()) {
+            for (Reviewer r : reviewers) {
+                System.out.println("ID: " + r.getId());
+                System.out.println("UserID: " + r.getReviewerID());
+                System.out.println("Department: " + r.getDepartment());
+                System.out.println("Full Name: " + r.getFullName());
+                System.out.println("--------------------------");
+            }
+        } else {
+            System.out.println("No reviewers found or failed to connect.");
+        }
+    }
 }

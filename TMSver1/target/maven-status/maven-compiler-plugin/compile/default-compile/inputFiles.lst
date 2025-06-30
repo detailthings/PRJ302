@@ -8,6 +8,7 @@ C:\projet pro\code\PRJ302\TMSver1\src\main\java\dao\RequestDAO.java
 C:\projet pro\code\PRJ302\TMSver1\src\main\java\controller\StudentReadRequest.java
 C:\projet pro\code\PRJ302\TMSver1\src\main\java\controller\Logout.java
 C:\projet pro\code\PRJ302\TMSver1\src\main\java\dao\DAO.java
+C:\projet pro\code\PRJ302\TMSver1\src\main\java\dao\DeliverableDAO.java
 C:\projet pro\code\PRJ302\TMSver1\src\main\java\controller\UpdateReviewerGrade.java
 C:\projet pro\code\PRJ302\TMSver1\src\main\java\controller\TeacherReadTeacher.java
 C:\projet pro\code\PRJ302\TMSver1\src\main\java\model\MemberOfProject.java
@@ -33,6 +34,7 @@ C:\projet pro\code\PRJ302\TMSver1\src\main\java\controller\StudentReadStudent.ja
 C:\projet pro\code\PRJ302\TMSver1\src\main\java\model\Student.java
 C:\projet pro\code\PRJ302\TMSver1\src\main\java\model\Judging.java
 C:\projet pro\code\PRJ302\TMSver1\src\main\java\model\Request.java
+C:\projet pro\code\PRJ302\TMSver1\src\main\java\controller\AdminReadReviewer.java
 C:\projet pro\code\PRJ302\TMSver1\src\main\java\controller\StudentCreateRequest.java
 C:\projet pro\code\PRJ302\TMSver1\src\main\java\dao\DBcontext.java
 C:\projet pro\code\PRJ302\TMSver1\src\main\java\model\Reviewer.java

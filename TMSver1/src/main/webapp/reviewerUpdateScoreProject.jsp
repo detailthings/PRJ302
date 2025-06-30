@@ -1,12 +1,11 @@
 <%-- 
-    Document   : table-reviewer
-    Created on : Jun 17, 2025, 2:07:53 PM
-    Author     : KHANH
+    Document   : reviewerUpdateScoreProject
+    Created on : Jun 30, 2025, 1:24:19 PM
+    Author     : Acer
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ page import="model.Reviewer" %>
-
+<%@ page import="model.Deliverable" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -160,33 +159,37 @@
                     </nav>
                     <div class="project-card">
                         <%@ page import="java.util.*" %>
-                        <%@ page import="model.Reviewer"%>
-                        <%List<Reviewer> rev = (List<Reviewer>) request.getAttribute("reviewer");%>
+                        <%@ page import="model.Deliverable"%>
+                        <%List<Deliverable> deli = (List<Deliverable>) request.getAttribute("deliverable");%>
                         <table class="tbReview" >
                             <thead>
                                 <tr class="ligth">
                                     <th>ID</th>
-                                    <th>ReviewerID</th>
-                                    <th>Department</th>
-                                    <th>FullName</th>
+                                    <th>Title</th>
+                                    <th>Description</th>
+                                    <th>SubmissionOpenDate</th>
+                                    <th>DueDate</th>
+                                    <th>tWeighting</th>
 
                                 </tr>
                             </thead>
                             <tbody>
 
                                 <%-- sửa để kiểm tra for null và empty --%>
-                                <% if (rev != null&& !rev.isEmpty()) { %>
-                                <% for (Reviewer r : rev) { %>
+                                <% if (deli != null&& !deli.isEmpty()) { %>
+                                <% for (Deliverable d : deli) { %>
                                 <tr>
-                                    <td><%= r.getId()%></td>
-                                    <td><%= r.getReviewerID()%></td>
-                                    <td><%= r.getDepartment() %></td>
-                                    <td><%= r.getFullName() %></td>
+                                    <td><%= d.getId()%></td>
+                                    <td><%= d.getTitle()%></td>
+                                    <td><%= d.getDescription()%></td>
+                                    <td><%= d.getSubmissionOpenDate() %></td>
+                                    <td><%= d.getDueDate() %></td>
+                                    <td><%= d.getWeighting() %></td>
                                 </tr>
                                 <% } %>
                                 <% } else { %>
                                 <tr>
-                                    <td colspan="2">No reviewer data found.</td>
+                                    <td colspan="2">No submission data found.</td>
                                 </tr>
                                 <% } %>
 
@@ -197,8 +200,10 @@
                             <tfoot>
                                 <tr>
                                     <th>ID</th>
-                                    <th>ReviewerID</th>
-                                    <th>Department</th>
+                                    <th>Title</th>
+                                    <th>SubmissionOpenDate</th>
+                                    <th>DueDate</th>
+                                    <th>tWeighting</th>
                                 </tr>
                             </tfoot>
                         </table>

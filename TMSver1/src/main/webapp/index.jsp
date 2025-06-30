@@ -137,6 +137,7 @@
             <a href="TeacherReadProject">Đồ án</a>           
             <a href="TeacherViewRequest">Xem yêu cầu</a>
             <a href="Login">Đăng nhập<a>
+            <a href="AdminReadReviewer">Danh sách giảng viên chấm điểm<a>
         </nav>
 
         <main class="projects-container">

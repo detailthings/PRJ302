@@ -9,18 +9,22 @@ package model;
  * @author admin
  */
 public class Reviewer {
-    
+
     private int id;
     private String reviewerID;
     private String department;
+    private String fullName;
+
+   
 
     public Reviewer() {
     }
 
-    public Reviewer(int id, String teacherID, String department) {
+    public Reviewer(int id, String teacherID, String department, String fullname) {
         this.id = id;
         this.reviewerID = teacherID;
         this.department = department;
+        this.fullName = fullname;
     }
 
     public int getId() {
@@ -46,6 +50,12 @@ public class Reviewer {
     public void setDepartment(String department) {
         this.department = department;
     }
+     public String getFullName() {
+        return fullName;
+    }
 
-    
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
 }

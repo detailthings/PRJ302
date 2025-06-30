@@ -76,6 +76,10 @@
         <servlet-name>UpdateReviewerGrade</servlet-name>
         <servlet-class>controller.UpdateReviewerGrade</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AdminReadReviewer</servlet-name>
+        <servlet-class>controller.AdminReadReviewer</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>stureadstu</servlet-name>
         <url-pattern>/stureadstu</url-pattern>
@@ -150,7 +154,11 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>UpdateReviewerGrade</servlet-name>
-        <url-pattern>/UpdateReviewerGrade</url-pattern>
+        <url-pattern>/ReviewerUpdateGrade</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminReadReviewer</servlet-name>
+        <url-pattern>/AdminReadReviewer</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

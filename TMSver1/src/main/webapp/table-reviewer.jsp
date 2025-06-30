@@ -5,6 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import="model.Reviewer" %>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -152,9 +154,9 @@
 
         <nav>
             <a href="index.jsp">Trang chủ</a>
-            <a href="Webkit/Webkit/html/backend/data-table.jsp">Đồ án</a>           
+            <a href="TeacherReadProject">Đồ án</a>           
             <a href="#">Liên hệ</a>
-            <a href="#">Đăng nhập<a>
+            <a href="Login">Đăng nhập</a>
                     </nav>
                     <div class="project-card">
                         <%@ page import="java.util.*" %>
@@ -166,18 +168,20 @@
                                     <th>ID</th>
                                     <th>ReviewerID</th>
                                     <th>Department</th>
+                                    <th>FullName</th>
 
                                 </tr>
                             </thead>
                             <tbody>
 
                                 <%-- sửa để kiểm tra for null và empty --%>
-                                <% if (rev != null&& rev.isEmpty()) { %>
+                                <% if (rev != null&& !rev.isEmpty()) { %>
                                 <% for (Reviewer r : rev) { %>
                                 <tr>
                                     <td><%= r.getId()%></td>
                                     <td><%= r.getReviewerID()%></td>
-                                    <td><%= e.getDepartment() %></td>
+                                    <td><%= r.getDepartment() %></td>
+                                    <td><%= r.getFullName() %></td>
                                 </tr>
                                 <% } %>
                                 <% } else { %>

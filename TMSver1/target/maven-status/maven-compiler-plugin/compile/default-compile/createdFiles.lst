@@ -13,6 +13,7 @@ dao\DBcontext.class
 controller\StudentDeleteRequest.class
 model\Semester.class
 model\Student.class
+controller\AdminReadReviewer.class
 controller\TeacherViewRequest.class
 dao\UserAccountDAO.class
 controller\StudentUpdateStudent.class
@@ -26,6 +27,7 @@ controller\TeacherReadProject.class
 controller\TeacherReadTeacher.class
 controller\StudentReadRequest.class
 controller\StudentReadStudent.class
+controller\UpdateReviewerGrade.class
 controller\TeacherCreateRequest.class
 model\Request.class
 controller\StudentCreateRequest.class
@@ -34,6 +36,7 @@ model\Project.class
 controller\StudentUpdateRequest.class
 controller\Login.class
 com\mycompany\tmsver1\resources\JakartaEE10Resource.class
+dao\DeliverableDAO.class
 dao\RequestDAO.class
 controller\StudentReadGrade.class
 model\Deliverable.class

@@ -14,6 +14,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 import model.Reviewer;
+
 /**
  *
  * @author KHANH
@@ -59,10 +60,10 @@ public class reviewLoad extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         List<Reviewer> reviewer = new ArrayList<>();
-        ReviewerDAO da;
-        da = new ReviewerDAO();
+        ReviewerDAO dao;
+        dao = new ReviewerDAO();
 
-        reviewer = da.readAll();
+        reviewer = dao.readAll();
         request.setAttribute("reviewer", reviewer);
         request.getRequestDispatcher("table-reviewer.jsp").forward(request, response);
     }

@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package model;
+import java.sql.Date; 
 
 /**
  *
@@ -14,13 +15,13 @@ public class Deliverable {
     private String title;
     private String description;
     private float weighting;
-    private String submissionOpenDate;
-    private String dueDate;
+    private Date submissionOpenDate;
+    private Date dueDate;
 
-    public Deliverable() {
+    public Deliverable(int id1, String title1, String department, float weighting1, String department1, String department2) {
     }
 
-    public Deliverable(int id, String title, String description, float weighting, String submissionOpenDate, String dueDate) {
+    public Deliverable(int id, String title, String description, float weighting, Date submissionOpenDate, Date dueDate) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -61,21 +62,28 @@ public class Deliverable {
         this.weighting = weighting;
     }
 
-    public String getSubmissionOpenDate() {
+    public Date getSubmissionOpenDate() {
         return submissionOpenDate;
     }
 
-    public void setSubmissionOpenDate(String submissionOpenDate) {
+    public void setSubmissionOpenDate(Date submissionOpenDate) {
         this.submissionOpenDate = submissionOpenDate;
     }
 
-    public String getDueDate() {
+    public Date getDueDate() {
         return dueDate;
     }
 
-    public void setDueDate(String dueDate) {
+    public void setDueDate(Date dueDate) {
         this.dueDate = dueDate;
     }
+
+    @Override
+    public String toString() {
+        return "Deliverable{" + "id=" + id + ", title=" + title + ", description=" + description + ", weighting=" + weighting + ", submissionOpenDate=" + submissionOpenDate + ", dueDate=" + dueDate + '}';
+    }
+
+    
     
     
     
