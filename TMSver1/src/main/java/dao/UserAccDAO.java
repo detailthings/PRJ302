@@ -116,4 +116,5 @@ public class UserAccDAO extends DAO1<UserAccount> {
     }
     //thì nếu truy vấn không ra kết quả, nó sẽ ném ra ngoại lệ NoResultException, chứ không trả về null.
 
+    
 }

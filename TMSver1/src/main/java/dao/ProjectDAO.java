@@ -162,7 +162,7 @@ public class ProjectDAO extends DAO1<Project> {
         int count = 0;
         try {
             em.getTransaction().begin();
-            count = em.createQuery("Select Count(u) From Project u Where u.scorce >= 8.0 and u.scorce < 9.0 and u.semesterID = :semesterID", Long.class)
+            count = em.createQuery("Select Count(u) From Project u Where u.semesterID = :semesterID", Long.class)
                     .setParameter("semesterID", newestSemester)
                     .getSingleResult()
                     .intValue();
@@ -174,14 +174,14 @@ public class ProjectDAO extends DAO1<Project> {
         }
         return count;
     }
-    
-    public static void main(String[] args) {
-        ProjectDAO p = new ProjectDAO();
-        int numOfProject = p.countAllProject();
-        String newestSemester = p.findNewestSemester();
-        int numOfProjectInNewestSemester = p.countAllProjectInNewestSemester(newestSemester);
-        int numOfGoodProject = p.countNumerOfGoodProject(newestSemester);
-        System.out.println(numOfGoodProject);
-    }
+//    
+//    public static void main(String[] args) {
+//        ProjectDAO p = new ProjectDAO();
+//        int numOfProject = p.countAllProject();
+//        String newestSemester = p.findNewestSemester();
+//        int numOfProjectInNewestSemester = p.countAllProjectInNewestSemester(newestSemester);
+//        int numOfGoodProject = p.countNumerOfGoodProject(newestSemester);
+//        System.out.println(numOfGoodProject);
+//    }
     
 }

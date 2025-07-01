@@ -2,7 +2,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-
 package controller.admin;
 
 import dao.*;
@@ -14,7 +13,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import model.*;
 
-
 /**
  *
  * @author admin
@@ -23,8 +21,12 @@ public class DashBoardController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
 //        processRequest(request, response);
+        request.setCharacterEncoding("UTF-8" );
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html; charset=UTF-8");
+
         HttpSession session = request.getSession(false);
         if (session == null || session.getAttribute("user") == null) {
             response.sendRedirect("/TMSver1/jsp/common/layout/login.jsp");
@@ -39,13 +41,14 @@ public class DashBoardController extends HttpServlet {
         String newestSemester = p.findNewestSemester();
         int numOfProjectNewestSemester = p.countAllProjectInNewestSemester(newestSemester);
         int numOfGoodProject = p.countNumerOfGoodProject(newestSemester);
+
+        request.setAttribute("t1", numOfProjectAllSemester);
+        request.setAttribute("t2", numOfProjectNewestSemester);
+        request.setAttribute("t3", numOfGoodProject);
         
-        request.setAttribute("t1",numOfProjectAllSemester);
-        request.setAttribute("t2",numOfProjectNewestSemester);
-        request.setAttribute("t3",numOfGoodProject);
 
         // Chuyển tiếp sang JSP hiển thị
         request.getRequestDispatcher("/jsp/admin/index.jsp").forward(request, response);
-    } 
+    }
 
 }

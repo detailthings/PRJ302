@@ -22,9 +22,9 @@ public class DBcontext {
             // dang ky drive cho project
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             // tao ket noi
-            Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=QLDAver3;trustServerCertificate=true", "sa", "123");
+            Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=PRJ302d;trustServerCertificate=true", "sa", "sa");
             System.out.println(conn);
-            System.out.println("succcessful");
+            System.out.println("succcessfulabccc");
             // ket noi thanh cong tra ve conn
            return conn;
         } catch (ClassNotFoundException | SQLException ex) {

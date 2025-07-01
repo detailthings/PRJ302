@@ -2,7 +2,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-
 package controller.user;
 
 import dao.ReviewerDAO;
@@ -28,42 +27,42 @@ import util.Validation;
  * @author admin
  */
 public class LoginController extends HttpServlet {
-   
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         HttpSession session = request.getSession();
         String user = (String) session.getAttribute("user");
         UserAccount a = (UserAccount) session.getAttribute("useraccount");
-           
+
         String role = a.getRole();
-            switch (role) {
-                case "admin":
-                    response.sendRedirect("dashboardcontroller");
-                    break;
-                case "teacher":
-                    Teacher profileT = new TeacherDAO().readOnly(user);
-                    session.setAttribute("teacherprofile", profileT);
-                    response.sendRedirect("hometeachercontroller");
-                    break;
-                case "reviewer":
-                    Reviewer profileR = new ReviewerDAO().readOnly(user);
-                    session.setAttribute("reviewerprofile", profileR);
-                    response.sendRedirect("homereviewercontroller");
-                    break;
-                case "student":
-                    Student profileS = new StudentDAO().readOnly(user);
-                    session.setAttribute("studentprofile", profileS);
-                    response.sendRedirect("homestudentcontroller");
-                    break;
-                default:
-                    response.sendRedirect("/TMSver1/jsp/common/layout/login.jsp");
-            }
-    } 
+        switch (role) {
+            case "admin":
+                response.sendRedirect("dashboardcontroller");
+                break;
+            case "teacher":
+                Teacher profileT = new TeacherDAO().readOnly(user);
+                session.setAttribute("teacherprofile", profileT);
+                response.sendRedirect("hometeachercontroller");
+                break;
+            case "reviewer":
+                Reviewer profileR = new ReviewerDAO().readOnly(user);
+                session.setAttribute("reviewerprofile", profileR);
+                response.sendRedirect("homereviewercontroller");
+                break;
+            case "student":
+                Student profileS = new StudentDAO().readOnly(user);
+                session.setAttribute("studentprofile", profileS);
+                response.sendRedirect("homestudentcontroller");
+                break;
+            default:
+                response.sendRedirect("/TMSver1/jsp/common/layout/login.jsp");
+        }
+    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try {
             HttpSession session = request.getSession();
@@ -85,9 +84,8 @@ public class LoginController extends HttpServlet {
 
             UserAccDAO uad = new UserAccDAO();
             UserAccount a = uad.getUserBy(user, pass);
-                     
-            
-            if(a != null) {
+
+            if (a != null) {
                 session.setAttribute("user", user);
                 session.setAttribute("pass", pass);
                 session.setAttribute("name", a.getFullName());
@@ -119,10 +117,11 @@ public class LoginController extends HttpServlet {
                 request.setAttribute("err", "Sai tên tài khoản hoặc mật khẩu.");
                 request.getRequestDispatcher("/jsp/common/layout/login.jsp").forward(request, response);
             }
-        } catch(Exception e) {
-            
+        } catch (Exception e) {
+            System.out.println("✅ LoginController đã được gọi");
+            e.printStackTrace();
         }
-    }
 
+    }
 
 }
