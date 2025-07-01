@@ -89,7 +89,7 @@ public class LoginController extends HttpServlet {
             
             if(a != null) {
                 session.setAttribute("user", user);
-                session.setAttribute("pass", pass);
+//                session.setAttribute("pass", pass);
                 session.setAttribute("name", a.getFullName());
                 session.setAttribute("useraccount", a);
                 String role = a.getRole();

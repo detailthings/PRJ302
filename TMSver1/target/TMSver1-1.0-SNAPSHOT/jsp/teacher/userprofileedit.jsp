@@ -83,11 +83,13 @@
                                      <% UserAccount u = (UserAccount) request.getAttribute("useraccount"); %>
                                     <div class="form-group col-sm-6">
                                        <label for="lname">Full Name:</label>
-                                       <input type="text" class="form-control" name="fullname" value="<%= u.getFullName() %>">
+                                       <input type="text" class="form-control" name="fullname" value="<%= u.getFullName() %>" pattern="^[A-Za-zÀ-Ỹà-ỹ\s]{2,50}$"
+                                        title="Tên chỉ chứa chữ cái và khoảng trắng, từ 2 đến 50 ký tự" 
+                                        required>
                                     </div>
                                     <div class="form-group col-sm-6">
                                        <label for="uname">Email:</label>
-                                       <input type="text" class="form-control" name="email" value="<%= u.getEmail() %>">
+                                       <input type="" class="form-control" name="email" value="<%= u.getEmail() %>" required="">
                                     </div>
                                  </div>
                                  <button type="submit" class="btn btn-primary mr-2">Submit</button>
@@ -104,19 +106,19 @@
                               </div>
                            </div>
                            <div class="card-body">
-                              <form>
+                              <form action="${path}/changepasswordcontroller" method="post">
                                  <div class="form-group">
                                     <label for="cpass">Current Password:</label>
                                     <a href="javascripe:void();" class="float-right">Forgot Password</a>
-                                    <input type="Password" class="form-control" id="cpass" value="">
+                                    <input type="Password" class="form-control" id="cpass" name="cpass" value="">
                                  </div>
                                  <div class="form-group">
                                     <label for="npass">New Password:</label>
-                                    <input type="Password" class="form-control" id="npass" value="">
+                                    <input type="Password" class="form-control" id="npass" name="npass" value="">
                                  </div>
                                  <div class="form-group">
                                     <label for="vpass">Verify Password:</label>
-                                    <input type="Password" class="form-control" id="vpass" value="">
+                                    <input type="Password" class="form-control" id="vpass" name="vpass" value="">
                                  </div>
                                  <button type="submit" class="btn btn-primary mr-2">Submit</button>
                                  <button type="reset" class="btn iq-bg-danger">Cancel</button>

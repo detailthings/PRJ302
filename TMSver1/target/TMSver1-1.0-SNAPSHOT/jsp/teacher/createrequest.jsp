@@ -41,11 +41,11 @@
                             <form action="${path}/createrequestcontroller" method="post">
                                 <div class="form-group">
                                     <label for="ID">Project ID:</label>
-                                    <input type="text" class="form-control" id="id" name="id" required>
+                                    <input type="text" class="form-control" id="id" name="id" pattern="^[A-Za-z]{3}\d{3}$" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="title">Title:</label>
-                                    <input type="text" class="form-control" id="title" name="title" maxlength="255" required>
+                                    <input type="text" class="form-control" id="title" name="title" maxlength="70" pattern="^[A-Za-zÀ-Ỹà-ỹ\s]+$" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="description">Description:</label>

@@ -23,10 +23,9 @@ public class DeleteApplyController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-//        processRequest(request, response);
         HttpSession session = request.getSession(false);
         if (session == null || session.getAttribute("user") == null) {
-            response.sendRedirect("/jsp/common/layout/login.jsp");
+            response.sendRedirect("/TMSver1/jsp/common/layout/login.jsp");
             return;
         }
         // Lấy  từ session

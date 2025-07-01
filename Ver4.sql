@@ -3,7 +3,7 @@
 
 -- TERM
 CREATE TABLE Semester (
-    SemesterID VARCHAR(4) PRIMARY KEY,
+    SemesterID, scorce VARCHAR(4) PRIMARY KEY,
     Semester VARCHAR(10) CHECK (Semester IN ('Fall', 'Spring', 'Summer')) NOT NULL,
     Year INT NOT NULL,
     StartDate DATE,
@@ -50,10 +50,11 @@ CREATE TABLE Project (
     Title NVARCHAR(255),
     Description NVARCHAR(MAX),
     TeacherID NVARCHAR(20) NOT NULL,
-    SemesterID VARCHAR(4),
+    SemesterID, scorce VARCHAR(4),
     JudgingID VARCHAR(50),
+	Scorce
     FOREIGN KEY (TeacherID) REFERENCES UserAccount(UserID),
-    FOREIGN KEY (SemesterID) REFERENCES Semester(SemesterID)
+    FOREIGN KEY (SemesterID, scorce) REFERENCES Semester(SemesterID, scorce)
 );
 
 -- JUDGING
@@ -104,21 +105,22 @@ CREATE TABLE Request (
 
 
 -- SEMESTER
-INSERT INTO Semester (SemesterID, Semester, Year, StartDate, EndDate) VALUES
-('SP24', 'Spring', 2024, '2024-01-01', '2024-04-30'),
-('SU24', 'Summer', 2024, '2024-05-01', '2024-08-31'),
-('FA24', 'Fall', 2024, '2024-09-01', '2024-12-31'),
-('SP25', 'Spring', 2025, '2024-01-01', '2024-04-30'),
-('SU25', 'Summer', 2025, '2025-05-01', '2025-08-31');
+INSERT INTO Semester (SemesterID, scorce, Semester, Year, StartDate, EndDate) VALUES
+('SP24', 8.0, 'Spring', 2024, '2024-01-01', '2024-04-30'),
+('SU24', 9.0, 'Summer', 2024, '2024-05-01', '2024-08-31'),
+('FA24', 7.5, 'Fall', 2024, '2024-09-01', '2024-12-31'),
+('SP25', 8.0, 'Spring', 2025, '2024-01-01', '2024-04-30'),
+('SU25', 7.0, 'Summer', 2025, '2025-05-01', '2025-08-31');
 
 -- USERACCOUNT
 INSERT INTO UserAccount (UserID, Password, FullName, Email, Role) VALUES
+('admin01', 'admin123', N'Admin Hệ thống', 'admin@fpt.edu.vn', 'admin');
 ('sv001', '12345678', N'Nguyễn Văn A', 'a@student.fpt.edu.vn', 'student'),
 ('sv002', '12345678', N'Lê Thị B', 'b@student.fpt.edu.vn', 'student'),
 ('gv001', '12345678', N'Trần Văn C', 'c@fpt.edu.vn', 'teacher'),
 ('rv001', '12345678', N'Phạm Văn D', 'd@fpt.edu.vn', 'reviewer'),
 ('rv002', '12345678', N'Hoàng Thị E', 'e@fpt.edu.vn', 'reviewer'),
-('admin01', 'admin123', N'Admin Hệ thống', 'admin@fpt.edu.vn', 'admin');
+('01', 'admin123', N'Admin Hệ thống', 'admin@fpt.edu.vn', 'admin');
 
 INSERT INTO UserAccount (UserID, Password, FullName, Email, Role) VALUES
 ('sv003', '12345678', N'Đỗ Minh F', 'sv003@student.fpt.edu.vn', 'student'),
@@ -180,12 +182,12 @@ INSERT INTO Reviewer (ID, UserID, Department) VALUES
 ('rv002','rv002', N'Information System');
 
 -- PROJECT
-INSERT INTO Project (ProjectID, Title, Description, TeacherID, SemesterID, JudgingID) VALUES
-('PRJ001', N'Hệ thống quản lý khóa luận', N'Một hệ thống giúp quản lý sinh viên và tiến độ khóa luận', 'gv001', 'FA24', 'JUDG001');
+INSERT INTO Project (ProjectID, Title, Description, TeacherID, SemesterID, scorce, JudgingID) VALUES
+('PRJ01', N'Hệ thống quản lý khóa luận', N'Một hệ thống giúp quản lý sinh viên và tiến độ khóa luận', 'gv001', 'FA24', 7.5, 'JUDG001');
 
 -- JUDGING
 INSERT INTO Judging (JudgingID, ProjectCode, TeacherID, Reviewer1ID, Reviewer2ID) VALUES
-('JUDG001', 'PRJ001', 'gv001', 'rv001', 'rv002');
+('JUDG001', 'PRJ01', 'gv001', 'rv001', 'rv002');
 
 -- DELIVERABLE
 INSERT INTO Deliverable (Title, Description, Weighting, SubmissionOpenDate, DueDate) VALUES
@@ -194,8 +196,8 @@ INSERT INTO Deliverable (Title, Description, Weighting, SubmissionOpenDate, DueD
 
 -- SUBMISSION
 INSERT INTO Submission (ProjectID, DeliverableID, Status) VALUES
-('PRJ001', 1, 'Submitted'),
-('PRJ001', 2, 'Pending');
+('PRJ01', 1, 'Submitted'),
+('PRJ01', 2, 'Pending');
 
 -- REQUEST
 INSERT INTO Request (ID, Title, Description, Status, TeacherID) VALUES

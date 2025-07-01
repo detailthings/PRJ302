@@ -18,7 +18,9 @@ public class Request {
     @Id
     private String id; //
     private String studentID;
+    @Column(name = "title", columnDefinition = "NVARCHAR(255)")
     private String title; //
+    @Column(name = "description", columnDefinition = "NVARCHAR(MAX)")
     private String description; //
     private String status;
     private String teacherID; //

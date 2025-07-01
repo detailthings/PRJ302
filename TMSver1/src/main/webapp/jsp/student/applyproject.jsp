@@ -54,10 +54,18 @@
                                             <span class="bg-success iq-progress progress-1" data-percent="65" style="transition: width 2s ease 0s; width: 65%;"></span>
                                         </div>
                                         <div class="d-flex align-items-center justify-content-between">
-                                            <div>
-                                                <a href="<%=request.getContextPath()%>/appliedcontroller?requestID=<%=p.getId()%>" class="btn bg-success-light"
-                                                   onclick="return confirm('Are you sure you want to apply?');">Apply</a>
-                                            </div>
+                                            <% 
+                                                if(p.getStudentID() != null) {
+                                                
+                                                } else {
+                                            %>
+                                                <div>
+                                                    <a href="<%=request.getContextPath()%>/appliedcontroller?requestID=<%=p.getId()%>" class="btn bg-success-light"
+                                                       onclick="return confirm('Are you sure you want to apply?');">Apply</a>
+                                                </div>
+                                            <%
+                                                }
+                                            %>
                                         </div>
                                     </div>
                                 </div>
