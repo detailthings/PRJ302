@@ -3,60 +3,56 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package controller.teacher;
+package controller.user;
 
 import dao.*;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.*;
 import model.*;
 
 /**
  *
  * @author admin
  */
-public class TeacherApplyController extends HttpServlet {
+public class ChangePassWordController extends HttpServlet {
    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-//        processRequest(request, response);
         HttpSession session = request.getSession(false);
         if (session == null || session.getAttribute("user") == null) {
             response.sendRedirect("/TMSver1/jsp/common/layout/login.jsp");
             return;
         }
-        
-        Teacher t = (Teacher) session.getAttribute("teacherprofile");
-        RequestDAO r = new RequestDAO();
-        List<Request> listAllRequest = r.readAllTeacher(t.getId());
-        request.setAttribute("listAllRequest", listAllRequest);
-        request.getRequestDispatcher("/jsp/teacher/teacherapply.jsp").forward(request, response);
     } 
-    
-    
-    // cái này dùng để tiếp nối doPost ở trang servlet khác
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-//        processRequest(request, response);
         HttpSession session = request.getSession(false);
         if (session == null || session.getAttribute("user") == null) {
             response.sendRedirect("/TMSver1/jsp/common/layout/login.jsp");
             return;
         }
         
-        Teacher t = (Teacher) session.getAttribute("teacherprofile");
-        RequestDAO r = new RequestDAO();
-        List<Request> listAllRequest = r.readAllTeacher(t.getId());
-        request.setAttribute("listAllRequest", listAllRequest);
-        request.getRequestDispatcher("/jsp/teacher/teacherapply.jsp").forward(request, response);
-    } 
+        UserAccDAO u = new UserAccDAO();
+        UserAccount a = (UserAccount) session.getAttribute("useraccount");
+        
+        String cpass = (String) request.getParameter("cpass");
+        if(!a.getPassWord().equals(cpass)) {
+            
+            
+        } 
+        String npass = (String) request.getParameter("npass");
+        String vpass = (String) request.getParameter("vpass");
+        if(!vpass.equals(npass)) {
+            
+        }
+        
+    }
 
 }

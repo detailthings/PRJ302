@@ -51,7 +51,7 @@
                                                     <div class="row">
                                                         <div class="col-lg-12">
                                                             <div class="floating-label form-group">
-                                                                <input class="floating-input form-control" type="username" name="username" placeholder=" ">
+                                                                <input class="floating-input form-control" type="username" name="username" placeholder=" " required="">
                                                                 <label>Username</label>
                                                             </div>
                                                             <%
@@ -67,7 +67,7 @@
                                                         </div>
                                                         <div class="col-lg-12">
                                                             <div class="floating-label form-group">
-                                                                <input class="floating-input form-control" type="password" name="password" placeholder=" ">
+                                                                <input class="floating-input form-control" type="password" name="password" placeholder=" " required="">
                                                                 <label>Password</label>
                                                             </div>
                                                             <%

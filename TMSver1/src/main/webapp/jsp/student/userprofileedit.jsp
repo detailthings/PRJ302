@@ -104,19 +104,19 @@
                               </div>
                            </div>
                            <div class="card-body">
-                              <form>
+                              <form action="${path}/changepasswordcontroller" method="post">
                                  <div class="form-group">
                                     <label for="cpass">Current Password:</label>
                                     <a href="javascripe:void();" class="float-right">Forgot Password</a>
-                                    <input type="Password" class="form-control" id="cpass" value="">
+                                    <input type="Password" class="form-control" id="cpass" name="cpass" value="">
                                  </div>
                                  <div class="form-group">
                                     <label for="npass">New Password:</label>
-                                    <input type="Password" class="form-control" id="npass" value="">
+                                    <input type="Password" class="form-control" id="npass" name="npass" value="">
                                  </div>
                                  <div class="form-group">
                                     <label for="vpass">Verify Password:</label>
-                                    <input type="Password" class="form-control" id="vpass" value="">
+                                    <input type="Password" class="form-control" id="vpass" name="vpass" value="">
                                  </div>
                                  <button type="submit" class="btn btn-primary mr-2">Submit</button>
                                  <button type="reset" class="btn iq-bg-danger">Cancel</button>

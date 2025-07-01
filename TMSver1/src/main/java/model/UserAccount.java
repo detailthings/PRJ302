@@ -19,6 +19,7 @@ public class UserAccount {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String userID;
     private String passWord;
+    @Column(name = "FullName", columnDefinition = "NVARCHAR(100)")
     private String fullName;
     private String email;
     private String role;

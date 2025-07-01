@@ -18,7 +18,9 @@ public class Project {
     @Id
     
     private String projectID;
+    @Column(name = "title", columnDefinition = "NVARCHAR(255)")
     private String title;
+    @Column(name = "description", columnDefinition = "NVARCHAR(MAX)")
     private String description;
     private String teacherID;
     private String semesterID;

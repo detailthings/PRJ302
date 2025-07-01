@@ -59,7 +59,7 @@ public class HomeStudentController extends HttpServlet {
 //        processRequest(request, response);
         HttpSession session = request.getSession(false);
         if (session == null || session.getAttribute("user") == null) {
-            response.sendRedirect("/jsp/common/layout/login.jsp");
+            response.sendRedirect("/TMSver1/jsp/common/layout/login.jsp");
             return;
         }
         // Lấy studentID từ session

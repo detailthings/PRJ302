@@ -168,6 +168,10 @@
         <servlet-name>EditRequestController</servlet-name>
         <servlet-class>controller.teacher.EditRequestController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ChangePassWordController</servlet-name>
+        <servlet-class>controller.user.ChangePassWordController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SubmissionController</servlet-name>
         <url-pattern>/submissioncontroller</url-pattern>
@@ -335,6 +339,10 @@
     <servlet-mapping>
         <servlet-name>EditRequestController</servlet-name>
         <url-pattern>/editrequestcontroller</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangePassWordController</servlet-name>
+        <url-pattern>/changepasswordcontroller</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

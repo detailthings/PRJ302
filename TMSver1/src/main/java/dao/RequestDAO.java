@@ -101,7 +101,7 @@ public class RequestDAO extends DAO1<Request> {
         List<Request> list = new ArrayList<>();
         try {
             em.getTransaction().begin();
-            list = em.createQuery("Select u From Request u Where u.teacherID = :teacherID And u.status = 'Reject' And u.status != 'Accept'", Request.class)
+            list = em.createQuery("Select u From Request u Where u.teacherID = :teacherID And u.status != 'Reject' And u.status != 'Accept'", Request.class)
                     .setParameter("teacherID", str)
                     .getResultList();
             em.getTransaction().commit();
@@ -169,7 +169,7 @@ public class RequestDAO extends DAO1<Request> {
     
     public static void main(String[] args) {
         RequestDAO r = new RequestDAO();
-        List<Request> list = r.readAllTeacher("gv001");
+        List<Request> list = r.readAllStudentApply("gv001");
         System.out.println(list.get(0));
     }
 

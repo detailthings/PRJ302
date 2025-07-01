@@ -29,7 +29,7 @@ public class TeacherProjectController extends HttpServlet {
     // Lấy session, không tạo mới nếu chưa có
         HttpSession session = request.getSession(false);
         if (session == null || session.getAttribute("user") == null) {
-            response.sendRedirect("/jsp/common/layout/login.jsp");
+            response.sendRedirect("/TMSver1/jsp/common/layout/login.jsp");
             return;
         }
 

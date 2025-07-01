@@ -49,7 +49,7 @@
                                 <input type="hidden" name="createAt" value="<%=editApply.getCreateAt()%>">
                                 <div class="form-group">
                                     <label for="title">Title:</label>
-                                    <input type="text" class="form-control" id="title" name="title" maxlength="255" required value="<%=editApply.getTitle()%>">
+                                    <input type="text" class="form-control" id="title" name="title" maxlength="255" required pattern="^[A-Za-zÀ-Ỹà-ỹ\s]+$" value="<%=editApply.getTitle()%>">
                                 </div>
                                 <div class="form-group">
                                     <label for="description">Description:</label>
