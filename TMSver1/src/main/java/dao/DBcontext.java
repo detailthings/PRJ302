@@ -22,7 +22,7 @@ public class DBcontext {
             // dang ky drive cho project
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             // tao ket noi
-            Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=PRJ302d;trustServerCertificate=true", "sa", "sa");
+            Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=test;trustServerCertificate=true", "sa", "sa");
             System.out.println(conn);
             System.out.println("succcessfulabccc");
             // ket noi thanh cong tra ve conn
@@ -35,5 +35,9 @@ public class DBcontext {
     public static void main(String[] args) throws SQLException {
         System.out.println(DBcontext.connectDB());
         
+    }
+
+    static Connection getConnection() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

@@ -5,6 +5,8 @@
 package dao;
 
 import jakarta.persistence.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
 import model.Project;
@@ -15,9 +17,9 @@ import model.Project;
  */
 public class ProjectDAO extends DAO1<Project> {
 
-    private EntityManagerFactory emf = 
-            Persistence.createEntityManagerFactory("Project");
-        
+    private EntityManagerFactory emf
+            = Persistence.createEntityManagerFactory("Project");
+
     @Override
     public void create(Project t) {
         EntityManager em = emf.createEntityManager();
@@ -56,7 +58,7 @@ public class ProjectDAO extends DAO1<Project> {
             list = em.createQuery("Select u From Project u", Project.class)
                     .getResultList();
             em.getTransaction().commit();
-        }  catch (NoResultException e) {
+        } catch (NoResultException e) {
             list = null;
         } finally {
             em.close();
@@ -73,7 +75,7 @@ public class ProjectDAO extends DAO1<Project> {
         em.close();
         return u;
     }
-    
+
     public List<Project> readAllByStuID(String studentID) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
@@ -85,7 +87,7 @@ public class ProjectDAO extends DAO1<Project> {
         em.close();
         return list;
     }
-    
+
     public List<Project> readAllByTeaID(String teacherID) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
@@ -97,8 +99,57 @@ public class ProjectDAO extends DAO1<Project> {
         em.close();
         return list;
     }
-    
-    
+
+    public List<Project> readByReviewer() {
+        EntityManager em = emf.createEntityManager();
+        List<Project> list = new ArrayList<>();
+        try {
+            em.getTransaction().begin();
+            list = em.createQuery("SELECT u FROM Project u WHERE u.semesterID = 'SU25'", Project.class)
+                    .getResultList();
+            em.getTransaction().commit();
+        } catch (NoResultException e) {
+            list = null;
+        } finally {
+            em.close();
+        }
+        return list;
+    }
+
+//    public void reviewerUpdateScore(String projectCode, double scorce) {
+//        String sql = "UPDATE Project SET score = ? WHERE projectCode = ?";
+//        try (Connection conn = DBcontext.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+//            ps.setDouble(1, scorce);
+//            ps.setString(2, projectCode);
+//            ps.executeUpdate();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
+
+    public void reviewerUpdateScore(String projectCode, float scorce) {
+    EntityManager em = this.emf.createEntityManager(); // dùng emf sẵn có
+
+    try {
+        em.getTransaction().begin();
+
+        Project project = em.find(Project.class, projectCode);
+        if (project != null) {
+            project.setScorce(scorce); 
+        }
+
+        em.getTransaction().commit();
+    } catch (Exception e) {
+        if (em.getTransaction().isActive()) {
+            em.getTransaction().rollback();
+        }
+        e.printStackTrace(); 
+    } finally {
+        em.close(); 
+    }
+}
+
+
     //Find the number of all Project in all Semester
     public int countAllProject() {
         EntityManager em = emf.createEntityManager();
@@ -109,15 +160,14 @@ public class ProjectDAO extends DAO1<Project> {
                     .getSingleResult()
                     .intValue();
             em.getTransaction().commit();
-        }  catch (NoResultException e) {
+        } catch (NoResultException e) {
             count = 0;
         } finally {
             em.close();
         }
         return count;
     }
-    
-    
+
     //Find the number of Project in newest Semester(not now semester)
     public int countAllProjectInNewestSemester(String newestSemester) {
         EntityManager em = emf.createEntityManager();
@@ -129,34 +179,34 @@ public class ProjectDAO extends DAO1<Project> {
                     .getSingleResult()
                     .intValue();
             em.getTransaction().commit();
-        }  catch (NoResultException e) {
+        } catch (NoResultException e) {
             count = 0;
         } finally {
             em.close();
         }
         return count;
     }
-    
+
     public String findNewestSemester() {
         EntityManager em = emf.createEntityManager();
         String newestSemester = null;
         try {
             em.getTransaction().begin();
             newestSemester = em.createQuery(
-                "SELECT s.semesterID FROM Semester s " +
-                "WHERE s.endDate < CURRENT_DATE " +
-                "ORDER BY s.endDate DESC", String.class)
-                .setMaxResults(1)
-                .getSingleResult();
+                    "SELECT s.semesterID FROM Semester s "
+                    + "WHERE s.endDate < CURRENT_DATE "
+                    + "ORDER BY s.endDate DESC", String.class)
+                    .setMaxResults(1)
+                    .getSingleResult();
             em.getTransaction().commit();
-        }  catch (NoResultException e) {
+        } catch (NoResultException e) {
             newestSemester = null;
         } finally {
             em.close();
         }
         return newestSemester;
     }
-    
+
     public int countNumerOfGoodProject(String newestSemester) {
         EntityManager em = emf.createEntityManager();
         int count = 0;
@@ -167,7 +217,7 @@ public class ProjectDAO extends DAO1<Project> {
                     .getSingleResult()
                     .intValue();
             em.getTransaction().commit();
-        }  catch (NoResultException e) {
+        } catch (NoResultException e) {
             count = 0;
         } finally {
             em.close();
@@ -183,5 +233,5 @@ public class ProjectDAO extends DAO1<Project> {
 //        int numOfGoodProject = p.countNumerOfGoodProject(newestSemester);
 //        System.out.println(numOfGoodProject);
 //    }
-    
+
 }

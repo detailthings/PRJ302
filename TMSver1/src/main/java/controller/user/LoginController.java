@@ -101,6 +101,7 @@ public class LoginController extends HttpServlet {
                         response.sendRedirect("hometeachercontroller");
                         break;
                     case "reviewer":
+                        System.out.println("✅ Redirecting reviewer");
                         Reviewer profileR = new ReviewerDAO().readOnly(user);
                         session.setAttribute("reviewerprofile", profileR);
                         response.sendRedirect("homereviewercontroller");

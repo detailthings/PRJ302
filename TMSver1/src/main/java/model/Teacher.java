@@ -16,7 +16,7 @@ import jakarta.persistence.Id;
 public class Teacher {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     
     private String id;
     private String userID;

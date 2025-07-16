@@ -63,7 +63,7 @@ public class ReviewerDAO extends DAO1<Reviewer> {
         Reviewer u = null;
         try {
             em.getTransaction().begin();
-            u = em.createQuery("Select u From Reviewer u Where u.userID = :userID", Reviewer.class)
+            u = em.createQuery("Select u From Reviewer u Where u.reviewerID = :userID", Reviewer.class)
                     .setParameter("userID", str)
                     .getSingleResult();
             em.getTransaction().commit();

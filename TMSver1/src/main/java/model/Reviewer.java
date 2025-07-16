@@ -19,6 +19,7 @@ public class Reviewer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     
     private String id;
+    @Column(name = "UserID")
     private String reviewerID;
     private String department;
 

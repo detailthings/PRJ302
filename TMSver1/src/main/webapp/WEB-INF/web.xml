@@ -168,6 +168,14 @@
         <servlet-name>EditRequestController</servlet-name>
         <servlet-class>controller.teacher.EditRequestController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>homereviewercontroller</servlet-name>
+        <servlet-class>controller.reviewer.homereviewercontroller</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ReviewerUpdateScore</servlet-name>
+        <servlet-class>controller.reviewer.ReviewerUpdateScore</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SubmissionController</servlet-name>
         <url-pattern>/submissioncontroller</url-pattern>
@@ -348,15 +356,18 @@
             <param-value>true</param-value>
         </init-param>
     </filter>
-
     <filter-mapping>
         <filter-name>EncodingFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
-
-
-
-
+    <servlet-mapping>
+        <servlet-name>homereviewercontroller</servlet-name>
+        <url-pattern>/homereviewercontroller</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ReviewerUpdateScore</servlet-name>
+        <url-pattern>/ReviewerUpdateScore</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
