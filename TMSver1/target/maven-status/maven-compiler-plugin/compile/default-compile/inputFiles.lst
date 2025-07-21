@@ -15,13 +15,17 @@ C:\Users\admin\Desktop\FPT\SU25\PRJ302\PRJ302\TMSver1\src\main\java\dao\Delivera
 C:\Users\admin\Desktop\FPT\SU25\PRJ302\PRJ302\TMSver1\src\main\java\controller\teacher\TeacherRequestController.java
 C:\Users\admin\Desktop\FPT\SU25\PRJ302\PRJ302\TMSver1\src\main\java\controller\admin\CreateProject.java
 C:\Users\admin\Desktop\FPT\SU25\PRJ302\PRJ302\TMSver1\src\main\java\controller\student\ApplicationController.java
+C:\Users\admin\Desktop\FPT\SU25\PRJ302\PRJ302\TMSver1\src\main\java\controller\user\ChangePassWordController.java
+C:\Users\admin\Desktop\FPT\SU25\PRJ302\PRJ302\TMSver1\src\main\java\controller\user\ChatController.java
 C:\Users\admin\Desktop\FPT\SU25\PRJ302\PRJ302\TMSver1\src\main\java\controller\admin\ReadAllProject.java
 C:\Users\admin\Desktop\FPT\SU25\PRJ302\PRJ302\TMSver1\src\main\java\controller\teacher\CreateRequestController.java
 C:\Users\admin\Desktop\FPT\SU25\PRJ302\PRJ302\TMSver1\src\main\java\controller\student\DeliverableController.java
 C:\Users\admin\Desktop\FPT\SU25\PRJ302\PRJ302\TMSver1\src\main\java\controller\admin\UpdateUseraccount.java
 C:\Users\admin\Desktop\FPT\SU25\PRJ302\PRJ302\TMSver1\src\main\java\controller\admin\UpdateRequest.java
+C:\Users\admin\Desktop\FPT\SU25\PRJ302\PRJ302\TMSver1\src\main\java\controller\user\ConfirmMailController.java
 C:\Users\admin\Desktop\FPT\SU25\PRJ302\PRJ302\TMSver1\src\main\java\dao\DBcontext.java
 C:\Users\admin\Desktop\FPT\SU25\PRJ302\PRJ302\TMSver1\src\main\java\controller\admin\DeleteProject.java
+C:\Users\admin\Desktop\FPT\SU25\PRJ302\PRJ302\TMSver1\src\main\java\controller\student\DownloadFileController.java
 C:\Users\admin\Desktop\FPT\SU25\PRJ302\PRJ302\TMSver1\src\main\java\controller\student\AppliedController.java
 C:\Users\admin\Desktop\FPT\SU25\PRJ302\PRJ302\TMSver1\src\main\java\controller\user\EditController.java
 C:\Users\admin\Desktop\FPT\SU25\PRJ302\PRJ302\TMSver1\src\main\java\dao\UserAccountDAO.java
@@ -31,6 +35,7 @@ C:\Users\admin\Desktop\FPT\SU25\PRJ302\PRJ302\TMSver1\src\main\java\controller\t
 C:\Users\admin\Desktop\FPT\SU25\PRJ302\PRJ302\TMSver1\src\main\java\controller\admin\CreateUseraccount.java
 C:\Users\admin\Desktop\FPT\SU25\PRJ302\PRJ302\TMSver1\src\main\java\dao\RequestDAO.java
 C:\Users\admin\Desktop\FPT\SU25\PRJ302\PRJ302\TMSver1\src\main\java\model\UserAccount.java
+C:\Users\admin\Desktop\FPT\SU25\PRJ302\PRJ302\TMSver1\src\main\java\controller\student\UploadFileController.java
 C:\Users\admin\Desktop\FPT\SU25\PRJ302\PRJ302\TMSver1\src\main\java\controller\teacher\AcceptRequestController.java
 C:\Users\admin\Desktop\FPT\SU25\PRJ302\PRJ302\TMSver1\src\main\java\controller\student\SubmissionController.java
 C:\Users\admin\Desktop\FPT\SU25\PRJ302\PRJ302\TMSver1\src\main\java\dao\DAO1.java
@@ -42,6 +47,7 @@ C:\Users\admin\Desktop\FPT\SU25\PRJ302\PRJ302\TMSver1\src\main\java\controller\t
 C:\Users\admin\Desktop\FPT\SU25\PRJ302\PRJ302\TMSver1\src\main\java\controller\admin\ReadAllSemester.java
 C:\Users\admin\Desktop\FPT\SU25\PRJ302\PRJ302\TMSver1\src\main\java\model\Reviewer.java
 C:\Users\admin\Desktop\FPT\SU25\PRJ302\PRJ302\TMSver1\src\main\java\dao\ProjectDAO.java
+C:\Users\admin\Desktop\FPT\SU25\PRJ302\PRJ302\TMSver1\src\main\java\model\DaSaP.java
 C:\Users\admin\Desktop\FPT\SU25\PRJ302\PRJ302\TMSver1\src\main\java\controller\admin\UpdateDeliverable.java
 C:\Users\admin\Desktop\FPT\SU25\PRJ302\PRJ302\TMSver1\src\main\java\controller\teacher\DeleteApplyController.java
 C:\Users\admin\Desktop\FPT\SU25\PRJ302\PRJ302\TMSver1\src\main\java\controller\teacher\TeacherApplyController.java
@@ -50,6 +56,7 @@ C:\Users\admin\Desktop\FPT\SU25\PRJ302\PRJ302\TMSver1\src\main\java\model\Teache
 C:\Users\admin\Desktop\FPT\SU25\PRJ302\PRJ302\TMSver1\src\main\java\com\mycompany\tmsver1\JakartaRestConfiguration.java
 C:\Users\admin\Desktop\FPT\SU25\PRJ302\PRJ302\TMSver1\src\main\java\controller\teacher\TeacherProjectController.java
 C:\Users\admin\Desktop\FPT\SU25\PRJ302\PRJ302\TMSver1\src\main\java\model\Submission.java
+C:\Users\admin\Desktop\FPT\SU25\PRJ302\PRJ302\TMSver1\src\main\java\util\Authentication.java
 C:\Users\admin\Desktop\FPT\SU25\PRJ302\PRJ302\TMSver1\src\main\java\controller\user\TEST.java
 C:\Users\admin\Desktop\FPT\SU25\PRJ302\PRJ302\TMSver1\src\main\java\controller\admin\CreateRequest.java
 C:\Users\admin\Desktop\FPT\SU25\PRJ302\PRJ302\TMSver1\src\main\java\controller\admin\DeleteSemester.java
@@ -62,7 +69,9 @@ C:\Users\admin\Desktop\FPT\SU25\PRJ302\PRJ302\TMSver1\src\main\java\model\Delive
 C:\Users\admin\Desktop\FPT\SU25\PRJ302\PRJ302\TMSver1\src\main\java\com\mycompany\tmsver1\resources\JakartaEE10Resource.java
 C:\Users\admin\Desktop\FPT\SU25\PRJ302\PRJ302\TMSver1\src\main\java\dao\SemesterDAO.java
 C:\Users\admin\Desktop\FPT\SU25\PRJ302\PRJ302\TMSver1\src\main\java\controller\student\MyProjectStudentController.java
+C:\Users\admin\Desktop\FPT\SU25\PRJ302\PRJ302\TMSver1\src\main\java\controller\user\ChatLogicController.java
 C:\Users\admin\Desktop\FPT\SU25\PRJ302\PRJ302\TMSver1\src\main\java\controller\user\LogoutController.java
+C:\Users\admin\Desktop\FPT\SU25\PRJ302\PRJ302\TMSver1\src\main\java\controller\user\RecoverController.java
 C:\Users\admin\Desktop\FPT\SU25\PRJ302\PRJ302\TMSver1\src\main\java\dao\SubmissionDAO.java
 C:\Users\admin\Desktop\FPT\SU25\PRJ302\PRJ302\TMSver1\src\main\java\controller\user\EditProfileController.java
 C:\Users\admin\Desktop\FPT\SU25\PRJ302\PRJ302\TMSver1\src\main\java\controller\admin\CreateDeliverable.java

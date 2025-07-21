@@ -73,5 +73,38 @@ public class DeliverableDAO extends DAO1<Deliverable> {
         em.close();
         return u;
     }
+    
+    public Deliverable readOnlyByID( int id) {
+        EntityManager em = emf.createEntityManager();
+        Deliverable de = new Deliverable();
+        try {
+            em.getTransaction().begin();
+            de = em.createQuery("Select u From Deliverable u Where u.deliverableID = :deliverableID", Deliverable.class)
+                    .setParameter("deliverableID", id)
+                    .getSingleResult();
+            em.getTransaction().commit();
+        }  catch (NoResultException e) {
+            de = null;
+        } finally {
+            em.close();
+        }
+        return de;
+    }
+    
+    public static void main(String[] args) {
+        DeliverableDAO d = new DeliverableDAO();
+        System.out.println(d.readAll());
+    }
+//    public List<Project> readAllByStuID(String studentID) {
+//        EntityManager em = emf.createEntityManager();
+//        em.getTransaction().begin();
+//        List<Project> list = em
+//                .createQuery("Select u From Project u Where u.studentID = :studentID", Project.class)
+//                .setParameter("studentID", studentID)
+//                .getResultList();
+//        em.getTransaction().commit();
+//        em.close();
+//        return list;
+//    }
 
 }

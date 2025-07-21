@@ -1,4 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import="dao.*" %>
+<%@ page import="model.*" %>
+<%@ page import="java.util.*" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 
@@ -27,6 +30,27 @@
                 response.sendRedirect(request.getContextPath() + "/logincontroller");
                 return;
             }
+            // Chưa có session → kiểm tra cookie
+            Cookie[] cookies = request.getCookies();
+            if (cookies != null) {
+                for (Cookie c : cookies) {
+                    if ("remember_user".equals(c.getName())) {
+                        String userID = c.getValue();
+
+                        // Tìm user từ DB
+                        UserAccDAO userDAO = new UserAccDAO();
+                        UserAccount u = userDAO.readOnly(userID);
+                        if (u != null) {
+                            session = request.getSession(true);// taij sao lại là true mà không phải false
+                            session.setAttribute("user", u.getUserID());
+                            session.setAttribute("useraccount", u);
+                            session.setAttribute("name", u.getFullName());
+                            response.sendRedirect(request.getContextPath() + "/logincontroller");
+                            return;
+                        }
+                    }
+                }
+            }
         %>
         <!-- loader Start -->
         <div id="loading">
@@ -51,7 +75,9 @@
                                                     <div class="row">
                                                         <div class="col-lg-12">
                                                             <div class="floating-label form-group">
-                                                                <input class="floating-input form-control" type="username" name="username" placeholder=" " required="">
+                                                                <input class="floating-input form-control" type="username" name="username" placeholder=" " required="" 
+                                                                pattern="^[a-zA-Z0-9_-]{2,}$"
+                                                                title="Username gồm các ký tự in a-z A-Z 0-9 và -_">
                                                                 <label>Username</label>
                                                             </div>
                                                             <%
@@ -67,7 +93,9 @@
                                                         </div>
                                                         <div class="col-lg-12">
                                                             <div class="floating-label form-group">
-                                                                <input class="floating-input form-control" type="password" name="password" placeholder=" " required="">
+                                                                <input class="floating-input form-control" type="password" name="password" placeholder=" " required=""
+                                                                pattern="^[\w]{8,}$"
+                                                                title="Password bao gồm ít nhất 8 ký tự">
                                                                 <label>Password</label>
                                                             </div>
                                                             <%
@@ -93,7 +121,7 @@
                                                             %>
                                                         <div class="col-lg-6">
                                                             <div class="custom-control custom-checkbox mb-3">
-                                                                <input type="checkbox" class="custom-control-input" id="customCheck1">
+                                                                <input type="checkbox" class="custom-control-input" id="customCheck1" name="remember">
                                                                 <label class="custom-control-label control-label-1 text-white" for="customCheck1">Remember Me</label>
                                                             </div>
                                                         </div>

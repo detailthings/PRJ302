@@ -65,6 +65,7 @@
         <!-- Modal list start -->
         <%@include file="/jsp/common/layout/footer.jsp" %>
         <%@include file="/jsp/common/layout/js.jsp" %>
+        
     </body>
 </html>
 

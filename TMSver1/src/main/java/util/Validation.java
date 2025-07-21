@@ -86,5 +86,10 @@ public class Validation {
     public static boolean checkTitle(String input) {
         return checkStringByRegex(input, "[a-zA-Z ]+");
     }
+    
+    public static void main(String[] args) throws NoSuchAlgorithmException {
+        String pass = Validation.encryptionMD5("admin123");
+        System.out.println(pass);
+    }
 
 }

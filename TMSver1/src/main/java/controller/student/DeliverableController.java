@@ -5,6 +5,8 @@
 
 package controller.student;
 
+import dao.DeliverableDAO;
+import dao.SubmissionDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -12,6 +14,9 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.util.List;
+import model.DaSaP;
+import model.Student;
 
 /**
  *
@@ -60,10 +65,27 @@ public class DeliverableController extends HttpServlet {
             response.sendRedirect("/TMSver1/jsp/common/layout/login.jsp");
             return;
         }
+//        String studentID = (String) session.getAttribute("user");
+        Student studentProfile = (Student) session.getAttribute("studentprofile");
+        String studentID = studentProfile.getStudentCode();
+        DeliverableDAO d = new DeliverableDAO();
+        SubmissionDAO s = new SubmissionDAO();
+        List<DaSaP> dasap = s.readAllByStuID(studentID);
+        int p = dasap.size();
+        boolean checkDone = true;
         // Lấy studentID từ session
-        String studentID = (String) session.getAttribute("user");
+        for(DaSaP l : dasap) {
+            if(l.getSubmission().getPath()==null) {
+                checkDone = false;
+            }
+        }
+        if(checkDone == true) {
+            request.setAttribute("checkDone", "Done Project");
+        }
         // Đặt dữ liệu lên request
         request.setAttribute("studentID", studentID);
+        request.setAttribute("dasap", dasap);
+        request.setAttribute("p", p); 
 
         // Chuyển tiếp sang JSP hiển thị
         request.getRequestDispatcher("/jsp/student/deliverable.jsp").forward(request, response);

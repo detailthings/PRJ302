@@ -76,7 +76,9 @@ CREATE TABLE Deliverable (
     Description NVARCHAR(MAX),
     Weighting FLOAT,
     SubmissionOpenDate DATE,
-    DueDate DATE
+    DueDate DATE,
+	SemesterID Varchar(4), 
+	FOREIGN KEY (SemesterID) REFERENCES Semester(SemesterID)
 );
 
 -- SUBMISSION
@@ -86,10 +88,16 @@ CREATE TABLE Submission (
     DeliverableID INT,
     SubmissionDate DATETIME DEFAULT GETDATE(),
     LastModified DATETIME DEFAULT GETDATE(),
-    Status VARCHAR(50),
+    Status VARCHAR(50) ,
     FOREIGN KEY (ProjectID) REFERENCES Project(ProjectID),
     FOREIGN KEY (DeliverableID) REFERENCES Deliverable(DeliverableID)
 );
+
+ALTER TABLE Submission
+ADD CONSTRAINT DF_Submission_Status DEFAULT 'None' FOR Status;
+
+ALTER TABLE Submission
+ADD CONSTRAINT CK_Submission_Status CHECK (Status IN ('Done', 'None'));
 
 -- REQUEST
 CREATE TABLE Request (
@@ -190,14 +198,18 @@ INSERT INTO Judging (JudgingID, ProjectCode, TeacherID, Reviewer1ID, Reviewer2ID
 ('JUDG001', 'PRJ01', 'gv001', 'rv001', 'rv002');
 
 -- DELIVERABLE
-INSERT INTO Deliverable (Title, Description, Weighting, SubmissionOpenDate, DueDate) VALUES
-(N'Proposal', N'Nộp đề cương khóa luận', 20, '2024-08-15', '2024-09-01'),
-(N'Final Report', N'Nộp báo cáo cuối kỳ', 80, '2024-11-15', '2024-12-01');
+INSERT INTO Deliverable (Title, Description, Weighting, SubmissionOpenDate, DueDate, SemesterID) VALUES
+(N'Proposal', N'Nộp đề cương khóa luận', 20, '2024-09-15', '2024-10-01','FA24'),
+(N'Final Report', N'Nộp báo cáo cuối kỳ', 80, '2024-11-15', '2024-12-01','FA24'),
+(N'Proposal', N'Nộp đề cương khóa luận', 20, '2025-01-15', '2024-02-01','SP25'),
+(N'Final Report', N'Nộp báo cáo cuối kỳ', 80, '2025-03-15', '2024-04-01','SP25'),
+(N'Proposal', N'Nộp đề cương khóa luận', 20, '2024-05-15', '2024-06-01','SU25'),
+(N'Final Report', N'Nộp báo cáo cuối kỳ', 80, '2024-07-15', '2024-08-01','SU25');
 
 -- SUBMISSION
 INSERT INTO Submission (ProjectID, DeliverableID, Status) VALUES
-('PRJ01', 1, 'Submitted'),
-('PRJ01', 2, 'Pending');
+('PRJ001', 1, 'Submitted'),
+('PRJ001', 2, 'Pending');
 
 -- REQUEST
 INSERT INTO Request (ID, Title, Description, Status, TeacherID) VALUES
@@ -207,3 +219,6 @@ INSERT INTO Request (ID, Title, Description, Status, TeacherID) VALUES
 ('PRJ310', N'Xin bảo lưu', N'Em gặp vấn đề cá nhân, xin bảo lưu đồ án sang kỳ sau', 'None', 'gv001'),
 ('PRJ300', N'Xin đổi đề tài', N'Em muốn đổi đề tài sang hướng AI', 'None', 'gv001');
 
+UPDATE UserAccount
+SET Password = '25d55ad283aa400af464c76d713c07ad'
+WHERE Password = '12345678';

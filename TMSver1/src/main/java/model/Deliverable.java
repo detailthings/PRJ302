@@ -24,6 +24,8 @@ public class Deliverable {
     private float weighting;
     private Date submissionOpenDate;
     private Date dueDate;
+//    private String path;
+    private String semesterID;
 
     public Deliverable() {
     }
@@ -37,6 +39,24 @@ public class Deliverable {
         this.dueDate = dueDate;
     }
 
+    public Deliverable(int deliverableID, String title, String description, float weighting, Date submissionOpenDate, Date dueDate, String semesterID) {
+        this.deliverableID = deliverableID;
+        this.title = title;
+        this.description = description;
+        this.weighting = weighting;
+        this.submissionOpenDate = submissionOpenDate;
+        this.dueDate = dueDate;
+        this.semesterID = semesterID;
+    }
+
+    public String getSemeterID() {
+        return semesterID;
+    }
+
+    public void setSemeterID(String semesterID) {
+        this.semesterID = semesterID;
+    }
+    
     public int getDeliverableID() {
         return deliverableID;
     }
@@ -85,7 +105,4 @@ public class Deliverable {
         this.dueDate = dueDate;
     }
 
-    
-    
-    
 }

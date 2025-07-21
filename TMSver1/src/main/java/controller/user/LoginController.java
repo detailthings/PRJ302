@@ -5,6 +5,7 @@
 
 package controller.user;
 
+import util.Validation;
 import dao.ReviewerDAO;
 import dao.StudentDAO;
 import dao.TeacherDAO;
@@ -13,6 +14,7 @@ import dao.UserAccountDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -35,7 +37,11 @@ public class LoginController extends HttpServlet {
         HttpSession session = request.getSession();
         String user = (String) session.getAttribute("user");
         UserAccount a = (UserAccount) session.getAttribute("useraccount");
-           
+        if (session == null || session.getAttribute("user") == null) {
+            response.sendRedirect("/TMSver1/jsp/common/layout/login.jsp");
+            return;
+        }
+        
         String role = a.getRole();
             switch (role) {
                 case "admin":
@@ -68,21 +74,28 @@ public class LoginController extends HttpServlet {
         try {
             HttpSession session = request.getSession();
             String user = request.getParameter("username");
-            String pass = request.getParameter("password");
-            boolean hasError = false;
-            if (!Validation.checkUsername(user)) {
-                request.setAttribute("uerror", "Username chỉ chứa a-z, A-Z, 0-9, dấu gạch dưới.");
-                hasError = true;
-            }
-            if (!Validation.checkPassword(pass)) {
-                request.setAttribute("perror", "Password phải có ít nhất 8 ký tự.");
-                hasError = true;
-            }
-            if (hasError) {
-                request.getRequestDispatcher("/jsp/common/layout/login.jsp").forward(request, response);
-                return;
-            }
+            String pass = Validation.encryptionMD5(request.getParameter("password"));
+//            boolean hasError = false;
+//            if (!Validation.checkUsername(user)) {
+//                request.setAttribute("uerror", "Username chỉ chứa a-z, A-Z, 0-9, dấu gạch dưới.");
+//                hasError = true;
+//            }
+//            if (!Validation.checkPassword(pass)) {
+//                request.setAttribute("perror", "Password phải có ít nhất 8 ký tự.");
+//                hasError = true;
+//            }
+//            if (hasError) {
+//                request.getRequestDispatcher("/jsp/common/layout/login.jsp").forward(request, response);
+//                return;
+//            }
+//            pattern="^[a-zA-Z0-9_-]{2,}$"
+//            title="Username gồm các ký tự in a-z A-Z 0-9 và -_"
+            
+//            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+//            accept=""title="Mật khẩu phải có ít nhất 8 ký tự, bao gồm chữ hoa, chữ thường và số"
 
+//            Cookie ck = new Cookie("useraccount", "");
+            
             UserAccDAO uad = new UserAccDAO();
             UserAccount a = uad.getUserBy(user, pass);
                      
@@ -92,6 +105,16 @@ public class LoginController extends HttpServlet {
 //                session.setAttribute("pass", pass);
                 session.setAttribute("name", a.getFullName());
                 session.setAttribute("useraccount", a);
+                String remember = request.getParameter("remember");
+                if (remember != null) {
+                    Cookie ck = new Cookie("remember_user", a.getUserID());
+                    ck.setMaxAge(60 * 60 * 24 * 7); // 7 ngày
+                    response.addCookie(ck);
+                } else {
+                    Cookie ck = new Cookie("remember_user", "");
+                    ck.setMaxAge(0);
+                    response.addCookie(ck);
+                }
                 String role = a.getRole();
                 switch (role) {
                     case "admin":

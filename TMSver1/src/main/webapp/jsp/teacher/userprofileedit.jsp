@@ -138,5 +138,12 @@
     <!-- Modal list start -->
     <%@include file="/jsp/common/layout/footer.jsp" %>
     <%@include file="/jsp/common/layout/js.jsp" %>
-  </body>
+    <c:if test="${not empty notice}">
+        <script>
+            window.onload = function () {
+                alert("${notice}");
+            }
+        </script>
+    </c:if>
+    </body>
 </html>

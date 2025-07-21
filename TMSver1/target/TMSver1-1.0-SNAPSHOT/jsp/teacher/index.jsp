@@ -19,6 +19,7 @@
     <body class="  ">
         <!-- check session && loader Start -->
         <%@include file="/jsp/common/layout/checksession.jsp" %>
+        
         <!-- loader Start -->
         <div id="loading">
             <div id="loading-center">
@@ -848,5 +849,7 @@
         </div>
         <%@include file="/jsp/common/layout/footer.jsp" %>
         <%@include file="/jsp/common/layout/js.jsp" %>
+        <!--Dòng này khiến cho nav mất-->
+        <%@include file="/jsp/common/layout/chat.jsp" %>
     </body>
 </html>

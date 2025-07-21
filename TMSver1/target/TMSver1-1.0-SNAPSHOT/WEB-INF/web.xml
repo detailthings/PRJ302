@@ -172,6 +172,34 @@
         <servlet-name>ChangePassWordController</servlet-name>
         <servlet-class>controller.user.ChangePassWordController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RecoverController</servlet-name>
+        <servlet-class>controller.user.RecoverController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ConfirmMailController</servlet-name>
+        <servlet-class>controller.user.ConfirmMailController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChatController</servlet-name>
+        <servlet-class>controller.user.ChatController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChatLogicController</servlet-name>
+        <servlet-class>controller.user.ChatLogicController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UploadFileController</servlet-name>
+        <servlet-class>controller.student.UploadFileController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DownloadFileController</servlet-name>
+        <servlet-class>controller.student.DownloadFileController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ReadDeliverableController</servlet-name>
+        <servlet-class>controller.teacher.ReadDeliverableController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SubmissionController</servlet-name>
         <url-pattern>/submissioncontroller</url-pattern>
@@ -343,6 +371,34 @@
     <servlet-mapping>
         <servlet-name>ChangePassWordController</servlet-name>
         <url-pattern>/changepasswordcontroller</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RecoverController</servlet-name>
+        <url-pattern>/recovercontroller</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ConfirmMailController</servlet-name>
+        <url-pattern>/confirmmailcontroller</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChatController</servlet-name>
+        <url-pattern>/chatcontroller</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChatLogicController</servlet-name>
+        <url-pattern>/chatLogiccontroller</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UploadFileController</servlet-name>
+        <url-pattern>/uploadfilecontroller</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DownloadFileController</servlet-name>
+        <url-pattern>/downloadfilecontroller</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ReadDeliverableController</servlet-name>
+        <url-pattern>/readdeliverablecontroller</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
