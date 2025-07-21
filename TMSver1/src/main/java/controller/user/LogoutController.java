@@ -8,6 +8,7 @@ package controller.user;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -25,6 +26,9 @@ public class LogoutController extends HttpServlet {
 //        processRequest(request, response);
         HttpSession session = request.getSession();
         session.invalidate();
+        Cookie ck = new Cookie("remember_user", "");
+        ck.setMaxAge(0); // ✅ Xóa cookie bằng cách set tuổi thọ = 0
+        response.addCookie(ck);
         response.sendRedirect("/TMSver1/jsp/common/layout/login.jsp");
     } 
 

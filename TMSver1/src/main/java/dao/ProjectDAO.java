@@ -177,12 +177,7 @@ public class ProjectDAO extends DAO1<Project> {
     
     public static void main(String[] args) {
         ProjectDAO p = new ProjectDAO();
-        int numOfProject = p.countAllProject();
-        String newestSemester = p.findNewestSemester();
-        int numOfProjectInNewestSemester = p.countAllProjectInNewestSemester(newestSemester);
-        int numOfGoodProject = p.countNumerOfGoodProject(newestSemester);
-        p.readAllByStuID("he000005");
-        System.out.println(p.readAllByStuID("he000005"));
+        System.out.println(p.readAllByStuID("SE000224").get(0).getStudentID());
     }
     
 }

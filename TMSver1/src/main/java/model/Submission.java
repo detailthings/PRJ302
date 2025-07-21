@@ -18,47 +18,71 @@ public class Submission {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     
-    private int id;
-    private String projectID;
-    private int deliverableID;
+    
+    private int submissionID;
+    @ManyToOne
+    @JoinColumn(name = "projectID")
+    private Project project;
+    @ManyToOne
+    @JoinColumn(name = "deliverableID", referencedColumnName = "deliverableID", insertable = false, updatable = false)
+    private Deliverable deliverable;
     private Timestamp submissionDate;
     private Timestamp lastModified;
     private String status;
+    private String path;
 
     public Submission() {
     }
 
-    public Submission(int id, String projectID, int deliverableID, Timestamp submissionDate, Timestamp lastModified, String status) {
-        this.id = id;
-        this.projectID = projectID;
-        this.deliverableID = deliverableID;
+    public Submission(int submissionID, Project project, Deliverable deliverable, Timestamp submissionDate, Timestamp lastModified, String status) {
+        this.submissionID = submissionID;
+        this.project = project;
+        this.deliverable = deliverable;
         this.submissionDate = submissionDate;
         this.lastModified = lastModified;
         this.status = status;
     }
 
-    public int getId() {
-        return id;
+    public Submission(int submissionID, Project project, Deliverable deliverable, Timestamp submissionDate, Timestamp lastModified, String status, String path) {
+        this.submissionID = submissionID;
+        this.project = project;
+        this.deliverable = deliverable;
+        this.submissionDate = submissionDate;
+        this.lastModified = lastModified;
+        this.status = status;
+        this.path = path;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public String getPath() {
+        return path;
     }
 
-    public String getProjectID() {
-        return projectID;
+    public void setPath(String path) {
+        this.path = path;
     }
 
-    public void setProjectID(String projectID) {
-        this.projectID = projectID;
+    public int getSubmissionID() {
+        return submissionID;
     }
 
-    public int getDeliverableID() {
-        return deliverableID;
+    public void setSubmissionID(int submissionID) {
+        this.submissionID = submissionID;
     }
 
-    public void setDeliverableID(int deliverableID) {
-        this.deliverableID = deliverableID;
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
+    }
+
+    public Deliverable getDeliverable() {
+        return deliverable;
+    }
+
+    public void setDeliverable(Deliverable deliverable) {
+        this.deliverable = deliverable;
     }
 
     public Timestamp getSubmissionDate() {
@@ -84,7 +108,5 @@ public class Submission {
     public void setStatus(String status) {
         this.status = status;
     }
-    
-    
     
 }

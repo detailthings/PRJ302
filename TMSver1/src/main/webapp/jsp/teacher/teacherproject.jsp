@@ -59,6 +59,7 @@
                                                     <th>Semester</th>
                                                     <th>Jubging</th>
                                                     <th>Members</th>
+                                                    <th>Deliverable</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -75,6 +76,7 @@
                                                     <td> <%= p.getSemesterID() %> </td>
                                                     <td> <%= p.getJudgingID() %> </td>
                                                     <td> <%= p.getStudentID() %> </td>
+                                                    <td> <a href="readdeliverablecontroller?studentID=<%= p.getStudentID() %>"> Select </a></td>
                                                 </tr>
                                                 <%  }}
                                                 %>
