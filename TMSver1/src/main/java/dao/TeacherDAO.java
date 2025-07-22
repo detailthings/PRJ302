@@ -42,8 +42,10 @@ public class TeacherDAO extends DAO1<Teacher> {
     public boolean delete(Teacher t) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
+//        em.remove(em.contains(teacher) ? teacher : em.merge(teacher));
         em.remove(t);
         em.getTransaction().commit();
+        
         em.close();
         return true;
     }

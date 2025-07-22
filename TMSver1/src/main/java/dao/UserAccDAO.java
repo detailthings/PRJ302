@@ -7,13 +7,14 @@ package dao;
 import jakarta.persistence.*;
 import java.util.*;
 import model.UserAccount;
+import model.Teacher;
 
 /**
  *
  * @author admin
  */
 public class UserAccDAO extends DAO1<UserAccount> {
-    
+
     private static final EntityManagerFactory emf
             = Persistence.createEntityManagerFactory("UserAccount");
 
@@ -40,6 +41,20 @@ public class UserAccDAO extends DAO1<UserAccount> {
     public boolean delete(UserAccount t) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
+        try {
+            String role = t.getRole();
+            String userID = t.getUserID();
+            if (role.equalsIgnoreCase("teacher")) {
+                Teacher teacher = em.createQuery("SELECT t FROM Teacher t WHERE t.user.userID = :userId", Teacher.class)
+                        .setParameter("userId", t.getUserID())
+                        .getSingleResult();
+
+                TeacherDAO teacherDAO = new TeacherDAO();
+                teacherDAO.delete(teacher);
+            }
+        } catch (Exception e) {
+            return false;
+        }
         em.remove(t);
         em.getTransaction().commit();
         em.close();
@@ -55,7 +70,7 @@ public class UserAccDAO extends DAO1<UserAccount> {
             list = em.createQuery("Select u From UserAccount u", UserAccount.class)
                     .getResultList();
             em.getTransaction().commit();
-        }  catch (NoResultException e) {
+        } catch (NoResultException e) {
             list = null;
         } finally {
             em.close();
@@ -73,14 +88,14 @@ public class UserAccDAO extends DAO1<UserAccount> {
                     .setParameter("userID", str)
                     .getSingleResult();
             em.getTransaction().commit();
-        }  catch (NoResultException e) {
+        } catch (NoResultException e) {
             u = null;
         } finally {
             em.close();
         }
         return u;
     }
-    
+
 //    public UserAccount getUserBy(String user, String pass) {
 //        EntityManager em = emf.createEntityManager();
 //        em.getTransaction().begin();
@@ -94,8 +109,6 @@ public class UserAccDAO extends DAO1<UserAccount> {
 //        em.close();
 //        return u;
 //    }
-  
-    
     public UserAccount getUserBy(String user, String pass) {
         EntityManager em = emf.createEntityManager();
         UserAccount u = null;
@@ -116,5 +129,4 @@ public class UserAccDAO extends DAO1<UserAccount> {
     }
     //thì nếu truy vấn không ra kết quả, nó sẽ ném ra ngoại lệ NoResultException, chứ không trả về null.
 
-    
 }

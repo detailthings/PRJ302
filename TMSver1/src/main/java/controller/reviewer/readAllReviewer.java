@@ -3,23 +3,24 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package controller.admin;
+package controller.reviewer;
 
+import dao.ReviewerDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import dao.UserAccDAO;
+import jakarta.servlet.http.HttpSession;
+import java.util.List;
+import model.Reviewer;
 
 /**
  *
- * @author admin
+ * @author Acer
  */
-@WebServlet(name="DeleteUseraccount", urlPatterns={"/deleteuseraccount"})
-public class DeleteUseraccount extends HttpServlet {
+public class readAllReviewer extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -36,10 +37,10 @@ public class DeleteUseraccount extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet DeleteUseraccount</title>");  
+            out.println("<title>Servlet readAllReviewer</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet DeleteUseraccount at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet readAllReviewer at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -57,12 +58,18 @@ public class DeleteUseraccount extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
 //        processRequest(request, response);
-//          String delete = request.getParameter("delete");
-//          
-//          if (delete.equals("true")) {
-//            String delete = UserAccDAO.
-//        }
-          
+        HttpSession session = request.getSession(false);
+        if (session == null || session.getAttribute("user") == null) {
+            response.sendRedirect("/TMSver1/jsp/common/layout/login.jsp");
+            return;
+        }
+        
+        ReviewerDAO p = new ReviewerDAO();
+        List<Reviewer> listAllReviewer = p.readAll();
+        
+        
+        request.setAttribute("listAllReviewer", listAllReviewer);
+        request.getRequestDispatcher("/jsp/admin/setreviewer.jsp").forward(request, response);
     } 
 
     /** 

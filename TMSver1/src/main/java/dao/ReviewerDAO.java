@@ -50,7 +50,7 @@ public class ReviewerDAO extends DAO1<Reviewer> {
     public List<Reviewer> readAll() {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
-        List<Reviewer> list = em.createQuery("Select u From Project u", Reviewer.class)
+        List<Reviewer> list = em.createQuery("Select u From Reviewer u", Reviewer.class)
                 .getResultList();
         em.getTransaction().commit();
         em.close();

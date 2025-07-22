@@ -48,7 +48,9 @@ public class ProjectDAO extends DAO1<Project> {
         em.close();
         return true;
     }
-
+ 
+    
+    
     @Override
     public List<Project> readAll() {
         EntityManager em = emf.createEntityManager();
@@ -128,7 +130,7 @@ public class ProjectDAO extends DAO1<Project> {
 //    }
 
     public void reviewerUpdateScore(String projectCode, float scorce) {
-    EntityManager em = this.emf.createEntityManager(); // dùng emf sẵn có
+    EntityManager em = this.emf.createEntityManager(); 
 
     try {
         em.getTransaction().begin();
@@ -148,7 +150,29 @@ public class ProjectDAO extends DAO1<Project> {
         em.close(); 
     }
 }
+    
+    
+    public void adminSetJudingIDproject(String projectCode, String judingID) {
+    EntityManager em = this.emf.createEntityManager(); 
 
+    try {
+        em.getTransaction().begin();
+
+        Project project = em.find(Project.class, projectCode);
+        if (project != null) {
+            project.setJudgingID(judingID); 
+        }
+
+        em.getTransaction().commit();
+    } catch (Exception e) {
+        if (em.getTransaction().isActive()) {
+            em.getTransaction().rollback();
+        }
+        e.printStackTrace(); 
+    } finally {
+        em.close(); 
+    }
+}
 
     //Find the number of all Project in all Semester
     public int countAllProject() {

@@ -73,7 +73,13 @@
                                                     <td> <%= p.getDescription() %> </td>
                                                     <td> <%= p.getTeacherID() %> </td>
                                                     <td> <%= p.getSemesterID() %> </td>
-                                                    <td> <%= p.getJudgingID() %> </td>
+                                                    <td>
+                                                        <% if (p.getJudgingID() == null) { %>
+                                                        <a href="<%= request.getContextPath() %>/readAllReviewer?projectID=<%= p.getProjectCode() %>">Phân công</a>
+                                                        <% } else { %>
+                                                        <%= p.getJudgingID() %>
+                                                        <% } %>
+                                                    </td>
                                                     <td> <%= p.getStudentID() %> </td>
                                                 </tr>
                                                 <%  }}
