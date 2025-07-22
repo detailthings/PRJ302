@@ -31,6 +31,7 @@ public class ReadAllProject extends HttpServlet {
             return;
         }
         
+        
         ProjectDAO p = new ProjectDAO();
         List<Project> listAllProject = p.readAll();
         

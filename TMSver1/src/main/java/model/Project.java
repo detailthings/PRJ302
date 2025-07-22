@@ -22,6 +22,7 @@ public class Project {
     private String description;
     private String teacherID;
     private String semesterID;
+    @Column(name = "JudgingID")
     private String judgingID;
     private String studentID;
     private Float scorce;

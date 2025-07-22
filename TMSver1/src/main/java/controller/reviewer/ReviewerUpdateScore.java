@@ -66,13 +66,13 @@ public class ReviewerUpdateScore extends HttpServlet {
             response.sendRedirect("/jsp/common/layout/login.jsp");
             return;
         }
-
+        
         // Lấy teacherID từ session
-        String teacherID = (String) session.getAttribute("user");
-
+        String reviewerID = (String) session.getAttribute("user");
+        String judgingID = (String) session.getAttribute("judgingID");
         // Truy vấn danh sách Project theo teacherID
         ProjectDAO p = new ProjectDAO();
-        List<Project> listProject = p.readByReviewer();
+        List<Project> listProject = p.readByReviewer(reviewerID);
 
         // Xử lý nếu null
         if (listProject == null) {

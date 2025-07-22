@@ -102,13 +102,19 @@ public class ProjectDAO extends DAO1<Project> {
         return list;
     }
 
-    public List<Project> readByReviewer() {
+    public List<Project> readByReviewer(String judgingID) {
         EntityManager em = emf.createEntityManager();
         List<Project> list = new ArrayList<>();
         try {
             em.getTransaction().begin();
-            list = em.createQuery("SELECT u FROM Project u WHERE u.semesterID = 'SU25'", Project.class)
-                    .getResultList();
+            list = em.createQuery(
+                "SELECT p FROM Project p " +
+                "WHERE p.semesterID = :semesterID " +
+                "AND p.judgingID LIKE :judgingID",
+                Project.class)
+            .setParameter("semesterID", "SU25")
+            .setParameter("judgingID", "%" + judgingID + "%")
+            .getResultList();
             em.getTransaction().commit();
         } catch (NoResultException e) {
             list = null;

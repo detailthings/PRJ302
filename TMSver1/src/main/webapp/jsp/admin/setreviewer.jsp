@@ -41,6 +41,7 @@
                         <div class="col-sm-12">
 
                             <form action="SetReviewerToJuding" method="get">
+
                                 <div class="card">
                                     <div class="card-header d-flex justify-content-between">
                                         <div class="header-title">
@@ -88,7 +89,9 @@
                                                         <td> <%= p.getReviewerID() %> </td>
                                                         <td> <%= p.getDepartment() %> </td>
                                                         <td> <input type="checkbox" name="reviewer" value="<%= p.getReviewerID() %>"> </td>
+                                                        <input type="hidden" name="projectCode" value="${projectCode}" />
 
+                                                        
                                                     </tr>
                                                     <%  }}
                                                     %>

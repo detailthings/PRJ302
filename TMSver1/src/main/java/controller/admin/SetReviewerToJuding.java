@@ -14,6 +14,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.List;
+import model.Project;
 import model.Reviewer;
 
 /**
@@ -95,11 +96,15 @@ public class SetReviewerToJuding extends HttpServlet {
             request.setAttribute("errorMessage", errorMessage);
         }
         //Load lại data RV
-        ReviewerDAO p = new ReviewerDAO();
-        List<Reviewer> listAllReviewer = p.readAll();
+        ReviewerDAO r = new ReviewerDAO();
+        List<Reviewer> listAllReviewer = r.readAll();
         request.setAttribute("listAllReviewer", listAllReviewer);
+        
+        ProjectDAO p = new ProjectDAO();
+        List<Project> listAllProject = p.readAll();
+        request.setAttribute("listAllProject", listAllProject);
 
-        request.getRequestDispatcher("/jsp/admin/setreviewer.jsp").forward(request, response);
+        request.getRequestDispatcher("/jsp/admin/allproject.jsp").forward(request, response);
     }
 
     /**

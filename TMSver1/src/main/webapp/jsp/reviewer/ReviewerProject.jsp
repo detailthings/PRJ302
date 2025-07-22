@@ -84,9 +84,8 @@
                                                     <td><%= p.getJudgingID() %></td>
                                                     <td><%= p.getStudentID() %></td>
 
-                                                    <!-- Gửi mã project để biết chấm project nào -->
-                                                <input type="hidden" name="projectCode" value="<%= p.getProjectCode() %>">
-
+                                                 <input type="hidden" name="projectCode" value="<%= p.getProjectCode() %>">
+                                                 <input type="hidden"  name="judgingID" value="<%= p.getJudgingID() %> >
                                                 <td>
                                                     <button type="submit" class="btn btn-primary btn-sm">Lưu điểm</button>
                                                 </td>

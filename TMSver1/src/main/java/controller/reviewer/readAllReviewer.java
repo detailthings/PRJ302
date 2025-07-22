@@ -63,6 +63,9 @@ public class readAllReviewer extends HttpServlet {
             response.sendRedirect("/TMSver1/jsp/common/layout/login.jsp");
             return;
         }
+        String projectCode = request.getParameter("projectID"); // <== lấy từ URL
+        request.setAttribute("projectCode", projectCode);
+        
         
         ReviewerDAO p = new ReviewerDAO();
         List<Reviewer> listAllReviewer = p.readAll();
