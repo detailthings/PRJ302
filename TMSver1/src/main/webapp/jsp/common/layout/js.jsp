@@ -16,3 +16,5 @@
 <script src="${path}/jsp/assets/js/app.js"></script>
 
 <script src="${path}/jsp/assets/vendor/moment.min.js"></script>
+
+<%@include file="/jsp/common/layout/chatbot-widget2.jsp" %>

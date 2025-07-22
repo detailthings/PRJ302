@@ -5,6 +5,7 @@
 
 package controller.student;
 
+import dao.ProjectDAO;
 import dao.RequestDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,6 +15,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.*;
+import model.Project;
 import model.Request;
 import model.Student;
 
@@ -35,10 +37,14 @@ public class ApplicationController extends HttpServlet {
         Student s = (Student) session.getAttribute("studentprofile");
         
         RequestDAO r = new RequestDAO();
+        ProjectDAO p = new ProjectDAO();
         Request newRequest = r.readOnly(s.getStudentCode());
+        List<Project> checkProject = p.readAllByStuID(s.getStudentCode());
         List<Request> listAllRequest = new ArrayList<>();
         if(newRequest!=null) {
             listAllRequest.add(newRequest);
+        } else if(checkProject.size() != 0) {
+            request.setAttribute("notice", "You already on a PROJECT!");
         } else {
             listAllRequest = r.readAllNone();
         }

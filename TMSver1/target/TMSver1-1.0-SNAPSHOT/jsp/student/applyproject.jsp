@@ -38,6 +38,7 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-lg-12">
+                            <h3> ${notice!=null ? notice : ""}</h3>
                             <% 
                                 List<Request> listAllRequest = (List<Request>) request.getAttribute("listAllRequest");
                             %>

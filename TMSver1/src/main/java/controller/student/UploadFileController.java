@@ -62,6 +62,7 @@ public class UploadFileController extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("id"));
         Submission newSub = dao.readOnlyByID(id);
         newSub.setPath(dbPath);
+        newSub.setStatus("Done");
         dao.update(newSub);
 
         response.sendRedirect("deliverablecontroller"); // load lại danh sách deliverables

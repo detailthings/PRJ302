@@ -116,7 +116,17 @@
                                                                 <label for="exampleInputText01" class="h5">Attachments</label>
                                                                 <div class="custom-file">
                                                                     <input type="file" name="file" class="custom-file-input" id="inputGroupFile001">
-                                                                    <label class="custom-file-label" for="inputGroupFile001">Upload file</label>
+                                                                    <c:choose>
+                                                                        <c:when test="${checkDate == true}">
+                                                                            <label class="custom-file-label" for="inputGroupFile001">Upload file</label>
+                                                                        </c:when>
+                                                                        <c:when test="${checkDateStart == false}">
+                                                                            <h4>Not yet due</h4>
+                                                                        </c:when>
+                                                                        <c:when test="${checkDateStart == true}">
+                                                                            <h4>Overdue</h4>
+                                                                        </c:when>
+                                                                    </c:choose>
                                                                     <input type="hidden" name="id" value="${d.submission.submissionID}">
                                                                 </div>
                                                             </div>
@@ -128,7 +138,9 @@
                                                                 </c:if>
                                                             </div>
                                                             <div>
-                                                                </br><button type="submit" class="btn bg-secondary-light mr-3">Upload</button>
+                                                                <c:if test="${checkDate == true}">
+                                                                    </br><button type="submit" class="btn bg-secondary-light mr-3">Upload</button>
+                                                                </c:if>
                                                             </div>
                                                             </form>
                                                         </div>
@@ -140,7 +152,7 @@
                                 </div>
                             </div>
                         </c:forEach>
-                                    <h3>${checkDone != null ? checkDone : ""}</h3>
+                        <h3>${checkDone != null ? checkDone : ""}</h3>
                         <!-- Page end  -->
                     </div>
                 </div>

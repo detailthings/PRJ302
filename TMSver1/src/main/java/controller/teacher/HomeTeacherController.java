@@ -5,6 +5,8 @@
 
 package controller.teacher;
 
+import dao.ProjectDAO;
+import dao.RequestDAO;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -31,6 +33,19 @@ public class HomeTeacherController extends HttpServlet {
         String teacherID = (String) session.getAttribute("user");
         // Đặt dữ liệu lên request
         request.setAttribute("teacherID", teacherID);
+        
+        RequestDAO r = new RequestDAO();
+        ProjectDAO p = new ProjectDAO();
+        //Number of request not have student ID:
+        int numberOfRequestNotStudentID = r.readAllTeacher(teacherID).size();
+        //Number of requeste hava student ID:
+        int numberOfRequestHaveStudentID = r.readAllStudentApply(teacherID).size();
+        //Number of Project:
+        int numberOfProject = p.readAllByTeaID(teacherID).size();
+        
+        request.setAttribute("numberOfRequestNotStudentID", numberOfRequestNotStudentID);
+        request.setAttribute("numberOfRequestHaveStudentID", numberOfRequestHaveStudentID);
+        request.setAttribute("numberOfProject", numberOfProject);
 
         // Chuyển tiếp sang JSP hiển thị
         request.getRequestDispatcher("/jsp/teacher/index.jsp").forward(request, response);

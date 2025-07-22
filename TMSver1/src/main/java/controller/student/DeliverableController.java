@@ -14,6 +14,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.time.LocalDate;
 import java.util.List;
 import model.DaSaP;
 import model.Student;
@@ -74,15 +75,38 @@ public class DeliverableController extends HttpServlet {
         int p = dasap.size();
         boolean checkDone = true;
         // Lấy studentID từ session
+        // Check quá hạn/ Chưa tới hạn
+        LocalDate getDateNow = LocalDate.now();
+        boolean checkDateStart = false;
+        boolean checkDateEnd = false;
+        boolean checkDate = false;
+        
         for(DaSaP l : dasap) {
             if(l.getSubmission().getPath()==null) {
                 checkDone = false;
             }
+            LocalDate getStartDate = l.getDeliverable().getSubmissionOpenDate().toLocalDate();
+            LocalDate getEndDate = l.getDeliverable().getDueDate().toLocalDate();
+            if(getStartDate.isBefore(getDateNow)) {
+                checkDateStart = true;
+                if(getEndDate.isAfter(getDateNow)) {
+                    checkDateEnd = true;
+                    checkDate = true;
+                }
+            }
+            if(getStartDate.isBefore(getDateNow) && getEndDate.isAfter(getDateNow)) {
+                checkDate = true;
+            }
         }
+        
         if(checkDone == true) {
             request.setAttribute("checkDone", "Done Project");
         }
         // Đặt dữ liệu lên request
+        request.setAttribute("checkDate", checkDate);
+        request.setAttribute("checkDateStart", checkDateStart);
+        request.setAttribute("checkDateEnd", checkDateEnd);
+        
         request.setAttribute("studentID", studentID);
         request.setAttribute("dasap", dasap);
         request.setAttribute("p", p); 
