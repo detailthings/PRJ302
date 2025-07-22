@@ -117,6 +117,10 @@
         <servlet-class>controller.admin.DeleteSemester</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>DeleteUseraccount</servlet-name>
+        <servlet-class>controller.admin.DeleteUseraccount</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>AppliedController</servlet-name>
         <servlet-class>controller.student.AppliedController</servlet-class>
     </servlet>
@@ -167,6 +171,22 @@
     <servlet>
         <servlet-name>EditRequestController</servlet-name>
         <servlet-class>controller.teacher.EditRequestController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>homereviewercontroller</servlet-name>
+        <servlet-class>controller.reviewer.homereviewercontroller</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ReviewerUpdateScore</servlet-name>
+        <servlet-class>controller.reviewer.ReviewerUpdateScore</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>readAllReviewer</servlet-name>
+        <servlet-class>controller.reviewer.readAllReviewer</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SetReviewerToJuding</servlet-name>
+        <servlet-class>controller.admin.SetReviewerToJuding</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>SubmissionController</servlet-name>
@@ -285,6 +305,10 @@
         <url-pattern>/deletesemester</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>DeleteUseraccount</servlet-name>
+        <url-pattern>/deleteuseraccount</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>AppliedController</servlet-name>
         <url-pattern>/appliedcontroller</url-pattern>
     </servlet-mapping>
@@ -335,6 +359,38 @@
     <servlet-mapping>
         <servlet-name>EditRequestController</servlet-name>
         <url-pattern>/editrequestcontroller</url-pattern>
+    </servlet-mapping>
+    <filter>
+        <filter-name>EncodingFilter</filter-name>
+        <filter-class>org.apache.catalina.filters.SetCharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+        <init-param>
+            <param-name>forceEncoding</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>EncodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <servlet-mapping>
+        <servlet-name>homereviewercontroller</servlet-name>
+        <url-pattern>/homereviewercontroller</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ReviewerUpdateScore</servlet-name>
+        <url-pattern>/ReviewerUpdateScore</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>readAllReviewer</servlet-name>
+        <url-pattern>/readAllReviewer</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SetReviewerToJuding</servlet-name>
+        <url-pattern>/SetReviewerToJuding</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

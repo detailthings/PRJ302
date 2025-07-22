@@ -49,33 +49,43 @@
                                         <%
                                            List<UserAccount> listAllUserAccount = (List<UserAccount>) request.getAttribute("listAllUserAccount");
                                         %>
-                                        <table id="datatable" class="table data-table table-striped">
-                                            <thead>
-                                                <tr class="ligth">
-                                                    <th>User ID</th>
-                                                    <th>Pass Word</th>
-                                                    <th>Full Name</th>
-                                                    <th>Email</th>
-                                                    <th>Role</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <%
-                                                    if(listAllUserAccount == null) {
+
+                                        <form action="deleteuseraccount"  method="get">
+                                            <table id="datatable" class="table data-table table-striped">
+                                                <thead>
+                                                    <tr class="ligth">
+                                                        <th>User ID</th>
+                                                        <th>Pass Word</th>
+                                                        <th>Full Name</th>
+                                                        <th>Email</th>
+                                                        <th>Role</th>
+                                                        <th>Xóa tài khoản</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <%
+                                                        if(listAllUserAccount == null) {
                     
-                                                    } else {
-                                                    for(UserAccount p : listAllUserAccount) { %>
-                                                <tr>
-                                                    <td> <%= p.getUserID() %> </td>
-                                                    <td> <%= p.getPassWord() %> </td>
-                                                    <td> <%= p.getFullName() %> </td>
-                                                    <td> <%= p.getEmail() %> </td>
-                                                    <td> <%= p.getRole() %> </td>
-                                                </tr>
-                                                <%  }}
-                                                %>
-                                                </tfoot>
-                                        </table>
+                                                        } else {
+                                                        for(UserAccount p : listAllUserAccount) { %>
+                                                    <tr>
+                                                        <td> <%= p.getUserID() %> </td>
+                                                        <td> <%= p.getPassWord() %> </td>
+                                                        <td> <%= p.getFullName() %> </td>
+                                                        <td> <%= p.getEmail() %> </td>
+                                                        <td> <%= p.getRole() %> </td>
+                                                        <td><input type="checkbox" name="delete" value="ON" /> Xác Nhận: <input type="submit" value="XÓA"></td>
+                                                    </tr>
+                                                    <%  }}
+                                                    %>
+                                                    </tfoot>
+                                            </table>
+
+                                        </form>
+
+
+
+
                                     </div>
                                 </div>
                             </div>
