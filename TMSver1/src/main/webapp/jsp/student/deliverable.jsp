@@ -114,16 +114,16 @@
                                                             <form action="uploadfilecontroller" method="post" enctype="multipart/form-data">
                                                             <div class="form-group mb-0">
                                                                 <label for="exampleInputText01" class="h5">Attachments</label>
-                                                                <div class="custom-file">
+                                                                <div class="custom-file"> 
                                                                     <input type="file" name="file" class="custom-file-input" id="inputGroupFile001">
                                                                     <c:choose>
-                                                                        <c:when test="${checkDate == true}">
+                                                                        <c:when test="${d.status == 2}">
                                                                             <label class="custom-file-label" for="inputGroupFile001">Upload file</label>
                                                                         </c:when>
-                                                                        <c:when test="${checkDateStart == false}">
+                                                                        <c:when test="${d.status == 1}">
                                                                             <h4>Not yet due</h4>
                                                                         </c:when>
-                                                                        <c:when test="${checkDateStart == true}">
+                                                                        <c:when test="${d.status == 3}">
                                                                             <h4>Overdue</h4>
                                                                         </c:when>
                                                                     </c:choose>

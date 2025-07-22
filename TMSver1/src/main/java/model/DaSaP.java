@@ -12,6 +12,7 @@ public class DaSaP {
     private Deliverable deliverable;
     private Submission submission;
     private Project project;
+    private int status;
 
     public DaSaP(Deliverable deliverable, Submission submission) {
         this.deliverable = deliverable;
@@ -47,6 +48,13 @@ public class DaSaP {
     public void setProject(Project project) {
         this.project = project;
     }
-    
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
     
 }

@@ -38,7 +38,7 @@ public class ApplicationController extends HttpServlet {
         
         RequestDAO r = new RequestDAO();
         ProjectDAO p = new ProjectDAO();
-        Request newRequest = r.readOnly(s.getStudentCode());
+        Request newRequest = r.readOnlyByStudentID(s.getStudentCode());
         List<Project> checkProject = p.readAllByStuID(s.getStudentCode());
         List<Request> listAllRequest = new ArrayList<>();
         if(newRequest!=null) {

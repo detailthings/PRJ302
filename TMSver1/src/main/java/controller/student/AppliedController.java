@@ -45,7 +45,8 @@ public class AppliedController extends HttpServlet {
         
         listAllRequest.add(newRequest);
         request.setAttribute("listAllRequest", listAllRequest);
-        request.getRequestDispatcher("/jsp/student/applyproject.jsp").forward(request, response);
+//        request.getRequestDispatcher("applicationcontroller").forward(request, response);
+        response.sendRedirect("applicationcontroller");
     } 
 
 }

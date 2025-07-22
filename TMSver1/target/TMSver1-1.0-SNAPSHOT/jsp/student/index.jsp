@@ -41,6 +41,7 @@
                                     <div class="card">
                                         <div class="card-header d-flex justify-content-between">
                                             <div class="header-title">
+                                                ${notionNotHaveProject!=null ? notionNotHaveProject : ""}
                                                 <h4 class="card-title">Overview of Project</h4>
                                             </div>
                                         </div>
@@ -49,7 +50,7 @@
                                                 <p>ID: ${project.projectID}</p>
                                                 <p>Title: ${project.title}</p>
                                                 <p>Description: ${project.description}</p>
-                                                <p>Score: ${project.scorce != null ? project.scorce : ""}</p>
+                                                <p>Score: ${project.scorce != null && processing == 100? project.scorce : ""}</p>
                                             </c:if>
                                         </div>
                                     </div>

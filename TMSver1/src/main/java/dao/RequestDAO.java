@@ -136,9 +136,25 @@ public class RequestDAO extends DAO1<Request> {
         Request r = new Request();
         try {
             em.getTransaction().begin();
-            r = em.createQuery("Select u From Request u Where u.studentID = :studentID Or u.Id = :Id", Request.class)
-                    .setParameter("studentID", str)
+            r = em.createQuery("Select u From Request u Where u.Id = :Id", Request.class)
                     .setParameter("Id", str)
+                    .getSingleResult();
+            em.getTransaction().commit();
+        }catch (NoResultException e) {
+            r = null;
+        } finally {
+            em.close();
+        }
+        return r;
+    }
+    
+    public Request readOnlyByStudentID(String str) {
+        EntityManager em = emf.createEntityManager();
+        Request r = new Request();
+        try {
+            em.getTransaction().begin();
+            r = em.createQuery("Select u From Request u Where u.studentID = :studentID", Request.class)
+                    .setParameter("studentID", str)
                     .getSingleResult();
             em.getTransaction().commit();
         }catch (NoResultException e) {
@@ -170,7 +186,10 @@ public class RequestDAO extends DAO1<Request> {
     public static void main(String[] args) {
         RequestDAO r = new RequestDAO();
         List<Request> list = r.readAllStudentApply("gv001");
-        System.out.println(list.get(0));
+        Request re = r.readOnly("PRJ303");
+        re.setStatus("None");
+        r.update(re);
+        System.out.println(re.getStatus());
     }
 
 }

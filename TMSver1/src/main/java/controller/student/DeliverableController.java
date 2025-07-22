@@ -25,38 +25,7 @@ import model.Student;
  */
 public class DeliverableController extends HttpServlet {
    
-    /** 
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet DeliverableController</title>");  
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet DeliverableController at " + request.getContextPath () + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    } 
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /** 
-     * Handles the HTTP <code>GET</code> method.
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+ 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
@@ -77,25 +46,20 @@ public class DeliverableController extends HttpServlet {
         // Lấy studentID từ session
         // Check quá hạn/ Chưa tới hạn
         LocalDate getDateNow = LocalDate.now();
-        boolean checkDateStart = false;
-        boolean checkDateEnd = false;
-        boolean checkDate = false;
-        
+
         for(DaSaP l : dasap) {
             if(l.getSubmission().getPath()==null) {
                 checkDone = false;
             }
             LocalDate getStartDate = l.getDeliverable().getSubmissionOpenDate().toLocalDate();
             LocalDate getEndDate = l.getDeliverable().getDueDate().toLocalDate();
+            l.setStatus(1);
             if(getStartDate.isBefore(getDateNow)) {
-                checkDateStart = true;
                 if(getEndDate.isAfter(getDateNow)) {
-                    checkDateEnd = true;
-                    checkDate = true;
+                    l.setStatus(2);
+                } else {
+                    l.setStatus(3);
                 }
-            }
-            if(getStartDate.isBefore(getDateNow) && getEndDate.isAfter(getDateNow)) {
-                checkDate = true;
             }
         }
         
@@ -103,10 +67,7 @@ public class DeliverableController extends HttpServlet {
             request.setAttribute("checkDone", "Done Project");
         }
         // Đặt dữ liệu lên request
-        request.setAttribute("checkDate", checkDate);
-        request.setAttribute("checkDateStart", checkDateStart);
-        request.setAttribute("checkDateEnd", checkDateEnd);
-        
+        request.setAttribute("getDateNow", getDateNow);
         request.setAttribute("studentID", studentID);
         request.setAttribute("dasap", dasap);
         request.setAttribute("p", p); 
@@ -114,28 +75,5 @@ public class DeliverableController extends HttpServlet {
         // Chuyển tiếp sang JSP hiển thị
         request.getRequestDispatcher("/jsp/student/deliverable.jsp").forward(request, response);
     } 
-
-    /** 
-     * Handles the HTTP <code>POST</code> method.
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-//        processRequest(request, response);
-        
-    }
-
-    /** 
-     * Returns a short description of the servlet.
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
 
 }
