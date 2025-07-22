@@ -60,6 +60,7 @@
                                                     <th>Score</th>
                                                     <th>Jubging</th>
                                                     <th>Members</th>
+                                                    <th>Xác nhận</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -68,29 +69,31 @@
                     
                                                     } else {
                                                     for(Project p : listProject) { %>
+
+                                        <tr>
                                             <form action="${path}/ReviewerUpdateScore" method="post">
-                                                <tr>
-                                                    <td><%= p.getProjectCode() %></td>
-                                                    <td><%= p.getTitle() %></td>
-                                                    <td><%= p.getDescription() %></td>
-                                                    <td><%= p.getTeacherID() %></td>
-                                                    <td><%= p.getSemesterID() %></td>
+                                                <td><%= p.getProjectCode() %></td>
+                                                <td><%= p.getTitle() %></td>
+                                                <td><%= p.getDescription() %></td>
+                                                <td><%= p.getTeacherID() %></td>
+                                                <td><%= p.getSemesterID() %></td>
 
-                                                    <!-- Ô nhập điểm -->
-                                                    <td>
-                                                        <input type="number" name="score" min="0" max="10" step="0.1" value="<%= p.getScorce() %>" required>
-                                                    </td>
+                                                <!-- Ô nhập điểm -->
+                                                <td>
+                                                    <input type="number" name="score" min="0" max="10" step="0.1" value="<%= p.getScorce() %>" required>
+                                                </td>
 
-                                                    <td><%= p.getJudgingID() %></td>
-                                                    <td><%= p.getStudentID() %></td>
+                                                <td><%= p.getJudgingID() %></td>
+                                                <td><%= p.getStudentID() %></td>
 
-                                                 <input type="hidden" name="projectCode" value="<%= p.getProjectCode() %>">
-                                                 <input type="hidden"  name="judgingID" value="<%= p.getJudgingID() %> >
+                                                <input type="hidden" name="projectCode" value="<%= p.getProjectCode() %>">
+                                                <input type="hidden" id="judgingID" name="judgingID" value="<%= p.getJudgingID() %>">
                                                 <td>
                                                     <button type="submit" class="btn btn-primary btn-sm">Lưu điểm</button>
                                                 </td>
-                                                </tr>
                                             </form>
+                                        </tr>
+
 
                                             <%  }}
                                             %>
